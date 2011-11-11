@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1F5029DA146C2CC2006CFFFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029D9146C2CC2006CFFFA /* UIKit.framework */; };
+		1F5029DC146C2CC2006CFFFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DB146C2CC2006CFFFA /* Foundation.framework */; };
+		1F5029DE146C2CC2006CFFFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DD146C2CC2006CFFFA /* CoreGraphics.framework */; };
+		1F5029E4146C2CC2006CFFFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F5029E2146C2CC2006CFFFA /* InfoPlist.strings */; };
+		1F5029E6146C2CC2006CFFFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029E5146C2CC2006CFFFA /* main.m */; };
+		1F5029EA146C2CC2006CFFFA /* FaceMeNowAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029E9146C2CC2006CFFFA /* FaceMeNowAppDelegate.m */; };
+		1F5029ED146C2CC2006CFFFA /* FaceMeNowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029EC146C2CC2006CFFFA /* FaceMeNowViewController.m */; };
+		1F5029F0146C2CC2006CFFFA /* FaceMeNowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5029EE146C2CC2006CFFFA /* FaceMeNowViewController.xib */; };
+		1F5029F7146C2D12006CFFFA /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029F6146C2D12006CFFFA /* CoreImage.framework */; };
+		1F5029F9146C2D1B006CFFFA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029F8146C2D1B006CFFFA /* AVFoundation.framework */; };
+		1F5029FB146C2D27006CFFFA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029FA146C2D27006CFFFA /* ImageIO.framework */; };
+		1F5029FD146C2D30006CFFFA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029FC146C2D30006CFFFA /* QuartzCore.framework */; };
+		1F5029FF146C2D38006CFFFA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029FE146C2D37006CFFFA /* AssetsLibrary.framework */; };
+		1F502A01146C2D41006CFFFA /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F502A00146C2D41006CFFFA /* CoreVideo.framework */; };
+		1F502A03146C3256006CFFFA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F502A02146C3256006CFFFA /* CoreMedia.framework */; };
+		1F502A07146C32CD006CFFFA /* sunglasses1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F502A06146C32CD006CFFFA /* sunglasses1.png */; };
+		1F502A0B146C3EC5006CFFFA /* ItemSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F502A09146C3EC5006CFFFA /* ItemSelector.m */; };
+		1F502A0C146C3EC5006CFFFA /* ItemSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F502A0A146C3EC5006CFFFA /* ItemSelector.xib */; };
+		1F502A0E146C41AA006CFFFA /* glasses_sunglasses.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F502A0D146C41AA006CFFFA /* glasses_sunglasses.png */; };
+		1F502A11146C4599006CFFFA /* Categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F502A10146C4599006CFFFA /* Categories.plist */; };
+		1F502A15146C47F2006CFFFA /* hat.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F502A14146C47F2006CFFFA /* hat.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1F5029D5146C2CC2006CFFFA /* MockMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MockMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F5029D9146C2CC2006CFFFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1F5029DB146C2CC2006CFFFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1F5029DD146C2CC2006CFFFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1F5029E1146C2CC2006CFFFA /* MockMe-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MockMe-Info.plist"; sourceTree = "<group>"; };
+		1F5029E3146C2CC2006CFFFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1F5029E5146C2CC2006CFFFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1F5029E7146C2CC2006CFFFA /* MockMe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MockMe-Prefix.pch"; sourceTree = "<group>"; };
+		1F5029E8146C2CC2006CFFFA /* FaceMeNowAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceMeNowAppDelegate.h; sourceTree = "<group>"; };
+		1F5029E9146C2CC2006CFFFA /* FaceMeNowAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceMeNowAppDelegate.m; sourceTree = "<group>"; };
+		1F5029EB146C2CC2006CFFFA /* FaceMeNowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceMeNowViewController.h; sourceTree = "<group>"; };
+		1F5029EC146C2CC2006CFFFA /* FaceMeNowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceMeNowViewController.m; sourceTree = "<group>"; };
+		1F5029EF146C2CC2006CFFFA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FaceMeNowViewController.xib; sourceTree = "<group>"; };
+		1F5029F6146C2D12006CFFFA /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		1F5029F8146C2D1B006CFFFA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1F5029FA146C2D27006CFFFA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		1F5029FC146C2D30006CFFFA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1F5029FE146C2D37006CFFFA /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		1F502A00146C2D41006CFFFA /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		1F502A02146C3256006CFFFA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1F502A06146C32CD006CFFFA /* sunglasses1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sunglasses1.png; sourceTree = "<group>"; };
+		1F502A08146C3EC5006CFFFA /* ItemSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemSelector.h; sourceTree = "<group>"; };
+		1F502A09146C3EC5006CFFFA /* ItemSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSelector.m; sourceTree = "<group>"; };
+		1F502A0A146C3EC5006CFFFA /* ItemSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemSelector.xib; sourceTree = "<group>"; };
+		1F502A0D146C41AA006CFFFA /* glasses_sunglasses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glasses_sunglasses.png; sourceTree = "<group>"; };
+		1F502A10146C4599006CFFFA /* Categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Categories.plist; sourceTree = "<group>"; };
+		1F502A14146C47F2006CFFFA /* hat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hat.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1F5029D2146C2CC2006CFFFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F502A03146C3256006CFFFA /* CoreMedia.framework in Frameworks */,
+				1F502A01146C2D41006CFFFA /* CoreVideo.framework in Frameworks */,
+				1F5029FF146C2D38006CFFFA /* AssetsLibrary.framework in Frameworks */,
+				1F5029FD146C2D30006CFFFA /* QuartzCore.framework in Frameworks */,
+				1F5029FB146C2D27006CFFFA /* ImageIO.framework in Frameworks */,
+				1F5029F9146C2D1B006CFFFA /* AVFoundation.framework in Frameworks */,
+				1F5029F7146C2D12006CFFFA /* CoreImage.framework in Frameworks */,
+				1F5029DA146C2CC2006CFFFA /* UIKit.framework in Frameworks */,
+				1F5029DC146C2CC2006CFFFA /* Foundation.framework in Frameworks */,
+				1F5029DE146C2CC2006CFFFA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1F5029CA146C2CC2006CFFFA = {
+			isa = PBXGroup;
+			children = (
+				1F5029DF146C2CC2006CFFFA /* MockMe */,
+				1F5029D8146C2CC2006CFFFA /* Frameworks */,
+				1F5029D6146C2CC2006CFFFA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1F5029D6146C2CC2006CFFFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1F5029D5146C2CC2006CFFFA /* MockMe.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1F5029D8146C2CC2006CFFFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F502A02146C3256006CFFFA /* CoreMedia.framework */,
+				1F502A00146C2D41006CFFFA /* CoreVideo.framework */,
+				1F5029FE146C2D37006CFFFA /* AssetsLibrary.framework */,
+				1F5029FC146C2D30006CFFFA /* QuartzCore.framework */,
+				1F5029FA146C2D27006CFFFA /* ImageIO.framework */,
+				1F5029F8146C2D1B006CFFFA /* AVFoundation.framework */,
+				1F5029F6146C2D12006CFFFA /* CoreImage.framework */,
+				1F5029D9146C2CC2006CFFFA /* UIKit.framework */,
+				1F5029DB146C2CC2006CFFFA /* Foundation.framework */,
+				1F5029DD146C2CC2006CFFFA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1F5029DF146C2CC2006CFFFA /* MockMe */ = {
+			isa = PBXGroup;
+			children = (
+				1F502A04146C32A2006CFFFA /* Images */,
+				1F5029E8146C2CC2006CFFFA /* FaceMeNowAppDelegate.h */,
+				1F5029E9146C2CC2006CFFFA /* FaceMeNowAppDelegate.m */,
+				1F5029EB146C2CC2006CFFFA /* FaceMeNowViewController.h */,
+				1F5029EC146C2CC2006CFFFA /* FaceMeNowViewController.m */,
+				1F5029EE146C2CC2006CFFFA /* FaceMeNowViewController.xib */,
+				1F5029E0146C2CC2006CFFFA /* Supporting Files */,
+				1F502A08146C3EC5006CFFFA /* ItemSelector.h */,
+				1F502A09146C3EC5006CFFFA /* ItemSelector.m */,
+				1F502A0A146C3EC5006CFFFA /* ItemSelector.xib */,
+			);
+			name = MockMe;
+			path = FaceMeNow;
+			sourceTree = "<group>";
+		};
+		1F5029E0146C2CC2006CFFFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F5029E1146C2CC2006CFFFA /* MockMe-Info.plist */,
+				1F5029E2146C2CC2006CFFFA /* InfoPlist.strings */,
+				1F5029E5146C2CC2006CFFFA /* main.m */,
+				1F5029E7146C2CC2006CFFFA /* MockMe-Prefix.pch */,
+				1F502A10146C4599006CFFFA /* Categories.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F502A04146C32A2006CFFFA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1F502A0F146C41AE006CFFFA /* Icons */,
+				1F502A05146C32AB006CFFFA /* SunGlasses */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		1F502A05146C32AB006CFFFA /* SunGlasses */ = {
+			isa = PBXGroup;
+			children = (
+				1F502A06146C32CD006CFFFA /* sunglasses1.png */,
+			);
+			name = SunGlasses;
+			sourceTree = "<group>";
+		};
+		1F502A0F146C41AE006CFFFA /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				1F502A14146C47F2006CFFFA /* hat.png */,
+				1F502A0D146C41AA006CFFFA /* glasses_sunglasses.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F5029D4146C2CC2006CFFFA /* MockMe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F5029F3146C2CC2006CFFFA /* Build configuration list for PBXNativeTarget "MockMe" */;
+			buildPhases = (
+				1F5029D1146C2CC2006CFFFA /* Sources */,
+				1F5029D2146C2CC2006CFFFA /* Frameworks */,
+				1F5029D3146C2CC2006CFFFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MockMe;
+			productName = FaceMeNow;
+			productReference = 1F5029D5146C2CC2006CFFFA /* MockMe.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1F5029CC146C2CC2006CFFFA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Bazinga Systems";
+			};
+			buildConfigurationList = 1F5029CF146C2CC2006CFFFA /* Build configuration list for PBXProject "MockMe" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1F5029CA146C2CC2006CFFFA;
+			productRefGroup = 1F5029D6146C2CC2006CFFFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1F5029D4146C2CC2006CFFFA /* MockMe */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1F5029D3146C2CC2006CFFFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F5029E4146C2CC2006CFFFA /* InfoPlist.strings in Resources */,
+				1F5029F0146C2CC2006CFFFA /* FaceMeNowViewController.xib in Resources */,
+				1F502A07146C32CD006CFFFA /* sunglasses1.png in Resources */,
+				1F502A0C146C3EC5006CFFFA /* ItemSelector.xib in Resources */,
+				1F502A0E146C41AA006CFFFA /* glasses_sunglasses.png in Resources */,
+				1F502A11146C4599006CFFFA /* Categories.plist in Resources */,
+				1F502A15146C47F2006CFFFA /* hat.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1F5029D1146C2CC2006CFFFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F502A0B146C3EC5006CFFFA /* ItemSelector.m in Sources */,
+				1F5029E6146C2CC2006CFFFA /* main.m in Sources */,
+				1F5029EA146C2CC2006CFFFA /* FaceMeNowAppDelegate.m in Sources */,
+				1F5029ED146C2CC2006CFFFA /* FaceMeNowViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1F5029E2146C2CC2006CFFFA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F5029E3146C2CC2006CFFFA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1F5029EE146C2CC2006CFFFA /* FaceMeNowViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F5029EF146C2CC2006CFFFA /* en */,
+			);
+			name = FaceMeNowViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1F5029F1146C2CC2006CFFFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1F5029F2146C2CC2006CFFFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1F5029F4146C2CC2006CFFFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FaceMeNow/MockMe-Prefix.pch";
+				INFOPLIST_FILE = "FaceMeNow/MockMe-Info.plist";
+				PRODUCT_NAME = MockMe;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1F5029F5146C2CC2006CFFFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FaceMeNow/MockMe-Prefix.pch";
+				INFOPLIST_FILE = "FaceMeNow/MockMe-Info.plist";
+				PRODUCT_NAME = MockMe;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F5029CF146C2CC2006CFFFA /* Build configuration list for PBXProject "MockMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F5029F1146C2CC2006CFFFA /* Debug */,
+				1F5029F2146C2CC2006CFFFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F5029F3146C2CC2006CFFFA /* Build configuration list for PBXNativeTarget "MockMe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F5029F4146C2CC2006CFFFA /* Debug */,
+				1F5029F5146C2CC2006CFFFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1F5029CC146C2CC2006CFFFA /* Project object */;
+}
