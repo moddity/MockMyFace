@@ -531,7 +531,8 @@ bail:
 	// hide all the face layers
 	for ( CALayer *layer in sublayers ) {
 		if ([[layer name] isEqualToString:@"FaceLayer"] ||
-            [[layer name] isEqualToString:@"HatLayer"] )
+            [[layer name] isEqualToString:@"HatLayer"] ||
+            [[layer name] isEqualToString:@"MouthLayer"] )
 			
             [layer setHidden:YES];
 	}	
@@ -563,7 +564,9 @@ bail:
 		faceRect.origin.y = temp;
         
         CGRect hatRect = faceRect;
-        //hatRect.origin.y -= 100;
+        hatRect.origin.y -= 200;
+        
+        CGRect mouthRect = CGRectMake(ff.mouthPosition.y-100, ff.mouthPosition.x-100, 200, 200);
         
 		// scale coordinates so they fit in the preview box, which may be scaled
 		CGFloat widthScaleBy = previewBox.size.width / clap.size.height;
@@ -578,12 +581,19 @@ bail:
         hatRect.origin.x *= widthScaleBy;
         hatRect.origin.y *= heightScaleBy;
         
+        mouthRect.size.width *= widthScaleBy;
+        mouthRect.size.height *= heightScaleBy;
+        mouthRect.origin.x *= widthScaleBy;
+        mouthRect.origin.y *= heightScaleBy;
+        
 		if ( isMirrored ) {
 			faceRect = CGRectOffset(faceRect, previewBox.origin.x + previewBox.size.width - faceRect.size.width - (faceRect.origin.x * 2), previewBox.origin.y);
-            hatRect = CGRectOffset(hatRect, previewBox.origin.x + previewBox.size.width - faceRect.size.width - (faceRect.origin.x * 2), previewBox.origin.y);
+            hatRect = CGRectOffset(hatRect, previewBox.origin.x + previewBox.size.width - hatRect.size.width - (hatRect.origin.x * 2), previewBox.origin.y);
+            mouthRect = CGRectOffset(mouthRect, previewBox.origin.x + previewBox.size.width - mouthRect.size.width - (mouthRect.origin.x * 2), previewBox.origin.y);
         } else {
 			faceRect = CGRectOffset(faceRect, previewBox.origin.x, previewBox.origin.y);
             hatRect = CGRectOffset(hatRect, previewBox.origin.x, previewBox.origin.y);
+            mouthRect = CGRectOffset(mouthRect, previewBox.origin.x, previewBox.origin.y);
         }
 		
 		CALayer *featureLayer = nil;
@@ -607,7 +617,9 @@ bail:
 			[previewLayer addSublayer:featureLayer];
 		}
         
-        [featureLayer setFrame:CGRectMake(faceRect.origin.x, faceRect.origin.y + 10 , faceRect.size.width, faceRect.size.height/3)];
+        featureLayer.opacity = 0.5;
+        featureLayer.backgroundColor = [[UIColor redColor] CGColor];
+        [featureLayer setFrame:faceRect];
         
         /***** HAT LAYER *****/
         CALayer *hatLayer = nil;
@@ -627,8 +639,29 @@ bail:
             [previewLayer addSublayer:hatLayer];
         }
         
-        hatLayer.backgroundColor = [[UIColor redColor] CGColor];
+        //hatLayer.backgroundColor = [[UIColor redColor] CGColor];
         [hatLayer setFrame:hatRect];
+        
+        /***** MOUTH LAYER *****/
+        CALayer *mouthLayer = nil;
+        
+        while(!mouthLayer && (currentSublayer < sublayersCount) ) {
+            CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
+            if([[currentLayer name] isEqualToString:@"MouthLayer"]) {
+                mouthLayer = currentLayer;
+                [currentLayer setHidden:NO];
+            }
+        }
+        
+        if(!mouthLayer && mouth != nil) {
+            mouthLayer = [CALayer new];
+            [mouthLayer setContents:(id)[mouth CGImage]];
+            [mouthLayer setName:@"MouthLayer"];
+            [previewLayer addSublayer:mouthLayer];
+        }
+        
+        //mouthLayer.backgroundColor = [[UIColor redColor] CGColor];
+        [mouthLayer setFrame:mouthRect];
                 
 		switch (orientation) {
 			case UIDeviceOrientationPortrait:
@@ -786,7 +819,12 @@ bail:
         case kItemTypeHat:
             hat = [UIImage imageNamed:imgName];
             break;
-            
+        case kItemTypeSunglasses:
+            sunglasses = [UIImage imageNamed:imgName];
+            break;
+        case kItemTypeMouth:
+            mouth = [UIImage imageNamed:imgName];
+            break;
         default:
             break;
     }

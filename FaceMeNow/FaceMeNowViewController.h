@@ -30,6 +30,8 @@
     
     //ImageMasks
     UIImage *hat;
+    UIImage *sunglasses;
+    UIImage *mouth;
     
 }
 

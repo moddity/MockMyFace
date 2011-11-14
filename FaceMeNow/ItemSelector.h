@@ -13,6 +13,7 @@
 
 #define kItemTypeHat 1
 #define kItemTypeSunglasses 2
+#define kItemTypeMouth 3
 
 
 @protocol ItemSelectorDelegate <NSObject>

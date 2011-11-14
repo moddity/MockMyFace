@@ -58,5 +58,21 @@
 			</dict>
 		</array>
 	</dict>
+    <key>Mouths</key>
+	<dict>
+		<key>icon</key>
+		<string>boques.png</string>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>type</key>
+				<integer>3</integer>
+				<key>name</key>
+				<string>Boca1</string>
+				<key>image</key>
+				<string>boca1.png</string>
+			</dict>
+		</array>
+	</dict>
 </dict>
 </plist>
