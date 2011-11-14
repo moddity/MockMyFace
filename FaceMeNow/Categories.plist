@@ -20,9 +20,33 @@
 				<key>type</key>
 				<integer>2</integer>
 				<key>name</key>
-				<string>Sunglass 2</string>
+				<string>gafes3D</string>
 				<key>image</key>
-				<string>sunglasses2.png</string>
+				<string>gafes_3D.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafesCorazon</string>
+				<key>image</key>
+				<string>gafes_corazon.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafesPlatejades</string>
+				<key>image</key>
+				<string>gafes_platejades.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafesRayban</string>
+				<key>image</key>
+				<string>gafes_rayban.png</string>
 			</dict>
 		</array>
 	</dict>
@@ -58,7 +82,7 @@
 			</dict>
 		</array>
 	</dict>
-    <key>Mouths</key>
+	<key>Mouths</key>
 	<dict>
 		<key>icon</key>
 		<string>boques.png</string>
@@ -71,6 +95,38 @@
 				<string>Boca1</string>
 				<key>image</key>
 				<string>boca1.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>3</integer>
+				<key>name</key>
+				<string>Boca2</string>
+				<key>image</key>
+				<string>boca2.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>3</integer>
+				<key>name</key>
+				<string>Boca3</string>
+				<key>image</key>
+				<string>boca3.png</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Frames</key>
+	<dict>
+		<key>icon</key>
+		<string>icon_marc.png</string>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>Marc1</string>
+				<key>image</key>
+				<string>marc_estrelles.png</string>
 			</dict>
 		</array>
 	</dict>
