@@ -9,12 +9,16 @@
 		<key>items</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<integer>2</integer>
 				<key>name</key>
 				<string>Sunglass 1</string>
 				<key>image</key>
 				<string>sunglasses1.png</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<integer>2</integer>
 				<key>name</key>
 				<string>Sunglass 2</string>
 				<key>image</key>
@@ -29,16 +33,28 @@
 		<key>items</key>
 		<array>
 			<dict>
+				<key>type</key>
+				<integer>1</integer>
 				<key>name</key>
-				<string>Sunglass 1</string>
+				<string>Viking</string>
 				<key>image</key>
-				<string>sunglasses1.png</string>
+				<string>vikingo.png</string>
 			</dict>
 			<dict>
+				<key>type</key>
+				<integer>1</integer>
 				<key>name</key>
-				<string>Sunglass 2</string>
+				<string>The Capitain</string>
 				<key>image</key>
-				<string>sunglasses2.png</string>
+				<string>capitan.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>Sailor</string>
+				<key>image</key>
+				<string>marinero.png</string>
 			</dict>
 		</array>
 	</dict>

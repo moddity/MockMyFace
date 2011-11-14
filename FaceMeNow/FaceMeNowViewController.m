@@ -11,7 +11,7 @@
 #import <ImageIO/ImageIO.h>
 #import <AssertMacros.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "ItemSelector.h"
+
 
 #pragma mark-
 
@@ -530,8 +530,10 @@ bail:
 	
 	// hide all the face layers
 	for ( CALayer *layer in sublayers ) {
-		if ( [[layer name] isEqualToString:@"FaceLayer"] )
-			[layer setHidden:YES];
+		if ([[layer name] isEqualToString:@"FaceLayer"] ||
+            [[layer name] isEqualToString:@"HatLayer"] )
+			
+            [layer setHidden:YES];
 	}	
 	
 	if ( featuresCount == 0) {
@@ -552,8 +554,6 @@ bail:
 		// (Bottom right if mirroring is turned on)
 		CGRect faceRect = [ff bounds];
         
-        
-        
 		// flip preview width and height
 		CGFloat temp = faceRect.size.width;
 		faceRect.size.width = faceRect.size.height;
@@ -561,6 +561,10 @@ bail:
 		temp = faceRect.origin.x;
 		faceRect.origin.x = faceRect.origin.y;
 		faceRect.origin.y = temp;
+        
+        CGRect hatRect = faceRect;
+        //hatRect.origin.y -= 100;
+        
 		// scale coordinates so they fit in the preview box, which may be scaled
 		CGFloat widthScaleBy = previewBox.size.width / clap.size.height;
 		CGFloat heightScaleBy = previewBox.size.height / clap.size.width;
@@ -568,14 +572,24 @@ bail:
 		faceRect.size.height *= heightScaleBy;
 		faceRect.origin.x *= widthScaleBy;
 		faceRect.origin.y *= heightScaleBy;
+
+        hatRect.size.width *= widthScaleBy;
+        hatRect.size.height *= heightScaleBy;
+        hatRect.origin.x *= widthScaleBy;
+        hatRect.origin.y *= heightScaleBy;
         
-		if ( isMirrored )
+		if ( isMirrored ) {
 			faceRect = CGRectOffset(faceRect, previewBox.origin.x + previewBox.size.width - faceRect.size.width - (faceRect.origin.x * 2), previewBox.origin.y);
-		else
+            hatRect = CGRectOffset(hatRect, previewBox.origin.x + previewBox.size.width - faceRect.size.width - (faceRect.origin.x * 2), previewBox.origin.y);
+        } else {
 			faceRect = CGRectOffset(faceRect, previewBox.origin.x, previewBox.origin.y);
+            hatRect = CGRectOffset(hatRect, previewBox.origin.x, previewBox.origin.y);
+        }
 		
 		CALayer *featureLayer = nil;
 		
+        [featureLayer setGeometryFlipped:YES];
+        
 		// re-use an existing layer if possible
 		while ( !featureLayer && (currentSublayer < sublayersCount) ) {
 			CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
@@ -591,13 +605,31 @@ bail:
 			[featureLayer setContents:(id)[square CGImage]];
 			[featureLayer setName:@"FaceLayer"];
 			[previewLayer addSublayer:featureLayer];
-			
 		}
         
-		//[featureLayer setFrame:faceRect];
-		
-        [featureLayer setFrame:CGRectMake(faceRect.origin.x, faceRect.origin.y, faceRect.size.width, faceRect.size.height/3)];
+        [featureLayer setFrame:CGRectMake(faceRect.origin.x, faceRect.origin.y + 10 , faceRect.size.width, faceRect.size.height/3)];
         
+        /***** HAT LAYER *****/
+        CALayer *hatLayer = nil;
+        
+        while(!hatLayer && (currentSublayer < sublayersCount) ) {
+            CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
+            if([[currentLayer name] isEqualToString:@"HatLayer"]) {
+                hatLayer = currentLayer;
+                [currentLayer setHidden:NO];
+            }
+        }
+        
+        if(!hatLayer && hat != nil) {
+            hatLayer = [CALayer new];
+            [hatLayer setContents:(id)[hat CGImage]];
+            [hatLayer setName:@"HatLayer"];
+            [previewLayer addSublayer:hatLayer];
+        }
+        
+        hatLayer.backgroundColor = [[UIColor redColor] CGColor];
+        [hatLayer setFrame:hatRect];
+                
 		switch (orientation) {
 			case UIDeviceOrientationPortrait:
 				[featureLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(0.))];
@@ -744,7 +776,20 @@ bail:
     //itemSelectorViewController.view.frame = self.view.bounds;
     //[self addChildViewController:itemSelectorViewController];
     [self.view addSubview:itemSelectorViewController.view];
+    itemSelectorViewController.delegate = self;
+}
+
+-(void) itemSelected:(int)kItemType imageName:(NSString *)imgName {
+    NSLog(@"SELECTED: %@", imgName);
     
+    switch (kItemType) {
+        case kItemTypeHat:
+            hat = [UIImage imageNamed:imgName];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)viewDidUnload

@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "ItemSelector.h"
 
-@class ItemSelector;
+
 @class CIDetector;
 
-@interface FaceMeNowViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate> {
+@interface FaceMeNowViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, ItemSelectorDelegate> {
     
     IBOutlet UIView *previewView;
     AVCaptureVideoPreviewLayer *previewLayer;
@@ -25,9 +26,11 @@
 	CIDetector *faceDetector;
 	CGFloat beginGestureScale;
 	CGFloat effectiveScale;
-
-    
     IBOutlet ItemSelector *itemSelectorViewController;
+    
+    //ImageMasks
+    UIImage *hat;
+    
 }
 
 @property (nonatomic, strong) IBOutlet ItemSelector *itemSelectorViewController;
