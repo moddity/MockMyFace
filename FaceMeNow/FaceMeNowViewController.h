@@ -10,6 +10,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ItemSelector.h"
 
+#define kSunglassesLayer @"SunglassesLayer"
+#define kHatLayer @"HatLayer"
+#define kMouthLayer @"MouthLayer"
+#define kBeardLayer @"BeardLayer"
 
 @class CIDetector;
 
@@ -32,6 +36,7 @@
     UIImage *hat;
     UIImage *sunglasses;
     UIImage *mouth;
+    UIImage *beard;
     
 }
 

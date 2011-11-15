@@ -521,6 +521,14 @@ bail:
 // to detect features and for each draw the red square in a layer and set appropriate orientation
 - (void)drawFaceBoxesForFeatures:(NSArray *)features forVideoBox:(CGRect)clap orientation:(UIDeviceOrientation)orientation
 {
+    
+    NSMutableArray *enabledLayers = [NSMutableArray array];
+    
+    if(sunglasses != nil) [enabledLayers addObject:kSunglassesLayer];
+    if(hat != nil) [enabledLayers addObject:kHatLayer];
+    if(mouth != nil) [enabledLayers addObject:kMouthLayer];
+    if(beard != nil) [enabledLayers addObject:kBeardLayer];
+    
 	NSArray *sublayers = [NSArray arrayWithArray:[previewLayer sublayers]];
 	NSInteger sublayersCount = [sublayers count], currentSublayer = 0;
 	NSInteger featuresCount = [features count], currentFeature = 0;
@@ -530,10 +538,7 @@ bail:
 	
 	// hide all the face layers
 	for ( CALayer *layer in sublayers ) {
-		if ([[layer name] isEqualToString:@"FaceLayer"] ||
-            [[layer name] isEqualToString:@"HatLayer"] ||
-            [[layer name] isEqualToString:@"MouthLayer"] )
-			
+        if([enabledLayers containsObject:[layer name]]) 
             [layer setHidden:YES];
 	}	
 	
@@ -567,6 +572,36 @@ bail:
         hatRect.origin.y -= 200;
         
         CGRect mouthRect = CGRectMake(ff.mouthPosition.y-100, ff.mouthPosition.x-100, 200, 200);
+        CGRect leftEyeRect = CGRectMake(ff.leftEyePosition.y-50, ff.leftEyePosition.x-50, 100, 100);
+        CGRect rightEyeRect = CGRectMake(ff.rightEyePosition.y-50, ff.rightEyePosition.x-50, 100, 100);
+        
+        /*CGRect glassesRect = CGRectMake(ff.rightEyePosition.y-120,
+                                        ff.rightEyePosition.x-120, 
+                                        (ff.rightEyePosition.y-ff.leftEyePosition.y)+100,
+                                        100);*/
+        
+        
+        float eyeCenterY = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
+    
+        CGPoint eyeCenter = CGPointMake(ff.rightEyePosition.x, eyeCenterY);
+    
+        float glassesWidth = (ff.rightEyePosition.y-ff.leftEyePosition.y)*2;
+        
+        /*
+        CGRect glassesRect = CGRectMake(ff.leftEyePosition.y - (glassesWidth / 3), 
+                                        ff.leftEyePosition.x - (glassesWidth / 2), 
+                                        glassesWidth, 
+                                        glassesWidth);*/
+        
+        CGRect glassesRect = CGRectMake(eyeCenter.y - (glassesWidth / 2), 
+                                        eyeCenter.x - (glassesWidth / 2), 
+                                        glassesWidth, 
+                                        glassesWidth);
+               
+        NSLog(@"GLASSES RECT: %@ - %@ - %@", 
+              NSStringFromCGRect(glassesRect), 
+              NSStringFromCGPoint(ff.leftEyePosition),
+              NSStringFromCGPoint(ff.rightEyePosition));
         
 		// scale coordinates so they fit in the preview box, which may be scaled
 		CGFloat widthScaleBy = previewBox.size.width / clap.size.height;
@@ -586,83 +621,90 @@ bail:
         mouthRect.origin.x *= widthScaleBy;
         mouthRect.origin.y *= heightScaleBy;
         
+        leftEyeRect.size.width *= widthScaleBy;
+        leftEyeRect.size.height *= heightScaleBy;
+        leftEyeRect.origin.x *= widthScaleBy;
+        leftEyeRect.origin.y *= heightScaleBy;
+        
+        rightEyeRect.size.width *= widthScaleBy;
+        rightEyeRect.size.height *= heightScaleBy;
+        rightEyeRect.origin.x *= widthScaleBy;
+        rightEyeRect.origin.y *= heightScaleBy;
+        
+        glassesRect.size.width *= widthScaleBy;
+        glassesRect.size.height *= heightScaleBy;
+        glassesRect.origin.x *= widthScaleBy;
+        glassesRect.origin.y *= heightScaleBy;
+        
+        
 		if ( isMirrored ) {
 			faceRect = CGRectOffset(faceRect, previewBox.origin.x + previewBox.size.width - faceRect.size.width - (faceRect.origin.x * 2), previewBox.origin.y);
             hatRect = CGRectOffset(hatRect, previewBox.origin.x + previewBox.size.width - hatRect.size.width - (hatRect.origin.x * 2), previewBox.origin.y);
             mouthRect = CGRectOffset(mouthRect, previewBox.origin.x + previewBox.size.width - mouthRect.size.width - (mouthRect.origin.x * 2), previewBox.origin.y);
+            leftEyeRect = CGRectOffset(leftEyeRect, previewBox.origin.x + previewBox.size.width - leftEyeRect.size.width - (leftEyeRect.origin.x * 2), previewBox.origin.y);
+            rightEyeRect = CGRectOffset(rightEyeRect, previewBox.origin.x + previewBox.size.width - rightEyeRect.size.width - (rightEyeRect.origin.x * 2), previewBox.origin.y);
+            glassesRect = CGRectOffset(glassesRect, previewBox.origin.x + previewBox.size.width - glassesRect.size.width - (glassesRect.origin.x * 2), previewBox.origin.y);
         } else {
 			faceRect = CGRectOffset(faceRect, previewBox.origin.x, previewBox.origin.y);
             hatRect = CGRectOffset(hatRect, previewBox.origin.x, previewBox.origin.y);
             mouthRect = CGRectOffset(mouthRect, previewBox.origin.x, previewBox.origin.y);
+            leftEyeRect = CGRectOffset(leftEyeRect, previewBox.origin.x, previewBox.origin.y);
+            rightEyeRect = CGRectOffset(rightEyeRect, previewBox.origin.x, previewBox.origin.y);
+            glassesRect = CGRectOffset(glassesRect, previewBox.origin.x, previewBox.origin.y);
         }
 		
-		CALayer *featureLayer = nil;
 		
-        [featureLayer setGeometryFlipped:YES];
-        
+        CALayer *sunglassesLayer = nil, *mouthLayer = nil, *hatLayer = nil, *beardLayer = nil;
+		
 		// re-use an existing layer if possible
-		while ( !featureLayer && (currentSublayer < sublayersCount) ) {
+		while ( (!sunglassesLayer || !mouthLayer || !hatLayer) 
+               && (currentSublayer < sublayersCount) ) {
 			CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
-			if ( [[currentLayer name] isEqualToString:@"FaceLayer"] ) {
-				featureLayer = currentLayer;
+            if([enabledLayers containsObject:[currentLayer name]]) {
 				[currentLayer setHidden:NO];
-			}
-		}
-		
-		// create a new one if necessary
-		if ( !featureLayer ) {
-			featureLayer = [CALayer new];
-			[featureLayer setContents:(id)[square CGImage]];
-			[featureLayer setName:@"FaceLayer"];
-			[previewLayer addSublayer:featureLayer];
-		}
-        
-        featureLayer.opacity = 0.5;
-        featureLayer.backgroundColor = [[UIColor redColor] CGColor];
-        [featureLayer setFrame:faceRect];
-        
-        /***** HAT LAYER *****/
-        CALayer *hatLayer = nil;
-        
-        while(!hatLayer && (currentSublayer < sublayersCount) ) {
-            CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
-            if([[currentLayer name] isEqualToString:@"HatLayer"]) {
-                hatLayer = currentLayer;
-                [currentLayer setHidden:NO];
+                
+                if([[currentLayer name] isEqualToString:kSunglassesLayer]) {
+                    sunglassesLayer = currentLayer;
+                } else if([[currentLayer name] isEqualToString:kHatLayer]) {
+                    hatLayer = currentLayer;
+                } else if([[currentLayer name] isEqualToString: kMouthLayer]) {
+                    mouthLayer = currentLayer;
+                } else {
+                    beardLayer = currentLayer;
+                }
             }
+		}
+        
+        if(!sunglassesLayer && sunglasses != nil) {
+            sunglassesLayer = [CALayer new];
+            [sunglassesLayer setContents:(id)[sunglasses CGImage]];
+            [sunglassesLayer setName:kSunglassesLayer];
+            [previewLayer addSublayer:sunglassesLayer];
         }
         
+        sunglassesLayer.opacity = 0.5;
+        sunglassesLayer.backgroundColor = [[UIColor redColor] CGColor];
+        [sunglassesLayer setFrame:glassesRect];
+		
         if(!hatLayer && hat != nil) {
             hatLayer = [CALayer new];
             [hatLayer setContents:(id)[hat CGImage]];
-            [hatLayer setName:@"HatLayer"];
+            [hatLayer setName:kHatLayer];
             [previewLayer addSublayer:hatLayer];
         }
-        
-        //hatLayer.backgroundColor = [[UIColor redColor] CGColor];
+
         [hatLayer setFrame:hatRect];
-        
-        /***** MOUTH LAYER *****/
-        CALayer *mouthLayer = nil;
-        
-        while(!mouthLayer && (currentSublayer < sublayersCount) ) {
-            CALayer *currentLayer = [sublayers objectAtIndex:currentSublayer++];
-            if([[currentLayer name] isEqualToString:@"MouthLayer"]) {
-                mouthLayer = currentLayer;
-                [currentLayer setHidden:NO];
-            }
-        }
         
         if(!mouthLayer && mouth != nil) {
             mouthLayer = [CALayer new];
             [mouthLayer setContents:(id)[mouth CGImage]];
-            [mouthLayer setName:@"MouthLayer"];
+            [mouthLayer setName:kMouthLayer];
             [previewLayer addSublayer:mouthLayer];
         }
         
-        //mouthLayer.backgroundColor = [[UIColor redColor] CGColor];
         [mouthLayer setFrame:mouthRect];
                 
+        /*
 		switch (orientation) {
 			case UIDeviceOrientationPortrait:
 				[featureLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(0.))];
@@ -681,6 +723,7 @@ bail:
 			default:
 				break; // leave the layer in its last known orientation
 		}
+         */
 		currentFeature++;
 	}
 	
