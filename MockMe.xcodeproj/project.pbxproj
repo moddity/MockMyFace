@@ -57,6 +57,8 @@
 		0869752C1472DEB5009A6441 /* MockMe-icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 0869752B1472DEB5009A6441 /* MockMe-icon114.png */; };
 		0869752E1472E752009A6441 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0869752D1472E752009A6441 /* Default.png */; };
 		086975301472E756009A6441 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0869752F1472E756009A6441 /* Default@2x.png */; };
+		086975371472ED61009A6441 /* shareSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975351472ED61009A6441 /* shareSheet.png */; };
+		086975381472ED61009A6441 /* shareSheet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975361472ED61009A6441 /* shareSheet@2x.png */; };
 		1F5029DA146C2CC2006CFFFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029D9146C2CC2006CFFFA /* UIKit.framework */; };
 		1F5029DC146C2CC2006CFFFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DB146C2CC2006CFFFA /* Foundation.framework */; };
 		1F5029DE146C2CC2006CFFFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DD146C2CC2006CFFFA /* CoreGraphics.framework */; };
@@ -148,6 +150,8 @@
 		0869752B1472DEB5009A6441 /* MockMe-icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MockMe-icon114.png"; sourceTree = "<group>"; };
 		0869752D1472E752009A6441 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0869752F1472E756009A6441 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		086975351472ED61009A6441 /* shareSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareSheet.png; sourceTree = "<group>"; };
+		086975361472ED61009A6441 /* shareSheet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareSheet@2x.png"; sourceTree = "<group>"; };
 		1F5029D5146C2CC2006CFFFA /* MockMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MockMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F5029D9146C2CC2006CFFFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1F5029DB146C2CC2006CFFFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -321,6 +325,8 @@
 		1F502A04146C32A2006CFFFA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				086975351472ED61009A6441 /* shareSheet.png */,
+				086975361472ED61009A6441 /* shareSheet@2x.png */,
 				0869750814719CBF009A6441 /* marcUI.png */,
 				0869750914719CBF009A6441 /* marcUI@2x.png */,
 				086974FB1471822D009A6441 /* thumb_marcs */,
@@ -553,6 +559,8 @@
 				0869752C1472DEB5009A6441 /* MockMe-icon114.png in Resources */,
 				0869752E1472E752009A6441 /* Default.png in Resources */,
 				086975301472E756009A6441 /* Default@2x.png in Resources */,
+				086975371472ED61009A6441 /* shareSheet.png in Resources */,
+				086975381472ED61009A6441 /* shareSheet@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
