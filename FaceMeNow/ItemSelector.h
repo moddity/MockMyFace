@@ -31,6 +31,8 @@
     NSMutableArray *itemsArray;
     NSMutableArray *itemsButtons;
     NSArray *activeItems;
+    
+    int selectedCategoryIndex;
 }
 
 @property (nonatomic, strong) IBOutlet UIScrollView *catScroll;

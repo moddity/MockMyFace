@@ -68,6 +68,9 @@
         
         [itemsButtons addObject:itemButton];
     }
+    
+    [itemScroll setContentSize:CGSizeMake(ITEM_WIDTH* [itemsButtons count], itemScroll.frame.size.height)];
+    
     activeItems = items;
 }
 
@@ -80,18 +83,18 @@
     int itemType = [[itemDict objectForKey:@"type"] intValue];
     
     [delegate itemSelected: itemType imageName: [itemDict objectForKey:@"image"]];
+    [self toogleItemsUP:sender];
 }
 
 -(IBAction) toogleItemsUP:(id) sender {
+     UIButton *origin = (UIButton*) sender;
+    
    if(!itemsUP) {
-       
        //Load buttons
        
-       UIButton *origin = (UIButton*) sender;
-       
-       int catIndex = origin.tag;
-       
-       [self loadItems:[itemsArray objectAtIndex:catIndex]];
+      
+       selectedCategoryIndex = origin.tag;
+       [self loadItems:[itemsArray objectAtIndex:selectedCategoryIndex]];
        
         [UIView animateWithDuration:0.3
                          animations:^{ 
@@ -103,6 +106,14 @@
                              itemsUP = YES;
                          }];
     } else {
+        
+        //Canvi de 
+        if(selectedCategoryIndex && origin.tag != selectedCategoryIndex) {
+            selectedCategoryIndex = origin.tag;
+            [self loadItems:[itemsArray objectAtIndex:selectedCategoryIndex]];
+            return;
+        }
+        
         [UIView animateWithDuration:0.3
                          animations:^{ 
                              CGPoint center = self.view.center;

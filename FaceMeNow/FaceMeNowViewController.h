@@ -42,4 +42,7 @@
 
 @property (nonatomic, strong) IBOutlet ItemSelector *itemSelectorViewController;
 
+-(NSMutableArray*) getEnabledLayers;
+-(void) removeLayer: (NSString*) layerToClean;
+
 @end

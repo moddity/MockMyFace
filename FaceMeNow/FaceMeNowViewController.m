@@ -517,22 +517,29 @@ bail:
 	return videoBox;
 }
 
-// called asynchronously as the capture output is capturing sample buffers, this method asks the face detector (if on)
-// to detect features and for each draw the red square in a layer and set appropriate orientation
-- (void)drawFaceBoxesForFeatures:(NSArray *)features forVideoBox:(CGRect)clap orientation:(UIDeviceOrientation)orientation
-{
-    
+-(NSMutableArray*) getEnabledLayers {
     NSMutableArray *enabledLayers = [NSMutableArray array];
     
     if(sunglasses != nil) [enabledLayers addObject:kSunglassesLayer];
     if(hat != nil) [enabledLayers addObject:kHatLayer];
     if(mouth != nil) [enabledLayers addObject:kMouthLayer];
     if(beard != nil) [enabledLayers addObject:kBeardLayer];
+    return enabledLayers;
+}
+
+// called asynchronously as the capture output is capturing sample buffers, this method asks the face detector (if on)
+// to detect features and for each draw the red square in a layer and set appropriate orientation
+- (void)drawFaceBoxesForFeatures:(NSArray *)features forVideoBox:(CGRect)clap orientation:(UIDeviceOrientation)orientation
+{
+    
+    NSMutableArray *enabledLayers = [self getEnabledLayers];
     
 	NSArray *sublayers = [NSArray arrayWithArray:[previewLayer sublayers]];
 	NSInteger sublayersCount = [sublayers count], currentSublayer = 0;
 	NSInteger featuresCount = [features count], currentFeature = 0;
 	
+    NSLog(@"ENABLED LAYERS: %d", [enabledLayers count]);
+    
 	[CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
 	
@@ -568,10 +575,14 @@ bail:
 		faceRect.origin.x = faceRect.origin.y;
 		faceRect.origin.y = temp;
         
-        CGRect hatRect = faceRect;
-        hatRect.origin.y -= 200;
+        CGRect hatRect = CGRectMake(faceRect.origin.x, 
+                                    faceRect.origin.y - (faceRect.size.width * 0.85),
+                                    faceRect.size.width, 
+                                    faceRect.size.width);
         
-        CGRect mouthRect = CGRectMake(ff.mouthPosition.y-100, ff.mouthPosition.x-100, 200, 200);
+        float mouthSize = faceRect.size.width / 2;
+        
+        CGRect mouthRect = CGRectMake(ff.mouthPosition.y-(mouthSize/2), ff.mouthPosition.x-(mouthSize/2), mouthSize, mouthSize);
         CGRect leftEyeRect = CGRectMake(ff.leftEyePosition.y-50, ff.leftEyePosition.x-50, 100, 100);
         CGRect rightEyeRect = CGRectMake(ff.rightEyePosition.y-50, ff.rightEyePosition.x-50, 100, 100);
         
@@ -682,8 +693,8 @@ bail:
             [previewLayer addSublayer:sunglassesLayer];
         }
         
-        sunglassesLayer.opacity = 0.5;
-        sunglassesLayer.backgroundColor = [[UIColor redColor] CGColor];
+        //sunglassesLayer.opacity = 0.5;
+        //sunglassesLayer.backgroundColor = [[UIColor redColor] CGColor];
         [sunglassesLayer setFrame:glassesRect];
 		
         if(!hatLayer && hat != nil) {
@@ -693,6 +704,8 @@ bail:
             [previewLayer addSublayer:hatLayer];
         }
 
+        //hatLayer.opacity = 0.5;
+        //hatLayer.backgroundColor = [[UIColor blueColor] CGColor];
         [hatLayer setFrame:hatRect];
         
         if(!mouthLayer && mouth != nil) {
@@ -702,6 +715,8 @@ bail:
             [previewLayer addSublayer:mouthLayer];
         }
         
+        //mouthLayer.opacity = 0.5;
+        //mouthLayer.backgroundColor = [[UIColor purpleColor] CGColor];
         [mouthLayer setFrame:mouthRect];
                 
         /*
@@ -856,21 +871,41 @@ bail:
 }
 
 -(void) itemSelected:(int)kItemType imageName:(NSString *)imgName {
+    
+    
+    
     NSLog(@"SELECTED: %@", imgName);
     
     switch (kItemType) {
         case kItemTypeHat:
+            [self removeLayer:kHatLayer];
             hat = [UIImage imageNamed:imgName];
             break;
         case kItemTypeSunglasses:
+            [self removeLayer:kSunglassesLayer];
             sunglasses = [UIImage imageNamed:imgName];
             break;
         case kItemTypeMouth:
+            [self removeLayer:kMouthLayer];
             mouth = [UIImage imageNamed:imgName];
             break;
         default:
             break;
     }
+}
+
+-(void) removeLayer:(NSString *)layerToClean {
+    NSArray *sublayers = [NSArray arrayWithArray:[previewLayer sublayers]];
+    
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+	
+	// hide all the face layers
+	for ( CALayer *layer in sublayers ) {
+        if([[layer name] isEqualToString:layerToClean])
+            [layer removeFromSuperlayer];
+	}	
+    [CATransaction commit];
 }
 
 - (void)viewDidUnload
