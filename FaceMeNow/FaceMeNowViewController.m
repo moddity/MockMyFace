@@ -196,9 +196,10 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	effectiveScale = 1.0;
 	previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
 	[previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
-	[previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
+	[previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
 	CALayer *rootLayer = [previewView layer];
 	[rootLayer setMasksToBounds:YES];
+    NSLog(@"ROOT LAYER BOUNDS: %@", NSStringFromCGRect([rootLayer bounds]));
 	[previewLayer setFrame:[rootLayer bounds]];
 	[rootLayer addSublayer:previewLayer];
 	[session startRunning];
@@ -279,12 +280,30 @@ bail:
                                        inCGImage:(CGImageRef)backgroundImage 
                                  withOrientation:(UIDeviceOrientation)orientation 
                                      frontFacing:(BOOL)isFrontFacing
+                                withSampleBuffer:(CMSampleBufferRef) sampleBuffer 
 {
-	CGImageRef returnImage = NULL;
+    
+    	CGImageRef returnImage = NULL;
 	CGRect backgroundImageRect = CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage));
-	CGContextRef bitmapContext = CreateCGBitmapContextForSize(backgroundImageRect.size);
+	//CGRect backgroundImageRect = CGRectMake(0, 0, 480, 320);
+    CGContextRef bitmapContext = CreateCGBitmapContextForSize(backgroundImageRect.size);
+    
+    
+    CGContextSaveGState(bitmapContext);
+    
+    CGContextTranslateCTM(bitmapContext, 0, 
+                          backgroundImageRect.size.height);
+    CGContextScaleCTM(bitmapContext, 1.0, -1.0);
+    
+
+    
 	CGContextClearRect(bitmapContext, backgroundImageRect);
-	CGContextDrawImage(bitmapContext, backgroundImageRect, backgroundImage);
+	CGContextDrawImage(bitmapContext, 
+                       CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage))
+                       , backgroundImage);
+    
+    NSLog(@"BACKGROUND IMAGE RECT: %@", NSStringFromCGRect(CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage))));
+    
 	CGFloat rotationDegrees = 0.;
 	
 	switch (orientation) {
@@ -307,13 +326,23 @@ bail:
 		default:
 			break; // leave the layer in its last known orientation
 	}
-	UIImage *rotatedSquareImage = [square imageRotatedByDegrees:rotationDegrees];
+    
+	UIImage *rotatedSquareImage = [sunglasses imageRotatedByDegrees:rotationDegrees];
 	
+    // get the clean aperture
+    // the clean aperture is a rectangle that defines the portion of the encoded pixel dimensions
+    // that represents image data valid for display.
+	CMFormatDescriptionRef fdesc = CMSampleBufferGetFormatDescription(sampleBuffer);
+	CGRect clap = CMVideoFormatDescriptionGetCleanAperture(fdesc, false /*originIsTopLeft == false*/);
+    
     // features found by the face detector
 	for ( CIFaceFeature *ff in features ) {
 		CGRect faceRect = [ff bounds];
         //CGRect faceRect = CGRectMake(ff.bounds.origin.x, ff.bounds.origin.y, ff.bounds.size.width, ff.bounds.size.height/2);
-		CGContextDrawImage(bitmapContext, faceRect, [rotatedSquareImage CGImage]);
+		CGContextDrawImage(bitmapContext, [self getSunglassesRectFromFace:ff forVideoBox:backgroundImageRect], [rotatedSquareImage CGImage]);
+        
+        //Marc
+        CGContextDrawImage(bitmapContext, backgroundImageRect, [[marc.image imageRotatedByDegrees:rotationDegrees] CGImage]);
 	}
 	returnImage = CGBitmapContextCreateImage(bitmapContext);
 	CGContextRelease (bitmapContext);
@@ -437,7 +466,8 @@ bail:
                                                                   CGImageRef cgImageResult = [self newSquareOverlayedImageForFeatures:features 
                                                                                                                             inCGImage:srcImage 
                                                                                                                       withOrientation:curDeviceOrientation 
-                                                                                                                          frontFacing:isUsingFrontFacingCamera];
+                                                                                                                          frontFacing:isUsingFrontFacingCamera
+                                                                                                                     withSampleBuffer:imageDataSampleBuffer];
                                                                   if (srcImage)
                                                                       CFRelease(srcImage);
                                                                   
@@ -527,6 +557,59 @@ bail:
     return enabledLayers;
 }
 
+-(CGRect) getSunglassesRectFromFace:(CIFaceFeature*)ff forVideoBox:(CGRect)clap {
+    CGRect faceRect = [ff bounds];
+    
+    // flip preview width and height
+    /*CGFloat temp = faceRect.size.width;
+    faceRect.size.width = faceRect.size.height;
+    faceRect.size.height = temp;
+    temp = faceRect.origin.x;
+    faceRect.origin.x = faceRect.origin.y;
+    faceRect.origin.y = temp;
+    */
+    float eyeCenterY = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
+    
+    CGPoint eyeCenter = CGPointMake(ff.rightEyePosition.x, eyeCenterY);
+    
+    float glassesWidth = (ff.rightEyePosition.y-ff.leftEyePosition.y)*2;
+    
+    CGRect glassesRect = CGRectMake(eyeCenter.y - (glassesWidth / 2), 
+                                    eyeCenter.x - (glassesWidth / 2), 
+                                    glassesWidth, 
+                                    glassesWidth);
+    
+        
+    CGSize parentFrameSize = [previewView frame].size;
+	NSString *gravity = [previewLayer videoGravity];
+	BOOL isMirrored = [previewLayer isMirrored];
+    
+    NSLog(@"PARENT FRAME SIZE: %@", NSStringFromCGSize([previewView frame].size));
+    
+    CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
+                                                                 frameSize:parentFrameSize 
+                                                              apertureSize:clap.size];
+    
+    // scale coordinates so they fit in the preview box, which may be scaled
+    CGFloat widthScaleBy = previewBox.size.width / clap.size.height;
+    CGFloat heightScaleBy = previewBox.size.height / clap.size.width;
+
+    
+    glassesRect.size.width *= widthScaleBy;
+    glassesRect.size.height *= heightScaleBy;
+    glassesRect.origin.x *= widthScaleBy;
+    glassesRect.origin.y *= heightScaleBy;
+    
+    
+    if ( isMirrored ) {
+        glassesRect = CGRectOffset(glassesRect, previewBox.origin.x + previewBox.size.width - glassesRect.size.width - (glassesRect.origin.x * 2), previewBox.origin.y);
+    } else {
+        glassesRect = CGRectOffset(glassesRect, previewBox.origin.x, previewBox.origin.y);
+    }
+
+    return glassesRect;
+}
+
 // called asynchronously as the capture output is capturing sample buffers, this method asks the face detector (if on)
 // to detect features and for each draw the red square in a layer and set appropriate orientation
 - (void)drawFaceBoxesForFeatures:(NSArray *)features forVideoBox:(CGRect)clap orientation:(UIDeviceOrientation)orientation
@@ -537,9 +620,7 @@ bail:
 	NSArray *sublayers = [NSArray arrayWithArray:[previewLayer sublayers]];
 	NSInteger sublayersCount = [sublayers count], currentSublayer = 0;
 	NSInteger featuresCount = [features count], currentFeature = 0;
-	
-    NSLog(@"ENABLED LAYERS: %d", [enabledLayers count]);
-    
+	  
 	[CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
 	
@@ -608,11 +689,6 @@ bail:
                                         eyeCenter.x - (glassesWidth / 2), 
                                         glassesWidth, 
                                         glassesWidth);
-               
-        NSLog(@"GLASSES RECT: %@ - %@ - %@", 
-              NSStringFromCGRect(glassesRect), 
-              NSStringFromCGPoint(ff.leftEyePosition),
-              NSStringFromCGPoint(ff.rightEyePosition));
         
 		// scale coordinates so they fit in the preview box, which may be scaled
 		CGFloat widthScaleBy = previewBox.size.width / clap.size.height;
@@ -863,7 +939,7 @@ bail:
 
     
     //itemSelectorViewController = [[ItemSelector alloc] initWithNibName:@"ItemSelector" bundle:nil];
-    [itemSelectorViewController.view setFrame:CGRectMake(0, 480-44, 320, 125)];
+    [itemSelectorViewController.view setFrame:CGRectMake(0, 480-168, 320, 168)];
     //itemSelectorViewController.view.frame = self.view.bounds;
     //[self addChildViewController:itemSelectorViewController];
     [self.view addSubview:itemSelectorViewController.view];

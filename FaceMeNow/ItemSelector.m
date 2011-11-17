@@ -33,17 +33,13 @@
         NSDictionary *category = (NSDictionary *) obj;
         
         UIButton *catButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [catButton setFrame:CGRectMake(CATEGORY_WIDTH*[[catDict allKeys] indexOfObject:key], 0, CATEGORY_WIDTH, CATEGORY_WIDTH)];
+        [catButton setFrame:CGRectMake(MARGIN_LEFT+(CATEGORY_WIDTH*[[catDict allKeys] indexOfObject:key]), 18, CATEGORY_WIDTH, CATEGORY_WIDTH)];
         [catButton setImage:[UIImage imageNamed:[category objectForKey:@"icon"]] forState:UIControlStateNormal];
         [catButton setTag:[[catDict allKeys] indexOfObject:key]];
         [catButton addTarget:self action:@selector(toogleItemsUP:) forControlEvents:UIControlEventTouchUpInside];
         [catScroll addSubview:catButton];
-        
-        NSLog(@"CAT: %@", category);
-        
+         
         [self.itemsArray addObject:[category objectForKey:@"items"]];
-        
-        NSLog(@"ITEMS ARRAY: %@", self.itemsArray);
         
     }];
    
@@ -98,9 +94,11 @@
        
         [UIView animateWithDuration:0.3
                          animations:^{ 
-                             CGPoint center = self.view.center;
-                             center.y -= 81;
-                             self.view.center = center;
+                             itemScroll.center = CGPointMake(itemScroll.center.x, itemScroll.center.y-168);
+                             
+                             slideBackground.center = CGPointMake(slideBackground.center.x, slideBackground.center.y-168);
+                             
+                             
                          } 
                          completion:^(BOOL finished){
                              itemsUP = YES;
@@ -116,9 +114,9 @@
         
         [UIView animateWithDuration:0.3
                          animations:^{ 
-                             CGPoint center = self.view.center;
-                             center.y += 81;
-                             self.view.center = center;
+                             itemScroll.center = CGPointMake(itemScroll.center.x, itemScroll.center.y+168);
+                             
+                             slideBackground.center = CGPointMake(slideBackground.center.x, slideBackground.center.y+168);
                          } 
                          completion:^(BOOL finished){
                              itemsUP = NO;
@@ -149,6 +147,8 @@
   
     [self parseItems];
   
+    slideBackground.center = CGPointMake(slideBackground.center.x, slideBackground.center.y+168);
+    
 }
 
 - (void)viewDidUnload

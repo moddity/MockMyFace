@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#define CATEGORY_WIDTH 44
+#define CATEGORY_WIDTH 56
 #define ITEM_WIDTH 75
-
+#define MARGIN_LEFT 40
 #define kItemTypeHat 1
 #define kItemTypeSunglasses 2
 #define kItemTypeMouth 3
@@ -26,6 +26,8 @@
 @interface ItemSelector : UIViewController {
     IBOutlet UIScrollView *catScroll;
     IBOutlet UIScrollView *itemScroll;
+    IBOutlet UIImageView *slideBackground;
+    
     BOOL itemsUP;
  
     NSMutableArray *itemsArray;

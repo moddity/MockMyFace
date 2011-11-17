@@ -37,12 +37,15 @@
     UIImage *sunglasses;
     UIImage *mouth;
     UIImage *beard;
-    
+    IBOutlet UIImageView *marc;
 }
 
 @property (nonatomic, strong) IBOutlet ItemSelector *itemSelectorViewController;
 
 -(NSMutableArray*) getEnabledLayers;
 -(void) removeLayer: (NSString*) layerToClean;
+
+//RECTANGLES
+-(CGRect) getSunglassesRectFromFace: (CIFaceFeature*) faceRect forVideoBox: (CGRect) clap;
 
 @end
