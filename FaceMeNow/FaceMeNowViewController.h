@@ -47,5 +47,9 @@
 
 //RECTANGLES
 -(CGRect) getSunglassesRectFromFace: (CIFaceFeature*) faceRect forVideoBox: (CGRect) clap;
+-(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage;
+
+// find where the video box is positioned within the preview layer based on the video size and gravity
++ (CGRect)videoPreviewBoxForGravity:(NSString *)gravity frameSize:(CGSize)frameSize apertureSize:(CGSize)apertureSize;
 
 @end

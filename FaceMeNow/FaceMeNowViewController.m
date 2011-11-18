@@ -152,7 +152,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	
 	AVCaptureSession *session = [AVCaptureSession new];
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-	    [session setSessionPreset:AVCaptureSessionPreset640x480];
+	    [session setSessionPreset:AVCaptureSessionPresetHigh];
 	else
 	    [session setSessionPreset:AVCaptureSessionPresetPhoto];
 	
@@ -196,7 +196,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	effectiveScale = 1.0;
 	previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
 	[previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
-	[previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+	[previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
 	CALayer *rootLayer = [previewView layer];
 	[rootLayer setMasksToBounds:YES];
     NSLog(@"ROOT LAYER BOUNDS: %@", NSStringFromCGRect([rootLayer bounds]));
@@ -285,24 +285,54 @@ bail:
     
     	CGImageRef returnImage = NULL;
 	CGRect backgroundImageRect = CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage));
-	//CGRect backgroundImageRect = CGRectMake(0, 0, 480, 320);
-    CGContextRef bitmapContext = CreateCGBitmapContextForSize(backgroundImageRect.size);
+	
     
+    //CGRect backgroundImageRect = CGRectMake(0, 0, 480, 320);
+    //CGContextRef bitmapContext = CreateCGBitmapContextForSize(backgroundImageRect.size);
     
+    CGContextRef bitmapContext = CreateCGBitmapContextForSize(CGSizeMake(480, 320));
+    
+    //Girar coordenadas
+    /*
     CGContextSaveGState(bitmapContext);
-    
     CGContextTranslateCTM(bitmapContext, 0, 
                           backgroundImageRect.size.height);
     CGContextScaleCTM(bitmapContext, 1.0, -1.0);
+     */
     
 
     
-	CGContextClearRect(bitmapContext, backgroundImageRect);
-	CGContextDrawImage(bitmapContext, 
+	//CGContextClearRect(bitmapContext, backgroundImageRect);
+    CGContextClearRect(bitmapContext,  CGRectMake(0, 0, 480, 320));
+    
+    // get the clean aperture
+    // the clean aperture is a rectangle that defines the portion of the encoded pixel dimensions
+    // that represents image data valid for display.
+	CMFormatDescriptionRef fdesc = CMSampleBufferGetFormatDescription(sampleBuffer);
+	CGRect clap = CMVideoFormatDescriptionGetCleanAperture(fdesc, false /*originIsTopLeft == false*/);
+    
+    
+    CGSize parentFrameSize = [previewView frame].size;
+	NSString *gravity = [previewLayer videoGravity];
+	
+
+    
+    CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
+                                                                 frameSize:parentFrameSize 
+                                                              apertureSize:clap.size];
+    
+	/*CGContextDrawImage(bitmapContext, 
                        CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage))
+                       , backgroundImage);*/
+
+    CGContextDrawImage(bitmapContext, 
+                       CGRectMake(previewBox.origin.y, previewBox.origin.x, previewBox.size.height, previewBox.size.width)
                        , backgroundImage);
     
-    NSLog(@"BACKGROUND IMAGE RECT: %@", NSStringFromCGRect(CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage))));
+    
+    
+    
+    NSLog(@"BACKGROUND IMAGE RECT: %@ %@", NSStringFromCGRect([previewLayer bounds]), NSStringFromCGRect(CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage))));
     
 	CGFloat rotationDegrees = 0.;
 	
@@ -329,11 +359,7 @@ bail:
     
 	UIImage *rotatedSquareImage = [sunglasses imageRotatedByDegrees:rotationDegrees];
 	
-    // get the clean aperture
-    // the clean aperture is a rectangle that defines the portion of the encoded pixel dimensions
-    // that represents image data valid for display.
-	CMFormatDescriptionRef fdesc = CMSampleBufferGetFormatDescription(sampleBuffer);
-	CGRect clap = CMVideoFormatDescriptionGetCleanAperture(fdesc, false /*originIsTopLeft == false*/);
+
     
     // features found by the face detector
 	for ( CIFaceFeature *ff in features ) {
@@ -341,9 +367,12 @@ bail:
         //CGRect faceRect = CGRectMake(ff.bounds.origin.x, ff.bounds.origin.y, ff.bounds.size.width, ff.bounds.size.height/2);
 		CGContextDrawImage(bitmapContext, [self getSunglassesRectFromFace:ff forVideoBox:backgroundImageRect], [rotatedSquareImage CGImage]);
         
-        //Marc
-        CGContextDrawImage(bitmapContext, backgroundImageRect, [[marc.image imageRotatedByDegrees:rotationDegrees] CGImage]);
+        
 	}
+    
+    //Marc
+    CGContextDrawImage(bitmapContext, CGRectMake(0, 0, 480, 320), [[marc.image imageRotatedByDegrees:rotationDegrees] CGImage]);
+    
 	returnImage = CGBitmapContextCreateImage(bitmapContext);
 	CGContextRelease (bitmapContext);
 	
@@ -412,10 +441,9 @@ bail:
 	});
 }
 
-// main action method to take a still image -- if face detection has been turned on and a face has been detected
-// the square overlay will be composited on top of the captured image and saved to the camera roll
-- (IBAction)takePicture:(id)sender
-{
+
+-(void) takePhoto {
+
 	// Find out the current orientation and tell the still image output.
 	AVCaptureConnection *stillImageConnection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
 	UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
@@ -463,8 +491,13 @@ bail:
                                                                   OSStatus err = CreateCGImageFromCVPixelBuffer(CMSampleBufferGetImageBuffer(imageDataSampleBuffer), &srcImage);
                                                                   check(!err);
                                                                   
+                                                                  
+                                                                 
+                                                                  CGImageRef imageFlipped = [self imageFlipedHorizontal: srcImage];
+
+                                                                  
                                                                   CGImageRef cgImageResult = [self newSquareOverlayedImageForFeatures:features 
-                                                                                                                            inCGImage:srcImage 
+                                                                                                                            inCGImage:imageFlipped 
                                                                                                                       withOrientation:curDeviceOrientation 
                                                                                                                           frontFacing:isUsingFrontFacingCamera
                                                                                                                      withSampleBuffer:imageDataSampleBuffer];
@@ -488,6 +521,36 @@ bail:
                                                   }
 	 ];
 }
+
+
+
+-(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage {
+    
+              
+    CGImageRef imgRef = frontCamImage;
+        
+    CGFloat width = CGImageGetWidth(imgRef);
+    CGFloat height = CGImageGetHeight(imgRef);
+        
+    
+    CGAffineTransform transform = CGAffineTransformMake(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+    CGRect bounds = CGRectMake(0, 0, width, height);
+    
+           
+    UIGraphicsBeginImageContext(bounds.size);
+        
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextConcatCTM(context, transform);
+        
+    CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef);
+    
+    UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+        
+    return [imageCopy CGImage];
+}
+
 
 // turn on/off face detection
 /*
@@ -586,9 +649,11 @@ bail:
     
     NSLog(@"PARENT FRAME SIZE: %@", NSStringFromCGSize([previewView frame].size));
     
-    CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
+    /*CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
                                                                  frameSize:parentFrameSize 
-                                                              apertureSize:clap.size];
+                                                              apertureSize:clap.size];*/
+    
+    CGRect previewBox = CGRectMake(0, 0, 320, 480);
     
     // scale coordinates so they fit in the preview box, which may be scaled
     CGFloat widthScaleBy = previewBox.size.width / clap.size.height;
@@ -869,6 +934,8 @@ bail:
 				exifOrientation = PHOTOS_EXIF_0ROW_BOTTOM_0COL_RIGHT;
 			break;
 		case UIDeviceOrientationPortrait:            // Device oriented vertically, home button on the bottom
+           
+            break;
 		default:
 			exifOrientation = PHOTOS_EXIF_0ROW_RIGHT_0COL_TOP;
 			break;
@@ -936,7 +1003,6 @@ bail:
 	faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
     
     [self switchCameras:nil];
-
     
     //itemSelectorViewController = [[ItemSelector alloc] initWithNibName:@"ItemSelector" bundle:nil];
     [itemSelectorViewController.view setFrame:CGRectMake(0, 480-168, 320, 168)];

@@ -19,6 +19,7 @@
 @protocol ItemSelectorDelegate <NSObject>
 
 -(void) itemSelected: (int) kItemType imageName: (NSString*) imgName;
+-(void) takePhoto;
 
 @end
 
@@ -48,5 +49,7 @@
 
 -(void) loadItems: (NSArray*) items;
 -(void) selectItem: (id) sender;
+
+-(IBAction) takePhotoAction: (id) sender;
 
 @end

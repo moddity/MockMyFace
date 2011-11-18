@@ -151,6 +151,10 @@
     
 }
 
+-(IBAction)takePhotoAction:(id)sender {
+    [delegate takePhoto];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
