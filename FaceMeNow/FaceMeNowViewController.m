@@ -577,7 +577,12 @@ bail:
     NSLog(@"METADATA: %@", metadata);
     
     self.previewController = [[ViewAndShareController alloc] initWithNibName:@"ViewAndShareController" bundle:nil];
-    [self.view addSubview:previewController.view];
+    //[self.view addSubview:previewController.view];
+    self.previewController.view.frame = self.view.bounds;
+    [self addChildViewController:self.previewController];
+    [[self view] addSubview:previewController.view];
+    
+    //[self presentModalViewController:self.previewController animated:YES];
     [self.previewController.previewImage setImage:[UIImage imageWithCGImage:previewImage scale:1.0 orientation:UIImageOrientationRight]];
 }
 

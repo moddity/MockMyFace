@@ -50,4 +50,12 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(IBAction)close:(id)sender {
+    [[self view] removeFromSuperview];
+}
+
+-(IBAction)openShareView:(id)sender {
+    
+}
+
 @end

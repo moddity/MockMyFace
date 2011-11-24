@@ -12,4 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *previewImage;
 
+-(IBAction) close: (id) sender;
+-(IBAction) openShareView:(id)sender;
+
 @end
