@@ -11,6 +11,7 @@
 #import <ImageIO/ImageIO.h>
 #import <AssertMacros.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "ViewAndShareController.h"
 
 
 #pragma mark-
@@ -144,7 +145,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 @implementation FaceMeNowViewController
 
-@synthesize itemSelectorViewController;
+@synthesize itemSelectorViewController, previewController;
 
 - (void)setupAVCapture
 {
@@ -330,6 +331,8 @@ bail:
                        , backgroundImage);
     
     
+  
+    
     
     
     NSLog(@"BACKGROUND IMAGE RECT: %@ %@", NSStringFromCGRect([previewLayer bounds]), NSStringFromCGRect(CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage))));
@@ -365,10 +368,49 @@ bail:
 	for ( CIFaceFeature *ff in features ) {
 		CGRect faceRect = [ff bounds];
         //CGRect faceRect = CGRectMake(ff.bounds.origin.x, ff.bounds.origin.y, ff.bounds.size.width, ff.bounds.size.height/2);
-		CGContextDrawImage(bitmapContext, [self getSunglassesRectFromFace:ff forVideoBox:backgroundImageRect], [rotatedSquareImage CGImage]);
+		
+        
+        
+        /*float eyeCenterX = ((ff.leftEyePosition.x - ff.rightEyePosition.x) / 2) + ff.rightEyePosition.x;
+        
+        CGPoint eyeCenter = CGPointMake(eyeCenterX, ff.leftEyePosition.y);
+        
+        float glassesWidth = (ff.leftEyePosition.x-ff.rightEyePosition.x)*2;
+        
+        CGRect glassesRect = CGRectMake(eyeCenter.x - (glassesWidth / 2), 
+                                        eyeCenter.y - (glassesWidth / 2), 
+                                        glassesWidth, 
+                                        glassesWidth);*/
+        
+        float eyeCenterX = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
+        CGPoint eyeCenter = CGPointMake(eyeCenterX, ff.rightEyePosition.y);
+        
+        float glassesWidth = (ff.rightEyePosition.y-ff.leftEyePosition.y)*2;
+        
+        CGRect glassesRect = CGRectMake(ff.leftEyePosition.x-(glassesWidth/2),
+                                        eyeCenterX-(glassesWidth/2),
+                                        glassesWidth, 
+                                        glassesWidth);
+        
+        NSLog(@"GLASSES RECT >> %@ - %@ - %@", NSStringFromCGRect(glassesRect), NSStringFromCGPoint(ff.leftEyePosition), NSStringFromCGPoint(ff.rightEyePosition));
+        
+        
+        /*CGContextSetFillColorWithColor(bitmapContext, [UIColor redColor].CGColor);
+        CGContextAddRect(bitmapContext, glassesRect);
+        CGContextFillPath(bitmapContext);
+        
+        CGContextSetFillColorWithColor(bitmapContext, [UIColor blueColor].CGColor);
+        CGContextAddRect(bitmapContext, CGRectMake(ff.leftEyePosition.x-15, ff.leftEyePosition.y-15, 30, 30));
+        CGContextAddRect(bitmapContext, CGRectMake(ff.rightEyePosition.x-15, ff.rightEyePosition.y-15, 30, 30));
+        CGContextFillPath(bitmapContext);*/
+    
+        
+        CGContextDrawImage(bitmapContext, glassesRect, [rotatedSquareImage CGImage]);
         
         
 	}
+    
+        
     
     //Marc
     CGContextDrawImage(bitmapContext, CGRectMake(0, 0, 480, 320), [[marc.image imageRotatedByDegrees:rotationDegrees] CGImage]);
@@ -390,7 +432,7 @@ bail:
 	BOOL success = (destination != NULL);
 	//require(success, bail);
     
-	const float JPEGCompQuality = 0.85f; // JPEGHigherQuality
+	const float JPEGCompQuality = 1.0f; // JPEGHigherQuality
 	CFMutableDictionaryRef optionsDict = NULL;
 	CFNumberRef qualityNum = NULL;
 	
@@ -486,7 +528,6 @@ bail:
                                                                   // get the array of CIFeature instances in the given image with a orientation passed in
                                                                   // the detection will be done based on the orientation but the coordinates in the returned features will
                                                                   // still be based on those of the image.
-                                                                  NSArray *features = [faceDetector featuresInImage:ciImage options:imageOptions];
                                                                   CGImageRef srcImage = NULL;
                                                                   OSStatus err = CreateCGImageFromCVPixelBuffer(CMSampleBufferGetImageBuffer(imageDataSampleBuffer), &srcImage);
                                                                   check(!err);
@@ -495,6 +536,11 @@ bail:
                                                                  
                                                                   CGImageRef imageFlipped = [self imageFlipedHorizontal: srcImage];
 
+                                                                  CIImage *img = [[CIImage alloc] initWithCGImage:imageFlipped options:imageOptions];
+                                                                  
+                                                                  NSArray *features = [faceDetector featuresInImage:img options:imageOptions];
+                                                                  
+                                                                  
                                                                   
                                                                   CGImageRef cgImageResult = [self newSquareOverlayedImageForFeatures:features 
                                                                                                                             inCGImage:imageFlipped 
@@ -507,7 +553,10 @@ bail:
                                                                   CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, 
                                                                                                                               imageDataSampleBuffer, 
                                                                                                                               kCMAttachmentMode_ShouldPropagate);
-                                                                  [self writeCGImageToCameraRoll:cgImageResult withMetadata:(__bridge id)attachments];
+                                                                  //[self writeCGImageToCameraRoll:cgImageResult withMetadata:(__bridge id)attachments];
+                                                                                                                                    
+                                                                  [self displayPreviewImage:cgImageResult withMetadata:(__bridge id)attachments];
+                                                                  
                                                                   if (attachments)
                                                                       CFRelease(attachments);
                                                                   if (cgImageResult)
@@ -522,6 +571,16 @@ bail:
 	 ];
 }
 
+-(void) displayPreviewImage:(CGImageRef)previewImage withMetadata: (NSDictionary*) metadata {
+    
+    
+    NSLog(@"METADATA: %@", metadata);
+    
+    self.previewController = [[ViewAndShareController alloc] initWithNibName:@"ViewAndShareController" bundle:nil];
+    [self.view addSubview:previewController.view];
+    [self.previewController.previewImage setImage:[UIImage imageWithCGImage:previewImage scale:1.0 orientation:UIImageOrientationRight]];
+}
+
 
 
 -(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage {
@@ -529,8 +588,10 @@ bail:
               
     CGImageRef imgRef = frontCamImage;
         
-    CGFloat width = CGImageGetWidth(imgRef);
-    CGFloat height = CGImageGetHeight(imgRef);
+    /*CGFloat width = CGImageGetWidth(imgRef);
+    CGFloat height = CGImageGetHeight(imgRef);*/
+    CGFloat width = 480.0;
+    CGFloat height = 320.0;
         
     
     CGAffineTransform transform = CGAffineTransformMake(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
@@ -629,8 +690,8 @@ bail:
     faceRect.size.height = temp;
     temp = faceRect.origin.x;
     faceRect.origin.x = faceRect.origin.y;
-    faceRect.origin.y = temp;
-    */
+    faceRect.origin.y = temp;*/
+    
     float eyeCenterY = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
     
     CGPoint eyeCenter = CGPointMake(ff.rightEyePosition.x, eyeCenterY);
@@ -647,8 +708,6 @@ bail:
 	NSString *gravity = [previewLayer videoGravity];
 	BOOL isMirrored = [previewLayer isMirrored];
     
-    NSLog(@"PARENT FRAME SIZE: %@", NSStringFromCGSize([previewView frame].size));
-    
     /*CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
                                                                  frameSize:parentFrameSize 
                                                               apertureSize:clap.size];*/
@@ -660,18 +719,22 @@ bail:
     CGFloat heightScaleBy = previewBox.size.height / clap.size.width;
 
     
+     NSLog(@"GLASSES RECT ABANS PHOTO: %@", NSStringFromCGRect(glassesRect));
+    
     glassesRect.size.width *= widthScaleBy;
     glassesRect.size.height *= heightScaleBy;
     glassesRect.origin.x *= widthScaleBy;
     glassesRect.origin.y *= heightScaleBy;
     
     
-    if ( isMirrored ) {
+    /*if ( isMirrored ) {
         glassesRect = CGRectOffset(glassesRect, previewBox.origin.x + previewBox.size.width - glassesRect.size.width - (glassesRect.origin.x * 2), previewBox.origin.y);
-    } else {
+    } else {*/
         glassesRect = CGRectOffset(glassesRect, previewBox.origin.x, previewBox.origin.y);
-    }
+    //}
 
+    NSLog(@"GLASSES RECT PHOTO: %@", NSStringFromCGRect(glassesRect));
+    
     return glassesRect;
 }
 
@@ -681,6 +744,8 @@ bail:
 {
     
     NSMutableArray *enabledLayers = [self getEnabledLayers];
+    
+
     
 	NSArray *sublayers = [NSArray arrayWithArray:[previewLayer sublayers]];
 	NSInteger sublayersCount = [sublayers count], currentSublayer = 0;
@@ -697,6 +762,7 @@ bail:
 	
 	if ( featuresCount == 0) {
 		[CATransaction commit];
+       
 		return; // early bail.
 	}
     
@@ -836,6 +902,7 @@ bail:
         
         //sunglassesLayer.opacity = 0.5;
         //sunglassesLayer.backgroundColor = [[UIColor redColor] CGColor];
+       
         [sunglassesLayer setFrame:glassesRect];
 		
         if(!hatLayer && hat != nil) {
@@ -934,8 +1001,6 @@ bail:
 				exifOrientation = PHOTOS_EXIF_0ROW_BOTTOM_0COL_RIGHT;
 			break;
 		case UIDeviceOrientationPortrait:            // Device oriented vertically, home button on the bottom
-           
-            break;
 		default:
 			exifOrientation = PHOTOS_EXIF_0ROW_RIGHT_0COL_TOP;
 			break;

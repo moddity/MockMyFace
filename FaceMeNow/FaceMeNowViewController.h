@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "ItemSelector.h"
+#import "ViewAndShareController.h"
 
 #define kSunglassesLayer @"SunglassesLayer"
 #define kHatLayer @"HatLayer"
@@ -38,9 +39,12 @@
     UIImage *mouth;
     UIImage *beard;
     IBOutlet UIImageView *marc;
+    
+    
 }
 
 @property (nonatomic, strong) IBOutlet ItemSelector *itemSelectorViewController;
+@property (nonatomic, strong) ViewAndShareController *previewController;
 
 -(NSMutableArray*) getEnabledLayers;
 -(void) removeLayer: (NSString*) layerToClean;
@@ -48,6 +52,8 @@
 //RECTANGLES
 -(CGRect) getSunglassesRectFromFace: (CIFaceFeature*) faceRect forVideoBox: (CGRect) clap;
 -(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage;
+-(void) displayPreviewImage: (CGImageRef) previewImage withMetadata: (NSDictionary*) metadata;
+
 
 // find where the video box is positioned within the preview layer based on the video size and gravity
 + (CGRect)videoPreviewBoxForGravity:(NSString *)gravity frameSize:(CGSize)frameSize apertureSize:(CGSize)apertureSize;
