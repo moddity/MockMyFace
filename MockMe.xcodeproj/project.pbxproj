@@ -784,7 +784,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -799,6 +799,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E2577C9E-E003-47BA-A4A6-4DEA2F7044C3";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -827,10 +828,12 @@
 		1F5029F4146C2CC2006CFFFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FaceMeNow/MockMe-Prefix.pch";
 				INFOPLIST_FILE = "FaceMeNow/MockMe-Info.plist";
 				PRODUCT_NAME = MockMe;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E2577C9E-E003-47BA-A4A6-4DEA2F7044C3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
