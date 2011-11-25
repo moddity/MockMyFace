@@ -135,6 +135,8 @@
 		1F8650F2146DA85E0010A2FE /* thumb_vickingo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F8650EC146DA85E0010A2FE /* thumb_vickingo@2x.png */; };
 		1FF3BB73147B7E1D008C9D94 /* ViewAndShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3BB71147B7E1D008C9D94 /* ViewAndShareController.m */; };
 		1FF3BB74147B7E1D008C9D94 /* ViewAndShareController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF3BB72147B7E1D008C9D94 /* ViewAndShareController.xib */; };
+		9998F0CC14801B8800F27A63 /* ShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9998F0CA14801B8700F27A63 /* ShareController.m */; };
+		9998F0CD14801B8800F27A63 /* ShareController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9998F0CB14801B8800F27A63 /* ShareController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -273,6 +275,9 @@
 		1FF3BB70147B7E1D008C9D94 /* ViewAndShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewAndShareController.h; sourceTree = "<group>"; };
 		1FF3BB71147B7E1D008C9D94 /* ViewAndShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewAndShareController.m; sourceTree = "<group>"; };
 		1FF3BB72147B7E1D008C9D94 /* ViewAndShareController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewAndShareController.xib; sourceTree = "<group>"; };
+		9998F0C914801B8700F27A63 /* ShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareController.h; sourceTree = "<group>"; };
+		9998F0CA14801B8700F27A63 /* ShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareController.m; sourceTree = "<group>"; };
+		9998F0CB14801B8800F27A63 /* ShareController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -440,6 +445,9 @@
 				1FF3BB70147B7E1D008C9D94 /* ViewAndShareController.h */,
 				1FF3BB71147B7E1D008C9D94 /* ViewAndShareController.m */,
 				1FF3BB72147B7E1D008C9D94 /* ViewAndShareController.xib */,
+				9998F0C914801B8700F27A63 /* ShareController.h */,
+				9998F0CA14801B8700F27A63 /* ShareController.m */,
+				9998F0CB14801B8800F27A63 /* ShareController.xib */,
 			);
 			name = MockMe;
 			path = FaceMeNow;
@@ -738,6 +746,7 @@
 				086975AB1474309E009A6441 /* volteoCam.png in Resources */,
 				086975AC1474309E009A6441 /* volteoCam@2x.png in Resources */,
 				1FF3BB74147B7E1D008C9D94 /* ViewAndShareController.xib in Resources */,
+				9998F0CD14801B8800F27A63 /* ShareController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,6 +762,7 @@
 				1F5029EA146C2CC2006CFFFA /* FaceMeNowAppDelegate.m in Sources */,
 				1F5029ED146C2CC2006CFFFA /* FaceMeNowViewController.m in Sources */,
 				1FF3BB73147B7E1D008C9D94 /* ViewAndShareController.m in Sources */,
+				9998F0CC14801B8800F27A63 /* ShareController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
