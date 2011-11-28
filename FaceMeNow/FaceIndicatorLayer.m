@@ -37,6 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [blackBackLayer.layer setCornerRadius:5.0];
+    [helperText setFont:[UIFont fontWithName:@"SusanWrittingMAYUSC-Regular" size:17.0]];
 }
 
 - (void)viewDidUnload
@@ -52,6 +53,21 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void) displayMessage:(BOOL)display withText:(NSString *)text {
+    if(display) {
+        if(self.view.alpha == 0.0) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.view.alpha = 1.0;
+            }];
+        }
+        helperText.text = text;
+    } else {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.view.alpha = 0.0;
+        }];
+    }
 }
 
 @end

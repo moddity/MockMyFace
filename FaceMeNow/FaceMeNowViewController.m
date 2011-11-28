@@ -634,14 +634,18 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	
 	if ( featuresCount == 0) {
         
-        self.faceIndicatorLayer.view.alpha = 1.0;
-        
+
 		[CATransaction commit];
-       
+
+        [self.faceIndicatorLayer displayMessage:YES withText:kNoFacesMessage];
+
 		return; // early bail.
 	} else {
-        if(self.faceIndicatorLayer.view.alpha > 0) {
-            self.faceIndicatorLayer.view.alpha = 0.0;
+        
+        if([enabledLayers count] == 0) {
+            [self.faceIndicatorLayer displayMessage:YES withText:kNoMocksEnabled];
+        } else {
+            [self.faceIndicatorLayer displayMessage:NO withText:nil];
         }
     }
     
@@ -961,7 +965,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                                     self.faceIndicatorLayer.view.frame.size.width, self.faceIndicatorLayer.view.frame.size.height);
  
     [self.view addSubview: self.faceIndicatorLayer.view];
-    self.faceIndicatorLayer.view.alpha = 0.0;
+    [self.faceIndicatorLayer displayMessage:NO withText:nil];
     
 }
 
