@@ -87,7 +87,6 @@
 		086975AA1474309E009A6441 /* slideBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975A01474309E009A6441 /* slideBackground@2x.png */; };
 		086975AB1474309E009A6441 /* volteoCam.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975A11474309E009A6441 /* volteoCam.png */; };
 		086975AC1474309E009A6441 /* volteoCam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975A21474309E009A6441 /* volteoCam@2x.png */; };
-		08CBF70B1483DE9100962DAD /* SusanWrittingMAYUSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF70A1483DE9100962DAD /* SusanWrittingMAYUSC-Regular.ttf */; };
 		08EB3D7E1483D90C00C5E272 /* marcBasic_blau.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */; };
 		08EB3D7F1483D90C00C5E272 /* marcBasic_blau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */; };
 		08EB3D831483D9B100C5E272 /* capirote.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D811483D9B100C5E272 /* capirote.png */; };
@@ -220,7 +219,6 @@
 		086975A01474309E009A6441 /* slideBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "slideBackground@2x.png"; path = "UI-main/slideBackground@2x.png"; sourceTree = "<group>"; };
 		086975A11474309E009A6441 /* volteoCam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volteoCam.png; path = "UI-main/volteoCam.png"; sourceTree = "<group>"; };
 		086975A21474309E009A6441 /* volteoCam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "volteoCam@2x.png"; path = "UI-main/volteoCam@2x.png"; sourceTree = "<group>"; };
-		08CBF70A1483DE9100962DAD /* SusanWrittingMAYUSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SusanWrittingMAYUSC-Regular.ttf"; path = "FaceMeNow/SusanWrittingMAYUSC-Regular.ttf"; sourceTree = "<group>"; };
 		08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marcBasic_blau.png; path = marcs/marcBasic_blau.png; sourceTree = "<group>"; };
 		08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marcBasic_blau@2x.png"; path = "marcs/marcBasic_blau@2x.png"; sourceTree = "<group>"; };
 		08EB3D811483D9B100C5E272 /* capirote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capirote.png; path = iconos/capirote.png; sourceTree = "<group>"; };
@@ -398,7 +396,6 @@
 		1F5029CA146C2CC2006CFFFA = {
 			isa = PBXGroup;
 			children = (
-				08CBF70A1483DE9100962DAD /* SusanWrittingMAYUSC-Regular.ttf */,
 				086975481473F56F009A6441 /* MockMe3-icon114.png */,
 				086975461473F56C009A6441 /* MockMe3-icon57.png */,
 				0869752F1472E756009A6441 /* Default@2x.png */,
@@ -747,7 +744,6 @@
 				08EB3D7F1483D90C00C5E272 /* marcBasic_blau@2x.png in Resources */,
 				08EB3D831483D9B100C5E272 /* capirote.png in Resources */,
 				08EB3D841483D9B100C5E272 /* capirote@2x.png in Resources */,
-				08CBF70B1483DE9100962DAD /* SusanWrittingMAYUSC-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
