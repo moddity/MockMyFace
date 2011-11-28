@@ -14,12 +14,14 @@
 #define kItemTypeHat 1
 #define kItemTypeSunglasses 2
 #define kItemTypeMouth 3
+#define kItemTypeMarc 4
 
 
 @protocol ItemSelectorDelegate <NSObject>
 
 -(void) itemSelected: (int) kItemType imageName: (NSString*) imgName;
 -(void) takePhoto;
+-(void) clearMocks;
 
 @end
 
@@ -53,6 +55,8 @@
 -(void) loadItems: (NSArray*) items;
 -(void) selectItem: (id) sender;
 
+
 -(IBAction) takePhotoAction: (id) sender;
+-(IBAction) cleanAction: (id) sender;
 
 @end

@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/ItemSelector.m"
-         timestampString = "344159735.929056"
+         timestampString = "344183175.153048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
          landmarkName = "-toogleItemsUP:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344155778.327946"
+         timestampString = "344180332.459196"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "502"
-         endingLineNumber = "502"
+         startingLineNumber = "500"
+         endingLineNumber = "500"
          landmarkName = "-displayPreviewImage:withMetadata:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -65,12 +65,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344178596.156099"
+         timestampString = "344184288.090002"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "900"
-         endingLineNumber = "900"
+         startingLineNumber = "904"
+         endingLineNumber = "904"
          landmarkName = "-dealloc"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/ItemSelector.m"
+         timestampString = "344183175.153048"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
+         landmarkName = "-toogleItemsUP:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

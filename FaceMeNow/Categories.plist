@@ -8,15 +8,7 @@
 		<string>block_gafes</string>
 		<key>items</key>
 		<array>
-			<dict>
-				<key>type</key>
-				<integer>2</integer>
-				<key>name</key>
-				<string>Sunglass 1</string>
-				<key>image</key>
-				<string>sunglasses1.png</string>
-			</dict>
-			<dict>
+            <dict>
 				<key>type</key>
 				<integer>2</integer>
 				<key>name</key>

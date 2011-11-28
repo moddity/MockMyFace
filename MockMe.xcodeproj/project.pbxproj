@@ -96,6 +96,8 @@
 		086975AB1474309E009A6441 /* volteoCam.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975A11474309E009A6441 /* volteoCam.png */; };
 		086975AC1474309E009A6441 /* volteoCam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975A21474309E009A6441 /* volteoCam@2x.png */; };
 		1F248D751483960D00179D37 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F248D741483960C00179D37 /* Twitter.framework */; };
+		1F248D791483D22B00179D37 /* FaceIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F248D771483D22B00179D37 /* FaceIndicatorLayer.m */; };
+		1F248D7A1483D22B00179D37 /* FaceIndicatorLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F248D781483D22B00179D37 /* FaceIndicatorLayer.xib */; };
 		1F5029DA146C2CC2006CFFFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029D9146C2CC2006CFFFA /* UIKit.framework */; };
 		1F5029DC146C2CC2006CFFFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DB146C2CC2006CFFFA /* Foundation.framework */; };
 		1F5029DE146C2CC2006CFFFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DD146C2CC2006CFFFA /* CoreGraphics.framework */; };
@@ -230,6 +232,9 @@
 		086975A11474309E009A6441 /* volteoCam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volteoCam.png; path = "UI-main/volteoCam.png"; sourceTree = "<group>"; };
 		086975A21474309E009A6441 /* volteoCam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "volteoCam@2x.png"; path = "UI-main/volteoCam@2x.png"; sourceTree = "<group>"; };
 		1F248D741483960C00179D37 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		1F248D761483D22B00179D37 /* FaceIndicatorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceIndicatorLayer.h; sourceTree = "<group>"; };
+		1F248D771483D22B00179D37 /* FaceIndicatorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceIndicatorLayer.m; sourceTree = "<group>"; };
+		1F248D781483D22B00179D37 /* FaceIndicatorLayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceIndicatorLayer.xib; sourceTree = "<group>"; };
 		1F5029D5146C2CC2006CFFFA /* MockMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MockMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F5029D9146C2CC2006CFFFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1F5029DB146C2CC2006CFFFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -452,6 +457,9 @@
 				9998F0C914801B8700F27A63 /* ShareController.h */,
 				9998F0CA14801B8700F27A63 /* ShareController.m */,
 				9998F0CB14801B8800F27A63 /* ShareController.xib */,
+				1F248D761483D22B00179D37 /* FaceIndicatorLayer.h */,
+				1F248D771483D22B00179D37 /* FaceIndicatorLayer.m */,
+				1F248D781483D22B00179D37 /* FaceIndicatorLayer.xib */,
 			);
 			name = MockMe;
 			path = FaceMeNow;
@@ -751,6 +759,7 @@
 				086975AC1474309E009A6441 /* volteoCam@2x.png in Resources */,
 				1FF3BB74147B7E1D008C9D94 /* ViewAndShareController.xib in Resources */,
 				9998F0CD14801B8800F27A63 /* ShareController.xib in Resources */,
+				1F248D7A1483D22B00179D37 /* FaceIndicatorLayer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,6 +776,7 @@
 				1F5029ED146C2CC2006CFFFA /* FaceMeNowViewController.m in Sources */,
 				1FF3BB73147B7E1D008C9D94 /* ViewAndShareController.m in Sources */,
 				9998F0CC14801B8800F27A63 /* ShareController.m in Sources */,
+				1F248D791483D22B00179D37 /* FaceIndicatorLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

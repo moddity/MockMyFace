@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ItemSelector.h"
 #import "ViewAndShareController.h"
+#import "FaceIndicatorLayer.h"
 
 #define kSunglassesLayer @"SunglassesLayer"
 #define kHatLayer @"HatLayer"
@@ -30,6 +31,7 @@
 
 @property (nonatomic, strong) IBOutlet ItemSelector *itemSelectorViewController;
 @property (nonatomic, strong) ViewAndShareController *previewController;
+@property (nonatomic, strong) FaceIndicatorLayer *faceIndicatorLayer;
 
 @property (nonatomic, strong) UIView *flashView;
 @property (nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;

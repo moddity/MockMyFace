@@ -145,7 +145,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 @implementation FaceMeNowViewController
 
-@synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, beard, marc, flashView, stillImageOutput, videoDataOutput, previewView, previewLayer;
+@synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, beard, marc, flashView, stillImageOutput, videoDataOutput, previewView, previewLayer, faceIndicatorLayer;
 
 - (void)setupAVCapture
 {
@@ -496,8 +496,6 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
  
 
 -(void) displayPreviewImage:(CGImageRef)previewImage withMetadata: (NSDictionary*) metadata {
-    
-    
     self.previewController = [[ViewAndShareController alloc] initWithNibName:@"ViewAndShareController" bundle:nil];
     //[self.view addSubview:previewController.view];
     self.previewController.view.frame = self.view.bounds;
@@ -508,7 +506,6 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     
     [self.previewController.previewImage setImage:image];
     self.previewController.imageMetatadata = [NSDictionary dictionaryWithDictionary:metadata];
-
 }
 
 
@@ -636,10 +633,17 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	}	
 	
 	if ( featuresCount == 0) {
+        
+        self.faceIndicatorLayer.view.alpha = 1.0;
+        
 		[CATransaction commit];
        
 		return; // early bail.
-	}
+	} else {
+        if(self.faceIndicatorLayer.view.alpha > 0) {
+            self.faceIndicatorLayer.view.alpha = 0.0;
+        }
+    }
     
 	CGSize parentFrameSize = [previewView frame].size;
 	NSString *gravity = [previewLayer videoGravity];
@@ -949,6 +953,16 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     //[self addChildViewController:itemSelectorViewController];
     [self.view addSubview:itemSelectorViewController.view];
     itemSelectorViewController.delegate = self;
+   
+    self.faceIndicatorLayer = [[FaceIndicatorLayer alloc] initWithNibName:@"FaceIndicatorLayer" bundle:nil];
+    
+    self.faceIndicatorLayer.view.frame = CGRectMake(self.view.frame.size.width/2 - (self.faceIndicatorLayer.view.frame.size.width/2),
+                                                    self.view.frame.size.height / 2 - (self.faceIndicatorLayer.view.frame.size.height / 2), 
+                                                    self.faceIndicatorLayer.view.frame.size.width, self.faceIndicatorLayer.view.frame.size.height);
+ 
+    [self.view addSubview: self.faceIndicatorLayer.view];
+    self.faceIndicatorLayer.view.alpha = 0.0;
+    
 }
 
 -(void) itemSelected:(int)kItemType imageName:(NSString *)imgName {
@@ -970,6 +984,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
             [self removeLayer:kMouthLayer];
             mouth = [UIImage imageNamed:imgName];
             break;
+        case kItemTypeMarc:
+            [marc setImage:[UIImage imageNamed:imgName]];
+            break;
         default:
             break;
     }
@@ -987,6 +1004,15 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
             [layer removeFromSuperlayer];
 	}	
     [CATransaction commit];
+}
+
+-(void) clearMocks {
+    [self removeLayer:kSunglassesLayer];
+    [self removeLayer:kHatLayer];
+    [self removeLayer:kMouthLayer];
+    self.sunglasses = nil;
+    self.hat = nil;
+    self.mouth = nil;
 }
 
 - (void)viewDidUnload

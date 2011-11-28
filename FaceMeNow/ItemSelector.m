@@ -53,21 +53,27 @@
         for(UIButton *b in itemsButtons) {
             [b removeFromSuperview];
         }
+        [itemsButtons removeAllObjects];
     }
     
+    float itemX = 10;
+    
     for(NSDictionary *itemDict in items) {
+        
         UIButton *itemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [itemButton setFrame:CGRectMake(ITEM_WIDTH*[items indexOfObject:itemDict], 0, ITEM_WIDTH, ITEM_WIDTH)];
+        [itemButton setFrame:CGRectMake(itemX, 10, ITEM_WIDTH, ITEM_WIDTH)];
         [itemButton setImage:[UIImage imageNamed:[itemDict objectForKey:@"image"]] forState:UIControlStateNormal];
         [itemButton setTag:[items indexOfObject:itemDict]];
         [itemButton addTarget:self action:@selector(selectItem:) forControlEvents:UIControlEventTouchUpInside];
         [itemScroll addSubview:itemButton];
         
         [itemsButtons addObject:itemButton];
+        
+        itemX += ITEM_WIDTH + 10;
     }
     
-    [itemScroll setContentSize:CGSizeMake(ITEM_WIDTH* [itemsButtons count], itemScroll.frame.size.height)];
-    
+    [itemScroll setContentSize:CGSizeMake(itemX, itemScroll.frame.size.height)];
+    [itemScroll setContentOffset:CGPointMake(0, 0)];
     activeItems = items;
 }
 
@@ -80,6 +86,7 @@
     int itemType = [[itemDict objectForKey:@"type"] intValue];
     
     [delegate itemSelected: itemType imageName: [itemDict objectForKey:@"image"]];
+    selectedCategoryIndex = -1;
     [self toogleItemsUP:sender];
 }
 
@@ -102,32 +109,12 @@
                          completion:^(BOOL finished){
                             itemsUP = YES;
                          }];
-      
-       NSString *catKey = [[catDict allKeys] objectAtIndex:selectedCategoryIndex];
-       NSDictionary *category = [catDict objectForKey:catKey];
-       
-       NSLog(@"CATEGORY: %@ - %@", category, [NSString stringWithFormat:@"%@-Big.png", [category objectForKey:@"icon"]]);
-       
-       [origin setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-Big", [category objectForKey:@"icon"]]] 
-               forState:UIControlStateNormal];
-      
-       /*[UIView animateWithDuration:0.3 
-                        animations:^{
-                            
-                            float newX = origin.frame.origin.x - (origin.frame.size.width/2);
-                            float newY = origin.frame.origin.y - (origin.frame.size.height/2);
-                            
-                            CGPoint newOrigin = CGPointMake(newX, newY);
-                            
-                            [origin setFrame:CGRectMake(newOrigin.x, newOrigin.y, origin.frame.size.width*2, origin.frame.size.height*2)];
-                        }];
-        */
        
     } else {
         
         //Canvi de 
         
-        if(selectedCategoryIndex && origin.tag != selectedCategoryIndex) {
+        if(selectedCategoryIndex >= 0 && origin.tag != selectedCategoryIndex) {
             selectedCategoryIndex = origin.tag;
             [self loadItems:[itemsArray objectAtIndex:selectedCategoryIndex]];
             return;
@@ -143,14 +130,13 @@
                              itemsUP = NO;
                          }];
         
-        NSString *catKey = [[catDict allKeys] objectAtIndex:selectedCategoryIndex];
-        NSDictionary *category = [catDict objectForKey:catKey];
-        [origin setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-Big", [category objectForKey:@"icon"]]] 
-                forState:UIControlStateNormal];
     }
     
 }
 
+-(IBAction)cleanAction:(id)sender {
+    [delegate clearMocks];
+}
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
