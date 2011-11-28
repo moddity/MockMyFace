@@ -95,6 +95,7 @@
 		086975AA1474309E009A6441 /* slideBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975A01474309E009A6441 /* slideBackground@2x.png */; };
 		086975AB1474309E009A6441 /* volteoCam.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975A11474309E009A6441 /* volteoCam.png */; };
 		086975AC1474309E009A6441 /* volteoCam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975A21474309E009A6441 /* volteoCam@2x.png */; };
+		1F248D751483960D00179D37 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F248D741483960C00179D37 /* Twitter.framework */; };
 		1F5029DA146C2CC2006CFFFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029D9146C2CC2006CFFFA /* UIKit.framework */; };
 		1F5029DC146C2CC2006CFFFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DB146C2CC2006CFFFA /* Foundation.framework */; };
 		1F5029DE146C2CC2006CFFFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DD146C2CC2006CFFFA /* CoreGraphics.framework */; };
@@ -228,6 +229,7 @@
 		086975A01474309E009A6441 /* slideBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "slideBackground@2x.png"; path = "UI-main/slideBackground@2x.png"; sourceTree = "<group>"; };
 		086975A11474309E009A6441 /* volteoCam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volteoCam.png; path = "UI-main/volteoCam.png"; sourceTree = "<group>"; };
 		086975A21474309E009A6441 /* volteoCam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "volteoCam@2x.png"; path = "UI-main/volteoCam@2x.png"; sourceTree = "<group>"; };
+		1F248D741483960C00179D37 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		1F5029D5146C2CC2006CFFFA /* MockMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MockMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F5029D9146C2CC2006CFFFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1F5029DB146C2CC2006CFFFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -285,6 +287,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F248D751483960D00179D37 /* Twitter.framework in Frameworks */,
 				1F502A03146C3256006CFFFA /* CoreMedia.framework in Frameworks */,
 				1F502A01146C2D41006CFFFA /* CoreVideo.framework in Frameworks */,
 				1F5029FF146C2D38006CFFFA /* AssetsLibrary.framework in Frameworks */,
@@ -415,6 +418,7 @@
 		1F5029D8146C2CC2006CFFFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F248D741483960C00179D37 /* Twitter.framework */,
 				1F502A02146C3256006CFFFA /* CoreMedia.framework */,
 				1F502A00146C2D41006CFFFA /* CoreVideo.framework */,
 				1F5029FE146C2D37006CFFFA /* AssetsLibrary.framework */,

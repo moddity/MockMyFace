@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/ItemSelector.m"
-         timestampString = "343208940.762299"
+         timestampString = "344159735.929056"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
          landmarkName = "-toogleItemsUP:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,12 +23,54 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/ItemSelector.m"
-         timestampString = "343208940.762299"
+         timestampString = "344159735.929056"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "51"
-         endingLineNumber = "51"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
          landmarkName = "-loadItems:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/FaceMeNowViewController.m"
+         timestampString = "344155090.732822"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "291"
+         endingLineNumber = "291"
+         landmarkName = "-newSquareOverlayedImageForFeatures:inCGImage:withOrientation:frontFacing:withSampleBuffer:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/FaceMeNowViewController.m"
+         timestampString = "344155778.327946"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "502"
+         endingLineNumber = "502"
+         landmarkName = "-displayPreviewImage:withMetadata:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/FaceMeNowViewController.m"
+         timestampString = "344178596.156099"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "900"
+         endingLineNumber = "900"
+         landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

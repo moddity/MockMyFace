@@ -9,6 +9,11 @@
 #import "ShareController.h"
 
 @implementation ShareController
+@synthesize backButton;
+@synthesize mailButton;
+@synthesize tweetButton;
+@synthesize facebookButton;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,6 +42,10 @@
 
 - (void)viewDidUnload
 {
+    [self setBackButton:nil];
+    [self setMailButton:nil];
+    [self setTweetButton:nil];
+    [self setFacebookButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -48,4 +57,11 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(IBAction)backButtonAction:(id)sender {
+    [delegate backFromShare];
+}
+
+-(IBAction)tweetButtonAction:(id)sender {
+    [delegate tweetAction];
+}
 @end

@@ -8,6 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ShareControllerDelegate <NSObject>
+
+-(void) backFromShare;
+-(void) tweetAction;
+
+@end
+
+
 @interface ShareController : UIViewController
+
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIButton *mailButton;
+@property (strong, nonatomic) IBOutlet UIButton *tweetButton;
+@property (strong, nonatomic) IBOutlet UIButton *facebookButton;
+@property (weak, nonatomic) id<ShareControllerDelegate> delegate;
+
+
+-(IBAction)backButtonAction:(id)sender;
+-(IBAction)tweetButtonAction:(id)sender;
 
 @end

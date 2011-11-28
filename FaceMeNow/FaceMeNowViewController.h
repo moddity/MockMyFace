@@ -19,38 +19,34 @@
 @class CIDetector;
 
 @interface FaceMeNowViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, ItemSelectorDelegate> {
-    
-    IBOutlet UIView *previewView;
-    AVCaptureVideoPreviewLayer *previewLayer;
-	AVCaptureVideoDataOutput *videoDataOutput;
+	
 	dispatch_queue_t videoDataOutputQueue;
-	AVCaptureStillImageOutput *stillImageOutput;
-	UIView *flashView;
-	UIImage *square;
+	
 	BOOL isUsingFrontFacingCamera;
 	CIDetector *faceDetector;
 	CGFloat beginGestureScale;
 	CGFloat effectiveScale;
-    IBOutlet ItemSelector *itemSelectorViewController;
-    
-    //ImageMasks
-    UIImage *hat;
-    UIImage *sunglasses;
-    UIImage *mouth;
-    UIImage *beard;
-    IBOutlet UIImageView *marc;
-    
-    
 }
 
 @property (nonatomic, strong) IBOutlet ItemSelector *itemSelectorViewController;
 @property (nonatomic, strong) ViewAndShareController *previewController;
 
+@property (nonatomic, strong) UIView *flashView;
+@property (nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
+@property (nonatomic, strong) AVCaptureVideoDataOutput *videoDataOutput;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
+@property (nonatomic, strong) IBOutlet UIView *previewView;
+
+@property (nonatomic, strong) UIImage *hat;
+@property (nonatomic, strong) UIImage *sunglasses;
+@property (nonatomic, strong) UIImage *mouth;
+@property (nonatomic, strong) UIImage *beard;
+@property (nonatomic, strong) IBOutlet UIImageView *marc;
+
+
 -(NSMutableArray*) getEnabledLayers;
 -(void) removeLayer: (NSString*) layerToClean;
 
-//RECTANGLES
--(CGRect) getSunglassesRectFromFace: (CIFaceFeature*) faceRect forVideoBox: (CGRect) clap;
 -(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage;
 -(void) displayPreviewImage: (CGImageRef) previewImage withMetadata: (NSDictionary*) metadata;
 

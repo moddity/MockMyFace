@@ -10,7 +10,7 @@
 
 @implementation ItemSelector
 
-@synthesize catScroll, itemsArray, delegate;
+@synthesize catScroll, itemsArray, delegate, catDict;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +26,7 @@
     
     NSString *categoriesFile = [[NSBundle mainBundle] pathForResource:@"Categories" ofType:@"plist"];
     
-    NSDictionary *catDict = [NSDictionary dictionaryWithContentsOfFile:categoriesFile];
+    catDict = [NSDictionary dictionaryWithContentsOfFile:categoriesFile];
     
     [catDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         
@@ -39,6 +39,7 @@
         [catButton addTarget:self action:@selector(toogleItemsUP:) forControlEvents:UIControlEventTouchUpInside];
         [catScroll addSubview:catButton];
          
+        
         [self.itemsArray addObject:[category objectForKey:@"items"]];
         
     }];
@@ -83,29 +84,49 @@
 }
 
 -(IBAction) toogleItemsUP:(id) sender {
-     UIButton *origin = (UIButton*) sender;
+    
+    UIButton *origin = (UIButton*) sender;
     
    if(!itemsUP) {
        //Load buttons
        
-      
        selectedCategoryIndex = origin.tag;
+       
        [self loadItems:[itemsArray objectAtIndex:selectedCategoryIndex]];
        
-        [UIView animateWithDuration:0.3
-                         animations:^{ 
-                             itemScroll.center = CGPointMake(itemScroll.center.x, itemScroll.center.y-168);
-                             
-                             slideBackground.center = CGPointMake(slideBackground.center.x, slideBackground.center.y-168);
-                             
-                             
+       [UIView animateWithDuration:0.3
+                        animations:^{ 
+                            itemScroll.center = CGPointMake(itemScroll.center.x, itemScroll.center.y-168);
+                            slideBackground.center = CGPointMake(slideBackground.center.x, slideBackground.center.y-168);
                          } 
                          completion:^(BOOL finished){
-                             itemsUP = YES;
+                            itemsUP = YES;
                          }];
+      
+       NSString *catKey = [[catDict allKeys] objectAtIndex:selectedCategoryIndex];
+       NSDictionary *category = [catDict objectForKey:catKey];
+       
+       NSLog(@"CATEGORY: %@ - %@", category, [NSString stringWithFormat:@"%@-Big.png", [category objectForKey:@"icon"]]);
+       
+       [origin setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-Big", [category objectForKey:@"icon"]]] 
+               forState:UIControlStateNormal];
+      
+       /*[UIView animateWithDuration:0.3 
+                        animations:^{
+                            
+                            float newX = origin.frame.origin.x - (origin.frame.size.width/2);
+                            float newY = origin.frame.origin.y - (origin.frame.size.height/2);
+                            
+                            CGPoint newOrigin = CGPointMake(newX, newY);
+                            
+                            [origin setFrame:CGRectMake(newOrigin.x, newOrigin.y, origin.frame.size.width*2, origin.frame.size.height*2)];
+                        }];
+        */
+       
     } else {
         
         //Canvi de 
+        
         if(selectedCategoryIndex && origin.tag != selectedCategoryIndex) {
             selectedCategoryIndex = origin.tag;
             [self loadItems:[itemsArray objectAtIndex:selectedCategoryIndex]];
@@ -121,6 +142,11 @@
                          completion:^(BOOL finished){
                              itemsUP = NO;
                          }];
+        
+        NSString *catKey = [[catDict allKeys] objectAtIndex:selectedCategoryIndex];
+        NSDictionary *category = [catDict objectForKey:catKey];
+        [origin setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-Big", [category objectForKey:@"icon"]]] 
+                forState:UIControlStateNormal];
     }
     
 }

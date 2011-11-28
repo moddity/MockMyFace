@@ -145,7 +145,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 @implementation FaceMeNowViewController
 
-@synthesize itemSelectorViewController, previewController;
+@synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, beard, marc, flashView, stillImageOutput, videoDataOutput, previewView, previewLayer;
 
 - (void)setupAVCapture
 {
@@ -160,7 +160,20 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     // Select a video device, make an input
 	AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-	//require( error == nil, bail );
+	
+    //Si hi ha error
+    if(error != nil) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Failed with error %d", (int)[error code]]
+															message:[error localizedDescription]
+														   delegate:nil 
+												  cancelButtonTitle:@"Dismiss" 
+												  otherButtonTitles:nil];
+		[alertView show];
+		
+		[self teardownAVCapture];
+        return;
+    }
+    
 	
     isUsingFrontFacingCamera = NO;
 	if ( [session canAddInput:deviceInput] )
@@ -168,8 +181,6 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	
     // Make a still image output
 	stillImageOutput = [AVCaptureStillImageOutput new];
-    
-  
     
 	[stillImageOutput addObserver:self forKeyPath:@"capturingStillImage" options:NSKeyValueObservingOptionNew context:(__bridge void *)AVCaptureStillImageIsCapturingStillImageContext];
 	if ( [session canAddOutput:stillImageOutput] )
@@ -205,18 +216,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	[rootLayer addSublayer:previewLayer];
 	[session startRunning];
     
-bail:
 
-	if (error) {
-		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Failed with error %d", (int)[error code]]
-															message:[error localizedDescription]
-														   delegate:nil 
-												  cancelButtonTitle:@"Dismiss" 
-												  otherButtonTitles:nil];
-		[alertView show];
-		
-		[self teardownAVCapture];
-	}
 }
 
 // clean up capture setup
@@ -224,7 +224,8 @@ bail:
 {
 	if (videoDataOutputQueue)
 		dispatch_release(videoDataOutputQueue);
-	[stillImageOutput removeObserver:self forKeyPath:@"isCapturingStillImage"];
+	
+    //[stillImageOutput removeObserver:self forKeyPath:@"isCapturingStillImage"];
 	
 	[previewLayer removeFromSuperlayer];
 	
@@ -233,7 +234,9 @@ bail:
 // perform a flash bulb animation using KVO to monitor the value of the capturingStillImage property of the AVCaptureStillImageOutput class
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	if ( context == (__bridge void *)AVCaptureStillImageIsCapturingStillImageContext ) {
+
+	
+    if ( context == (__bridge void *)AVCaptureStillImageIsCapturingStillImageContext ) {
 		BOOL isCapturingStillImage = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
 		
 		if ( isCapturingStillImage ) {
@@ -262,6 +265,7 @@ bail:
 			 ];
 		}
 	}
+     
 }
 
 // utility routing used during image capture to set up capture orientation
@@ -284,27 +288,12 @@ bail:
                                 withSampleBuffer:(CMSampleBufferRef) sampleBuffer 
 {
     
-    	CGImageRef returnImage = NULL;
-	CGRect backgroundImageRect = CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage));
-	
+    CGImageRef returnImage = NULL;
     
-    //CGRect backgroundImageRect = CGRectMake(0, 0, 480, 320);
-    //CGContextRef bitmapContext = CreateCGBitmapContextForSize(backgroundImageRect.size);
+    CGRect backgroundImageRect = CGRectMake(0, 0, 480, 320);
+    CGContextRef bitmapContext = CreateCGBitmapContextForSize(backgroundImageRect.size);
     
-    CGContextRef bitmapContext = CreateCGBitmapContextForSize(CGSizeMake(480, 320));
-    
-    //Girar coordenadas
-    /*
-    CGContextSaveGState(bitmapContext);
-    CGContextTranslateCTM(bitmapContext, 0, 
-                          backgroundImageRect.size.height);
-    CGContextScaleCTM(bitmapContext, 1.0, -1.0);
-     */
-    
-
-    
-	//CGContextClearRect(bitmapContext, backgroundImageRect);
-    CGContextClearRect(bitmapContext,  CGRectMake(0, 0, 480, 320));
+	CGContextClearRect(bitmapContext, backgroundImageRect);
     
     // get the clean aperture
     // the clean aperture is a rectangle that defines the portion of the encoded pixel dimensions
@@ -312,30 +301,17 @@ bail:
 	CMFormatDescriptionRef fdesc = CMSampleBufferGetFormatDescription(sampleBuffer);
 	CGRect clap = CMVideoFormatDescriptionGetCleanAperture(fdesc, false /*originIsTopLeft == false*/);
     
-    
     CGSize parentFrameSize = [previewView frame].size;
 	NSString *gravity = [previewLayer videoGravity];
-	
 
-    
     CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
                                                                  frameSize:parentFrameSize 
                                                               apertureSize:clap.size];
     
-	/*CGContextDrawImage(bitmapContext, 
-                       CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage))
-                       , backgroundImage);*/
-
+    //Pintem la imatge de la cámera
     CGContextDrawImage(bitmapContext, 
                        CGRectMake(previewBox.origin.y, previewBox.origin.x, previewBox.size.height, previewBox.size.width)
                        , backgroundImage);
-    
-    
-  
-    
-    
-    
-    NSLog(@"BACKGROUND IMAGE RECT: %@ %@", NSStringFromCGRect([previewLayer bounds]), NSStringFromCGRect(CGRectMake(0., 0., CGImageGetWidth(backgroundImage), CGImageGetHeight(backgroundImage))));
     
 	CGFloat rotationDegrees = 0.;
 	
@@ -360,60 +336,50 @@ bail:
 			break; // leave the layer in its last known orientation
 	}
     
-	UIImage *rotatedSquareImage = [sunglasses imageRotatedByDegrees:rotationDegrees];
 	
 
-    
     // features found by the face detector
-	for ( CIFaceFeature *ff in features ) {
+	for (CIFaceFeature *ff in features ) {
 		CGRect faceRect = [ff bounds];
-        //CGRect faceRect = CGRectMake(ff.bounds.origin.x, ff.bounds.origin.y, ff.bounds.size.width, ff.bounds.size.height/2);
-		
         
+        /// SUNGLASSES
+        if(self.sunglasses != nil) {
+            
+            
+            float eyeCenterX = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
         
-        /*float eyeCenterX = ((ff.leftEyePosition.x - ff.rightEyePosition.x) / 2) + ff.rightEyePosition.x;
+            float glassesWidth = (ff.rightEyePosition.y-ff.leftEyePosition.y)*2;
         
-        CGPoint eyeCenter = CGPointMake(eyeCenterX, ff.leftEyePosition.y);
-        
-        float glassesWidth = (ff.leftEyePosition.x-ff.rightEyePosition.x)*2;
-        
-        CGRect glassesRect = CGRectMake(eyeCenter.x - (glassesWidth / 2), 
-                                        eyeCenter.y - (glassesWidth / 2), 
-                                        glassesWidth, 
-                                        glassesWidth);*/
-        
-        float eyeCenterX = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
-        CGPoint eyeCenter = CGPointMake(eyeCenterX, ff.rightEyePosition.y);
-        
-        float glassesWidth = (ff.rightEyePosition.y-ff.leftEyePosition.y)*2;
-        
-        CGRect glassesRect = CGRectMake(ff.leftEyePosition.x-(glassesWidth/2),
+            CGRect glassesRect = CGRectMake(ff.leftEyePosition.x-(glassesWidth/2),
                                         eyeCenterX-(glassesWidth/2),
                                         glassesWidth, 
                                         glassesWidth);
         
-        NSLog(@"GLASSES RECT >> %@ - %@ - %@", NSStringFromCGRect(glassesRect), NSStringFromCGPoint(ff.leftEyePosition), NSStringFromCGPoint(ff.rightEyePosition));
+            UIImage *sunglassesImage = [sunglasses imageRotatedByDegrees:rotationDegrees];
+            CGContextDrawImage(bitmapContext, glassesRect, [sunglassesImage CGImage]);
+        }
         
+        // HAT
+        if(self.hat != nil) {
+            CGRect hatRect = CGRectMake(faceRect.origin.x - (faceRect.size.width * 0.85), 
+                                        faceRect.origin.y,
+                                        faceRect.size.width, 
+                                        faceRect.size.width);
+            UIImage *hatImage = [hat imageRotatedByDegrees:rotationDegrees];
+            CGContextDrawImage(bitmapContext, hatRect, [hatImage CGImage]);
+        }
         
-        /*CGContextSetFillColorWithColor(bitmapContext, [UIColor redColor].CGColor);
-        CGContextAddRect(bitmapContext, glassesRect);
-        CGContextFillPath(bitmapContext);
-        
-        CGContextSetFillColorWithColor(bitmapContext, [UIColor blueColor].CGColor);
-        CGContextAddRect(bitmapContext, CGRectMake(ff.leftEyePosition.x-15, ff.leftEyePosition.y-15, 30, 30));
-        CGContextAddRect(bitmapContext, CGRectMake(ff.rightEyePosition.x-15, ff.rightEyePosition.y-15, 30, 30));
-        CGContextFillPath(bitmapContext);*/
-    
-        
-        CGContextDrawImage(bitmapContext, glassesRect, [rotatedSquareImage CGImage]);
-        
-        
+        if(self.mouth != nil) {
+            float mouthSize = faceRect.size.width / 2;
+            CGRect mouthRect = CGRectMake(ff.mouthPosition.x-(mouthSize/2), ff.mouthPosition.y-(mouthSize/2), mouthSize, mouthSize);
+            
+            UIImage *mouthImage = [mouth imageRotatedByDegrees:rotationDegrees];
+            CGContextDrawImage(bitmapContext, mouthRect, [mouthImage CGImage]);
+        }
 	}
     
-        
-    
-    //Marc
-    CGContextDrawImage(bitmapContext, CGRectMake(0, 0, 480, 320), [[marc.image imageRotatedByDegrees:rotationDegrees] CGImage]);
+    //PINTEM EL MARC
+    CGContextDrawImage(bitmapContext, backgroundImageRect, [[marc.image imageRotatedByDegrees:rotationDegrees] CGImage]);
     
 	returnImage = CGBitmapContextCreateImage(bitmapContext);
 	CGContextRelease (bitmapContext);
@@ -421,53 +387,6 @@ bail:
 	return returnImage;
 }
 
-// utility routine used after taking a still image to write the resulting image to the camera roll
-- (BOOL)writeCGImageToCameraRoll:(CGImageRef)cgImage withMetadata:(NSDictionary *)metadata
-{
-	CFMutableDataRef destinationData = CFDataCreateMutable(kCFAllocatorDefault, 0);
-	CGImageDestinationRef destination = CGImageDestinationCreateWithData(destinationData, 
-																		 CFSTR("public.jpeg"), 
-																		 1, 
-																		 NULL);
-	BOOL success = (destination != NULL);
-	//require(success, bail);
-    
-	const float JPEGCompQuality = 1.0f; // JPEGHigherQuality
-	CFMutableDictionaryRef optionsDict = NULL;
-	CFNumberRef qualityNum = NULL;
-	
-	qualityNum = CFNumberCreate(0, kCFNumberFloatType, &JPEGCompQuality);    
-	if ( qualityNum ) {
-		optionsDict = CFDictionaryCreateMutable(0, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-		if ( optionsDict )
-			CFDictionarySetValue(optionsDict, kCGImageDestinationLossyCompressionQuality, qualityNum);
-		CFRelease( qualityNum );
-	}
-	
-	CGImageDestinationAddImage( destination, cgImage, optionsDict );
-	success = CGImageDestinationFinalize( destination );
-    
-	if ( optionsDict )
-		CFRelease(optionsDict);
-	
-	//require(success, bail);
-	
-	CFRetain(destinationData);
-	ALAssetsLibrary *library = [ALAssetsLibrary new];
-	[library writeImageDataToSavedPhotosAlbum:(__bridge id)destinationData metadata:metadata completionBlock:^(NSURL *assetURL, NSError *error) {
-		if (destinationData)
-			CFRelease(destinationData);
-	}];
-
-    
-    
-bail:
-	if (destinationData)
-		CFRelease(destinationData);
-	if (destination)
-		CFRelease(destination);
-	return success;
-}
 
 // utility routine to display error aleart if takePicture fails
 - (void)displayErrorOnMainQueue:(NSError *)error withMessage:(NSString *)message
@@ -482,6 +401,7 @@ bail:
 	
 	});
 }
+
 
 
 -(void) takePhoto {
@@ -532,30 +452,33 @@ bail:
                                                                   OSStatus err = CreateCGImageFromCVPixelBuffer(CMSampleBufferGetImageBuffer(imageDataSampleBuffer), &srcImage);
                                                                   check(!err);
                                                                   
+                                                                   
+                                                                  if(isUsingFrontFacingCamera) {
+                                                                      srcImage = [self imageFlipedHorizontal: srcImage];
+                                                                  }
                                                                   
-                                                                 
-                                                                  CGImageRef imageFlipped = [self imageFlipedHorizontal: srcImage];
-
-                                                                  CIImage *img = [[CIImage alloc] initWithCGImage:imageFlipped options:imageOptions];
+                                                                  CIImage *img = [[CIImage alloc] initWithCGImage:srcImage options:imageOptions];
                                                                   
                                                                   NSArray *features = [faceDetector featuresInImage:img options:imageOptions];
                                                                   
                                                                   
                                                                   
                                                                   CGImageRef cgImageResult = [self newSquareOverlayedImageForFeatures:features 
-                                                                                                                            inCGImage:imageFlipped 
+                                                                                                                            inCGImage:srcImage 
                                                                                                                       withOrientation:curDeviceOrientation 
                                                                                                                           frontFacing:isUsingFrontFacingCamera
                                                                                                                      withSampleBuffer:imageDataSampleBuffer];
-                                                                  if (srcImage)
-                                                                      CFRelease(srcImage);
+                                                                  /*if (srcImage)
+                                                                      CFRelease(srcImage);*/
                                                                   
                                                                   CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, 
                                                                                                                               imageDataSampleBuffer, 
                                                                                                                               kCMAttachmentMode_ShouldPropagate);
                                                                   //[self writeCGImageToCameraRoll:cgImageResult withMetadata:(__bridge id)attachments];
-                                                                                                                                    
-                                                                  [self displayPreviewImage:cgImageResult withMetadata:(__bridge id)attachments];
+                                                                                         
+                                                                  NSDictionary *metadata = [[NSDictionary alloc] initWithDictionary:(__bridge NSDictionary*)attachments];
+                                                                  
+                                                                  [self displayPreviewImage:cgImageResult withMetadata:metadata];
                                                                   
                                                                   if (attachments)
                                                                       CFRelease(attachments);
@@ -570,11 +493,10 @@ bail:
                                                   }
 	 ];
 }
+ 
 
 -(void) displayPreviewImage:(CGImageRef)previewImage withMetadata: (NSDictionary*) metadata {
     
-    
-    NSLog(@"METADATA: %@", metadata);
     
     self.previewController = [[ViewAndShareController alloc] initWithNibName:@"ViewAndShareController" bundle:nil];
     //[self.view addSubview:previewController.view];
@@ -582,8 +504,11 @@ bail:
     [self addChildViewController:self.previewController];
     [[self view] addSubview:previewController.view];
     
-    //[self presentModalViewController:self.previewController animated:YES];
-    [self.previewController.previewImage setImage:[UIImage imageWithCGImage:previewImage scale:1.0 orientation:UIImageOrientationRight]];
+    UIImage *image = [[UIImage alloc] initWithCGImage:previewImage scale:1.0 orientation:UIImageOrientationRight];
+    
+    [self.previewController.previewImage setImage:image];
+    self.previewController.imageMetatadata = [NSDictionary dictionaryWithDictionary:metadata];
+
 }
 
 
@@ -679,69 +604,14 @@ bail:
 -(NSMutableArray*) getEnabledLayers {
     NSMutableArray *enabledLayers = [NSMutableArray array];
     
-    if(sunglasses != nil) [enabledLayers addObject:kSunglassesLayer];
-    if(hat != nil) [enabledLayers addObject:kHatLayer];
-    if(mouth != nil) [enabledLayers addObject:kMouthLayer];
-    if(beard != nil) [enabledLayers addObject:kBeardLayer];
+    if(self.sunglasses != nil) [enabledLayers addObject:kSunglassesLayer];
+    if(self.hat != nil) [enabledLayers addObject:kHatLayer];
+    if(self.mouth != nil) [enabledLayers addObject:kMouthLayer];
+    if(self.beard != nil) [enabledLayers addObject:kBeardLayer];
     return enabledLayers;
 }
 
--(CGRect) getSunglassesRectFromFace:(CIFaceFeature*)ff forVideoBox:(CGRect)clap {
-    CGRect faceRect = [ff bounds];
-    
-    // flip preview width and height
-    /*CGFloat temp = faceRect.size.width;
-    faceRect.size.width = faceRect.size.height;
-    faceRect.size.height = temp;
-    temp = faceRect.origin.x;
-    faceRect.origin.x = faceRect.origin.y;
-    faceRect.origin.y = temp;*/
-    
-    float eyeCenterY = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
-    
-    CGPoint eyeCenter = CGPointMake(ff.rightEyePosition.x, eyeCenterY);
-    
-    float glassesWidth = (ff.rightEyePosition.y-ff.leftEyePosition.y)*2;
-    
-    CGRect glassesRect = CGRectMake(eyeCenter.y - (glassesWidth / 2), 
-                                    eyeCenter.x - (glassesWidth / 2), 
-                                    glassesWidth, 
-                                    glassesWidth);
-    
-        
-    CGSize parentFrameSize = [previewView frame].size;
-	NSString *gravity = [previewLayer videoGravity];
-	BOOL isMirrored = [previewLayer isMirrored];
-    
-    /*CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
-                                                                 frameSize:parentFrameSize 
-                                                              apertureSize:clap.size];*/
-    
-    CGRect previewBox = CGRectMake(0, 0, 320, 480);
-    
-    // scale coordinates so they fit in the preview box, which may be scaled
-    CGFloat widthScaleBy = previewBox.size.width / clap.size.height;
-    CGFloat heightScaleBy = previewBox.size.height / clap.size.width;
 
-    
-     NSLog(@"GLASSES RECT ABANS PHOTO: %@", NSStringFromCGRect(glassesRect));
-    
-    glassesRect.size.width *= widthScaleBy;
-    glassesRect.size.height *= heightScaleBy;
-    glassesRect.origin.x *= widthScaleBy;
-    glassesRect.origin.y *= heightScaleBy;
-    
-    
-    /*if ( isMirrored ) {
-        glassesRect = CGRectOffset(glassesRect, previewBox.origin.x + previewBox.size.width - glassesRect.size.width - (glassesRect.origin.x * 2), previewBox.origin.y);
-    } else {*/
-        glassesRect = CGRectOffset(glassesRect, previewBox.origin.x, previewBox.origin.y);
-    //}
-
-    NSLog(@"GLASSES RECT PHOTO: %@", NSStringFromCGRect(glassesRect));
-    
-    return glassesRect;
-}
 
 // called asynchronously as the capture output is capturing sample buffers, this method asks the face detector (if on)
 // to detect features and for each draw the red square in a layer and set appropriate orientation
@@ -1014,7 +884,6 @@ bail:
 	imageOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:exifOrientation] forKey:CIDetectorImageOrientation];
 	NSArray *features = [faceDetector featuresInImage:ciImage options:imageOptions];
 	
-	
     // get the clean aperture
     // the clean aperture is a rectangle that defines the portion of the encoded pixel dimensions
     // that represents image data valid for display.
@@ -1068,7 +937,7 @@ bail:
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	[self setupAVCapture];
-	square = [UIImage imageNamed:@"sunglasses1"];
+    
 	NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
 	faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
     

@@ -36,12 +36,15 @@
     NSArray *activeItems;
     
     int selectedCategoryIndex;
+    
+
 }
 
 @property (nonatomic, strong) IBOutlet UIScrollView *catScroll;
 @property (nonatomic, strong) NSMutableArray *itemsArray;
 @property (nonatomic, weak) id<ItemSelectorDelegate> delegate;
 
+@property (nonatomic, strong) NSDictionary *catDict;
 
 -(void) parseItems;
 -(IBAction) toogleItemsUP:(id) sender;

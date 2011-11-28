@@ -5,7 +5,7 @@
 	<key>Sunglasses</key>
 	<dict>
 		<key>icon</key>
-		<string>block_gafes.png</string>
+		<string>block_gafes</string>
 		<key>items</key>
 		<array>
 			<dict>
@@ -53,7 +53,7 @@
 	<key>Hats</key>
 	<dict>
 		<key>icon</key>
-		<string>block_sombreros.png</string>
+		<string>block_sombreros</string>
 		<key>items</key>
 		<array>
 			<dict>
@@ -85,7 +85,7 @@
 	<key>Mouths</key>
 	<dict>
 		<key>icon</key>
-		<string>block_boques.png</string>
+		<string>block_boques</string>
 		<key>items</key>
 		<array>
 			<dict>
@@ -117,7 +117,7 @@
 	<key>Frames</key>
 	<dict>
 		<key>icon</key>
-		<string>block_marcs.png</string>
+		<string>block_marcs</string>
 		<key>items</key>
 		<array>
 			<dict>

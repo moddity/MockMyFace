@@ -7,12 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreImage/CoreImage.h>
+#import <ImageIO/ImageIO.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "ShareController.h"
+#import <Twitter/Twitter.h>
 
-@interface ViewAndShareController : UIViewController
+@interface ViewAndShareController : UIViewController <ShareControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *previewImage;
+@property (strong, nonatomic) NSDictionary *imageMetatadata;
+@property (strong, nonatomic) ShareController *shareController;
+
 
 -(IBAction) close: (id) sender;
 -(IBAction) openShareView:(id)sender;
+-(IBAction) saveToCameraRoll:(id)sender;
+
+- (BOOL)writeCGImageToCameraRoll:(CGImageRef)cgImage withMetadata:(NSDictionary *)metadata;
 
 @end
