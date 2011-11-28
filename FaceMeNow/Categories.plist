@@ -8,7 +8,7 @@
 		<string>block_gafes</string>
 		<key>items</key>
 		<array>
-            <dict>
+			<dict>
 				<key>type</key>
 				<integer>2</integer>
 				<key>name</key>
@@ -119,6 +119,54 @@
 				<string>Marc1</string>
 				<key>image</key>
 				<string>marc_estrelles.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcRoigRatlles</string>
+				<key>image</key>
+				<string>marc_roigRatlles.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcTigre</string>
+				<key>image</key>
+				<string>marc_tigre.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcOnes</string>
+				<key>image</key>
+				<string>marc_onesBlau.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcLlum</string>
+				<key>image</key>
+				<string>marc_llum</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>Marc_Dorat</string>
+				<key>image</key>
+				<string>marc_dorat.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcLleopard</string>
+				<key>image</key>
+				<string>marc_lleopard.png</string>
 			</dict>
 		</array>
 	</dict>
