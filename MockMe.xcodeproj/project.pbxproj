@@ -112,6 +112,10 @@
 		08CBF7391483EF2400962DAD /* marc_tigre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF72F1483EF2400962DAD /* marc_tigre@2x.png */; };
 		08CBF73C1483EF2A00962DAD /* marc_dorat.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF73A1483EF2A00962DAD /* marc_dorat.png */; };
 		08CBF73D1483EF2A00962DAD /* marc_dorat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF73B1483EF2A00962DAD /* marc_dorat@2x.png */; };
+		08CBF7441483FCF700962DAD /* marc_raig.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7421483FCF700962DAD /* marc_raig.png */; };
+		08CBF7451483FCF700962DAD /* marc_raig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7431483FCF700962DAD /* marc_raig@2x.png */; };
+		08CBF7491483FD0300962DAD /* thumb_marcRaig.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7471483FD0200962DAD /* thumb_marcRaig.png */; };
+		08CBF74A1483FD0300962DAD /* thumb_marcRaig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7481483FD0300962DAD /* thumb_marcRaig@2x.png */; };
 		08EB3D7E1483D90C00C5E272 /* marcBasic_blau.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */; };
 		08EB3D7F1483D90C00C5E272 /* marcBasic_blau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */; };
 		08EB3D831483D9B100C5E272 /* capirote.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D811483D9B100C5E272 /* capirote.png */; };
@@ -269,6 +273,10 @@
 		08CBF72F1483EF2400962DAD /* marc_tigre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marc_tigre@2x.png"; path = "marcs/marc_tigre@2x.png"; sourceTree = "<group>"; };
 		08CBF73A1483EF2A00962DAD /* marc_dorat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marc_dorat.png; path = marcs/marc_dorat.png; sourceTree = "<group>"; };
 		08CBF73B1483EF2A00962DAD /* marc_dorat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marc_dorat@2x.png"; path = "marcs/marc_dorat@2x.png"; sourceTree = "<group>"; };
+		08CBF7421483FCF700962DAD /* marc_raig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marc_raig.png; path = marcs/marc_raig.png; sourceTree = "<group>"; };
+		08CBF7431483FCF700962DAD /* marc_raig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marc_raig@2x.png"; path = "marcs/marc_raig@2x.png"; sourceTree = "<group>"; };
+		08CBF7471483FD0200962DAD /* thumb_marcRaig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thumb_marcRaig.png; path = thumb_marcs/thumb_marcRaig.png; sourceTree = "<group>"; };
+		08CBF7481483FD0300962DAD /* thumb_marcRaig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "thumb_marcRaig@2x.png"; path = "thumb_marcs/thumb_marcRaig@2x.png"; sourceTree = "<group>"; };
 		08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marcBasic_blau.png; path = marcs/marcBasic_blau.png; sourceTree = "<group>"; };
 		08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marcBasic_blau@2x.png"; path = "marcs/marcBasic_blau@2x.png"; sourceTree = "<group>"; };
 		08EB3D811483D9B100C5E272 /* capirote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capirote.png; path = iconos/capirote.png; sourceTree = "<group>"; };
@@ -369,6 +377,8 @@
 		086974FA14718222009A6441 /* marcs */ = {
 			isa = PBXGroup;
 			children = (
+				08CBF7421483FCF700962DAD /* marc_raig.png */,
+				08CBF7431483FCF700962DAD /* marc_raig@2x.png */,
 				08CBF73A1483EF2A00962DAD /* marc_dorat.png */,
 				08CBF73B1483EF2A00962DAD /* marc_dorat@2x.png */,
 				08CBF7261483EF2400962DAD /* marc_lleopard.png */,
@@ -394,6 +404,8 @@
 		086974FB1471822D009A6441 /* thumb_marcs */ = {
 			isa = PBXGroup;
 			children = (
+				08CBF7471483FD0200962DAD /* thumb_marcRaig.png */,
+				08CBF7481483FD0300962DAD /* thumb_marcRaig@2x.png */,
 				08CBF7221483EF1700962DAD /* thumb_marcDorat.png */,
 				08CBF7231483EF1700962DAD /* thumb_marcDorat@2x.png */,
 				08CBF70E1483EF1100962DAD /* thumb_marcLleopard.png */,
@@ -844,6 +856,10 @@
 				08CBF7391483EF2400962DAD /* marc_tigre@2x.png in Resources */,
 				08CBF73C1483EF2A00962DAD /* marc_dorat.png in Resources */,
 				08CBF73D1483EF2A00962DAD /* marc_dorat@2x.png in Resources */,
+				08CBF7441483FCF700962DAD /* marc_raig.png in Resources */,
+				08CBF7451483FCF700962DAD /* marc_raig@2x.png in Resources */,
+				08CBF7491483FD0300962DAD /* thumb_marcRaig.png in Resources */,
+				08CBF74A1483FD0300962DAD /* thumb_marcRaig@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
