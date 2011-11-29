@@ -110,6 +110,12 @@
 		08CBF7391483EF2400962DAD /* marc_tigre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF72F1483EF2400962DAD /* marc_tigre@2x.png */; };
 		08CBF73C1483EF2A00962DAD /* marc_dorat.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF73A1483EF2A00962DAD /* marc_dorat.png */; };
 		08CBF73D1483EF2A00962DAD /* marc_dorat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF73B1483EF2A00962DAD /* marc_dorat@2x.png */; };
+		08CBF7A51484E04100962DAD /* saveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7A11484E04100962DAD /* saveButton.png */; };
+		08CBF7A61484E04100962DAD /* saveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7A21484E04100962DAD /* saveButton@2x.png */; };
+		08CBF7A71484E04100962DAD /* shareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7A31484E04100962DAD /* shareButton.png */; };
+		08CBF7A81484E04100962DAD /* shareButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7A41484E04100962DAD /* shareButton@2x.png */; };
+		08CBF7AB1484E04B00962DAD /* closeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7A91484E04B00962DAD /* closeButton.png */; };
+		08CBF7AC1484E04B00962DAD /* closeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7AA1484E04B00962DAD /* closeButton@2x.png */; };
 		08EB3D7E1483D90C00C5E272 /* marcBasic_blau.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */; };
 		08EB3D7F1483D90C00C5E272 /* marcBasic_blau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */; };
 		08EB3D831483D9B100C5E272 /* capirote.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D811483D9B100C5E272 /* capirote.png */; };
@@ -284,6 +290,12 @@
 		08CBF72F1483EF2400962DAD /* marc_tigre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marc_tigre@2x.png"; path = "marcs/marc_tigre@2x.png"; sourceTree = "<group>"; };
 		08CBF73A1483EF2A00962DAD /* marc_dorat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marc_dorat.png; path = marcs/marc_dorat.png; sourceTree = "<group>"; };
 		08CBF73B1483EF2A00962DAD /* marc_dorat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marc_dorat@2x.png"; path = "marcs/marc_dorat@2x.png"; sourceTree = "<group>"; };
+		08CBF7A11484E04100962DAD /* saveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saveButton.png; sourceTree = "<group>"; };
+		08CBF7A21484E04100962DAD /* saveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "saveButton@2x.png"; sourceTree = "<group>"; };
+		08CBF7A31484E04100962DAD /* shareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareButton.png; sourceTree = "<group>"; };
+		08CBF7A41484E04100962DAD /* shareButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareButton@2x.png"; sourceTree = "<group>"; };
+		08CBF7A91484E04B00962DAD /* closeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButton.png; sourceTree = "<group>"; };
+		08CBF7AA1484E04B00962DAD /* closeButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeButton@2x.png"; sourceTree = "<group>"; };
 		08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marcBasic_blau.png; path = marcs/marcBasic_blau.png; sourceTree = "<group>"; };
 		08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marcBasic_blau@2x.png"; path = "marcs/marcBasic_blau@2x.png"; sourceTree = "<group>"; };
 		08EB3D811483D9B100C5E272 /* capirote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capirote.png; path = iconos/capirote.png; sourceTree = "<group>"; };
@@ -454,6 +466,7 @@
 		0869756A14743063009A6441 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				08CBF7A01484E02600962DAD /* stillPhoto view */,
 				086975981474308E009A6441 /* main view */,
 				0869756B14743076009A6441 /* share View */,
 			);
@@ -504,6 +517,19 @@
 				086975A21474309E009A6441 /* volteoCam@2x.png */,
 			);
 			name = "main view";
+			sourceTree = "<group>";
+		};
+		08CBF7A01484E02600962DAD /* stillPhoto view */ = {
+			isa = PBXGroup;
+			children = (
+				08CBF7A91484E04B00962DAD /* closeButton.png */,
+				08CBF7AA1484E04B00962DAD /* closeButton@2x.png */,
+				08CBF7A11484E04100962DAD /* saveButton.png */,
+				08CBF7A21484E04100962DAD /* saveButton@2x.png */,
+				08CBF7A31484E04100962DAD /* shareButton.png */,
+				08CBF7A41484E04100962DAD /* shareButton@2x.png */,
+			);
+			name = "stillPhoto view";
 			sourceTree = "<group>";
 		};
 		1F5029CA146C2CC2006CFFFA = {
@@ -912,6 +938,12 @@
 				1F248DC5148458BB00179D37 /* icon_sombrero@2x.png in Resources */,
 				1F248DC6148458BB00179D37 /* icon_volteo.png in Resources */,
 				1F248DC7148458BB00179D37 /* icon_volteo@2x.png in Resources */,
+				08CBF7A51484E04100962DAD /* saveButton.png in Resources */,
+				08CBF7A61484E04100962DAD /* saveButton@2x.png in Resources */,
+				08CBF7A71484E04100962DAD /* shareButton.png in Resources */,
+				08CBF7A81484E04100962DAD /* shareButton@2x.png in Resources */,
+				08CBF7AB1484E04B00962DAD /* closeButton.png in Resources */,
+				08CBF7AC1484E04B00962DAD /* closeButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,7 +992,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -975,7 +1007,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "806DB5C3-784E-4614-96CA-5D36C7E19379";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1004,12 +1036,12 @@
 		1F5029F4146C2CC2006CFFFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FaceMeNow/MockMyFace-Prefix.pch";
 				INFOPLIST_FILE = "FaceMeNow/MockMyFace-Info.plist";
 				PRODUCT_NAME = MockMyFace;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "806DB5C3-784E-4614-96CA-5D36C7E19379";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

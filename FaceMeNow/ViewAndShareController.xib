@@ -53,13 +53,12 @@
 						<string key="NSFrame">{{20, 20}, {76, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="778838173"/>
+						<reference key="NSNextKeyView" ref="28489971"/>
 						<string key="NSReuseIdentifierKey">_NS:225</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">CLOSE</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="398091980">
 							<int key="NSColorSpace">3</int>
@@ -72,6 +71,10 @@
 						<object class="NSColor" key="IBUINormalTitleShadowColor" id="946841246">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">closeButton.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="941178747">
 							<int key="type">2</int>
@@ -95,7 +98,6 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">SHARE</string>
 						<reference key="IBUIHighlightedTitleColor" ref="398091980"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
@@ -103,6 +105,10 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="946841246"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">shareButton.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="941178747"/>
 						<reference key="IBUIFont" ref="34699893"/>
 					</object>
@@ -112,12 +118,12 @@
 						<string key="NSFrame">{{124, 20}, {72, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="778838173"/>
 						<string key="NSReuseIdentifierKey">_NS:225</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">SAVE</string>
 						<reference key="IBUIHighlightedTitleColor" ref="398091980"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
@@ -125,6 +131,10 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="946841246"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">saveButton.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="941178747"/>
 						<reference key="IBUIFont" ref="34699893"/>
 					</object>
@@ -203,8 +213,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="420539624"/>
 							<reference ref="778838173"/>
-							<reference ref="505297667"/>
 							<reference ref="28489971"/>
+							<reference ref="505297667"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -304,6 +314,11 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="closeButton.png">{76, 37}</string>
+			<string key="saveButton.png">{76, 37}</string>
+			<string key="shareButton.png">{76, 37}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
 </archive>
