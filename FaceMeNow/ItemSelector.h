@@ -49,6 +49,7 @@
 @property (nonatomic, strong) NSDictionary *catDict;
 
 -(void) parseItems;
+-(void) getRandomItems;
 -(IBAction) toogleItemsUP:(id) sender;
 
 

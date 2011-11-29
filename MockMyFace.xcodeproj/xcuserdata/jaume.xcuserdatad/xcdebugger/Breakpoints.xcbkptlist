@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/ItemSelector.m"
-         timestampString = "344183175.153048"
+         timestampString = "344190804.704566"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "98"
-         endingLineNumber = "98"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
          landmarkName = "-toogleItemsUP:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344155090.732822"
+         timestampString = "344205076.176833"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "291"
-         endingLineNumber = "291"
+         startingLineNumber = "290"
+         endingLineNumber = "290"
          landmarkName = "-newSquareOverlayedImageForFeatures:inCGImage:withOrientation:frontFacing:withSampleBuffer:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344180332.459196"
+         timestampString = "344205076.176833"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "500"
-         endingLineNumber = "500"
+         startingLineNumber = "522"
+         endingLineNumber = "522"
          landmarkName = "-displayPreviewImage:withMetadata:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -65,11 +65,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344185547.065857"
+         timestampString = "344205954.996327"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "908"
-         endingLineNumber = "908"
+         startingLineNumber = "935"
+         endingLineNumber = "935"
          landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>
@@ -79,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/ItemSelector.m"
-         timestampString = "344183175.153048"
+         timestampString = "344190804.704566"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "117"
-         endingLineNumber = "117"
+         startingLineNumber = "131"
+         endingLineNumber = "131"
          landmarkName = "-toogleItemsUP:"
          landmarkType = "5">
       </FileBreakpoint>

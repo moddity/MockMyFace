@@ -12,6 +12,7 @@
 #import "ViewAndShareController.h"
 #import "FaceIndicatorLayer.h"
 
+
 #define kSunglassesLayer @"SunglassesLayer"
 #define kHatLayer @"HatLayer"
 #define kMouthLayer @"MouthLayer"
@@ -34,6 +35,7 @@
 @property (nonatomic, strong) FaceIndicatorLayer *faceIndicatorLayer;
 
 @property (nonatomic, strong) UIView *flashView;
+@property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
 @property (nonatomic, strong) AVCaptureVideoDataOutput *videoDataOutput;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
@@ -52,6 +54,9 @@
 -(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage;
 -(void) displayPreviewImage: (CGImageRef) previewImage withMetadata: (NSDictionary*) metadata;
 
+-(void) setFrontCamera: (BOOL) isFront;
+
+-(void) restartVideoCapture;
 
 // find where the video box is positioned within the preview layer based on the video size and gravity
 + (CGRect)videoPreviewBoxForGravity:(NSString *)gravity frameSize:(CGSize)frameSize apertureSize:(CGSize)apertureSize;

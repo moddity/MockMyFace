@@ -77,6 +77,20 @@
     activeItems = items;
 }
 
+-(void) getRandomItems {
+    
+    for(NSArray *items in itemsArray) {
+        int value = arc4random() % [items count];
+        
+        NSDictionary *itemDict = [items objectAtIndex:value];
+        
+        int itemType = [[itemDict objectForKey:@"type"] intValue];
+        
+        [delegate itemSelected:itemType imageName:[itemDict objectForKey:@"image"]];
+    }
+}
+
+
 -(void) selectItem:(id)sender {
     UIButton *origin = (UIButton*) sender;
     int itemsIndex = origin.tag;

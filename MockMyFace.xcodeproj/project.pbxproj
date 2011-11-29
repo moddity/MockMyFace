@@ -39,8 +39,6 @@
 		0869750314718291009A6441 /* pelo_cola@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0869750114718291009A6441 /* pelo_cola@2x.png */; };
 		086975061471829B009A6441 /* thumb_pelo_cola.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975041471829B009A6441 /* thumb_pelo_cola.png */; };
 		086975071471829B009A6441 /* thumb_pelo_cola@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975051471829B009A6441 /* thumb_pelo_cola@2x.png */; };
-		0869750A14719CBF009A6441 /* marcUI.png in Resources */ = {isa = PBXBuildFile; fileRef = 0869750814719CBF009A6441 /* marcUI.png */; };
-		0869750B14719CBF009A6441 /* marcUI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0869750914719CBF009A6441 /* marcUI@2x.png */; };
 		0869752E1472E752009A6441 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0869752D1472E752009A6441 /* Default.png */; };
 		086975301472E756009A6441 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0869752F1472E756009A6441 /* Default@2x.png */; };
 		086975371472ED61009A6441 /* shareSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 086975351472ED61009A6441 /* shareSheet.png */; };
@@ -112,10 +110,6 @@
 		08CBF7391483EF2400962DAD /* marc_tigre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF72F1483EF2400962DAD /* marc_tigre@2x.png */; };
 		08CBF73C1483EF2A00962DAD /* marc_dorat.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF73A1483EF2A00962DAD /* marc_dorat.png */; };
 		08CBF73D1483EF2A00962DAD /* marc_dorat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF73B1483EF2A00962DAD /* marc_dorat@2x.png */; };
-		08CBF7441483FCF700962DAD /* marc_raig.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7421483FCF700962DAD /* marc_raig.png */; };
-		08CBF7451483FCF700962DAD /* marc_raig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7431483FCF700962DAD /* marc_raig@2x.png */; };
-		08CBF7491483FD0300962DAD /* thumb_marcRaig.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7471483FD0200962DAD /* thumb_marcRaig.png */; };
-		08CBF74A1483FD0300962DAD /* thumb_marcRaig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CBF7481483FD0300962DAD /* thumb_marcRaig@2x.png */; };
 		08EB3D7E1483D90C00C5E272 /* marcBasic_blau.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */; };
 		08EB3D7F1483D90C00C5E272 /* marcBasic_blau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */; };
 		08EB3D831483D9B100C5E272 /* capirote.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D811483D9B100C5E272 /* capirote.png */; };
@@ -123,6 +117,9 @@
 		1F248D751483960D00179D37 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F248D741483960C00179D37 /* Twitter.framework */; };
 		1F248D791483D22B00179D37 /* FaceIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F248D771483D22B00179D37 /* FaceIndicatorLayer.m */; };
 		1F248D7A1483D22B00179D37 /* FaceIndicatorLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F248D781483D22B00179D37 /* FaceIndicatorLayer.xib */; };
+		1F248D941483E8D700179D37 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F248D931483E8D700179D37 /* CoreMotion.framework */; };
+		1F248DA01483F26400179D37 /* marcUI.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F248D9E1483F26200179D37 /* marcUI.png */; };
+		1F248DA11483F26400179D37 /* marcUI@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F248D9F1483F26300179D37 /* marcUI@2x.png */; };
 		1F5029DA146C2CC2006CFFFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029D9146C2CC2006CFFFA /* UIKit.framework */; };
 		1F5029DC146C2CC2006CFFFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DB146C2CC2006CFFFA /* Foundation.framework */; };
 		1F5029DE146C2CC2006CFFFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029DD146C2CC2006CFFFA /* CoreGraphics.framework */; };
@@ -200,8 +197,6 @@
 		0869750114718291009A6441 /* pelo_cola@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pelo_cola@2x.png"; sourceTree = "<group>"; };
 		086975041471829B009A6441 /* thumb_pelo_cola.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_pelo_cola.png; sourceTree = "<group>"; };
 		086975051471829B009A6441 /* thumb_pelo_cola@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_pelo_cola@2x.png"; sourceTree = "<group>"; };
-		0869750814719CBF009A6441 /* marcUI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marcUI.png; sourceTree = "<group>"; };
-		0869750914719CBF009A6441 /* marcUI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marcUI@2x.png"; sourceTree = "<group>"; };
 		0869752D1472E752009A6441 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0869752F1472E756009A6441 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		086975351472ED61009A6441 /* shareSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareSheet.png; sourceTree = "<group>"; };
@@ -273,10 +268,6 @@
 		08CBF72F1483EF2400962DAD /* marc_tigre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marc_tigre@2x.png"; path = "marcs/marc_tigre@2x.png"; sourceTree = "<group>"; };
 		08CBF73A1483EF2A00962DAD /* marc_dorat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marc_dorat.png; path = marcs/marc_dorat.png; sourceTree = "<group>"; };
 		08CBF73B1483EF2A00962DAD /* marc_dorat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marc_dorat@2x.png"; path = "marcs/marc_dorat@2x.png"; sourceTree = "<group>"; };
-		08CBF7421483FCF700962DAD /* marc_raig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marc_raig.png; path = marcs/marc_raig.png; sourceTree = "<group>"; };
-		08CBF7431483FCF700962DAD /* marc_raig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marc_raig@2x.png"; path = "marcs/marc_raig@2x.png"; sourceTree = "<group>"; };
-		08CBF7471483FD0200962DAD /* thumb_marcRaig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thumb_marcRaig.png; path = thumb_marcs/thumb_marcRaig.png; sourceTree = "<group>"; };
-		08CBF7481483FD0300962DAD /* thumb_marcRaig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "thumb_marcRaig@2x.png"; path = "thumb_marcs/thumb_marcRaig@2x.png"; sourceTree = "<group>"; };
 		08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marcBasic_blau.png; path = marcs/marcBasic_blau.png; sourceTree = "<group>"; };
 		08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marcBasic_blau@2x.png"; path = "marcs/marcBasic_blau@2x.png"; sourceTree = "<group>"; };
 		08EB3D811483D9B100C5E272 /* capirote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capirote.png; path = iconos/capirote.png; sourceTree = "<group>"; };
@@ -285,14 +276,17 @@
 		1F248D761483D22B00179D37 /* FaceIndicatorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceIndicatorLayer.h; sourceTree = "<group>"; };
 		1F248D771483D22B00179D37 /* FaceIndicatorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceIndicatorLayer.m; sourceTree = "<group>"; };
 		1F248D781483D22B00179D37 /* FaceIndicatorLayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaceIndicatorLayer.xib; sourceTree = "<group>"; };
-		1F5029D5146C2CC2006CFFFA /* MockMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MockMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F248D931483E8D700179D37 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		1F248D9E1483F26200179D37 /* marcUI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marcUI.png; sourceTree = "<group>"; };
+		1F248D9F1483F26300179D37 /* marcUI@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marcUI@2x.png"; sourceTree = "<group>"; };
+		1F5029D5146C2CC2006CFFFA /* MockMyFace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MockMyFace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F5029D9146C2CC2006CFFFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1F5029DB146C2CC2006CFFFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1F5029DD146C2CC2006CFFFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1F5029E1146C2CC2006CFFFA /* MockMe-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MockMe-Info.plist"; sourceTree = "<group>"; };
+		1F5029E1146C2CC2006CFFFA /* MockMyFace-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MockMyFace-Info.plist"; sourceTree = "<group>"; };
 		1F5029E3146C2CC2006CFFFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1F5029E5146C2CC2006CFFFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1F5029E7146C2CC2006CFFFA /* MockMe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MockMe-Prefix.pch"; sourceTree = "<group>"; };
+		1F5029E7146C2CC2006CFFFA /* MockMyFace-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MockMyFace-Prefix.pch"; sourceTree = "<group>"; };
 		1F5029E8146C2CC2006CFFFA /* FaceMeNowAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceMeNowAppDelegate.h; sourceTree = "<group>"; };
 		1F5029E9146C2CC2006CFFFA /* FaceMeNowAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceMeNowAppDelegate.m; sourceTree = "<group>"; };
 		1F5029EB146C2CC2006CFFFA /* FaceMeNowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceMeNowViewController.h; sourceTree = "<group>"; };
@@ -342,6 +336,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F248D941483E8D700179D37 /* CoreMotion.framework in Frameworks */,
 				1F248D751483960D00179D37 /* Twitter.framework in Frameworks */,
 				1F502A03146C3256006CFFFA /* CoreMedia.framework in Frameworks */,
 				1F502A01146C2D41006CFFFA /* CoreVideo.framework in Frameworks */,
@@ -377,8 +372,6 @@
 		086974FA14718222009A6441 /* marcs */ = {
 			isa = PBXGroup;
 			children = (
-				08CBF7421483FCF700962DAD /* marc_raig.png */,
-				08CBF7431483FCF700962DAD /* marc_raig@2x.png */,
 				08CBF73A1483EF2A00962DAD /* marc_dorat.png */,
 				08CBF73B1483EF2A00962DAD /* marc_dorat@2x.png */,
 				08CBF7261483EF2400962DAD /* marc_lleopard.png */,
@@ -404,8 +397,6 @@
 		086974FB1471822D009A6441 /* thumb_marcs */ = {
 			isa = PBXGroup;
 			children = (
-				08CBF7471483FD0200962DAD /* thumb_marcRaig.png */,
-				08CBF7481483FD0300962DAD /* thumb_marcRaig@2x.png */,
 				08CBF7221483EF1700962DAD /* thumb_marcDorat.png */,
 				08CBF7231483EF1700962DAD /* thumb_marcDorat@2x.png */,
 				08CBF70E1483EF1100962DAD /* thumb_marcLleopard.png */,
@@ -482,6 +473,7 @@
 		1F5029CA146C2CC2006CFFFA = {
 			isa = PBXGroup;
 			children = (
+				1F248D931483E8D700179D37 /* CoreMotion.framework */,
 				08CBF70C1483DFE200962DAD /* SusanWrittingMAYUSC-Regular.ttf */,
 				086975481473F56F009A6441 /* MockMe3-icon114.png */,
 				086975461473F56C009A6441 /* MockMe3-icon57.png */,
@@ -496,7 +488,7 @@
 		1F5029D6146C2CC2006CFFFA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1F5029D5146C2CC2006CFFFA /* MockMe.app */,
+				1F5029D5146C2CC2006CFFFA /* MockMyFace.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -549,10 +541,10 @@
 		1F5029E0146C2CC2006CFFFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1F5029E1146C2CC2006CFFFA /* MockMe-Info.plist */,
+				1F5029E1146C2CC2006CFFFA /* MockMyFace-Info.plist */,
 				1F5029E2146C2CC2006CFFFA /* InfoPlist.strings */,
 				1F5029E5146C2CC2006CFFFA /* main.m */,
-				1F5029E7146C2CC2006CFFFA /* MockMe-Prefix.pch */,
+				1F5029E7146C2CC2006CFFFA /* MockMyFace-Prefix.pch */,
 				1F502A10146C4599006CFFFA /* Categories.plist */,
 			);
 			name = "Supporting Files";
@@ -561,10 +553,10 @@
 		1F502A04146C32A2006CFFFA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1F248D9E1483F26200179D37 /* marcUI.png */,
+				1F248D9F1483F26300179D37 /* marcUI@2x.png */,
 				086975351472ED61009A6441 /* shareSheet.png */,
 				086975361472ED61009A6441 /* shareSheet@2x.png */,
-				0869750814719CBF009A6441 /* marcUI.png */,
-				0869750914719CBF009A6441 /* marcUI@2x.png */,
 				086974FB1471822D009A6441 /* thumb_marcs */,
 				086974FA14718222009A6441 /* marcs */,
 				1F58236C1471634D00604489 /* thumb_boques */,
@@ -672,9 +664,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1F5029D4146C2CC2006CFFFA /* MockMe */ = {
+		1F5029D4146C2CC2006CFFFA /* MockMyFace */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F5029F3146C2CC2006CFFFA /* Build configuration list for PBXNativeTarget "MockMe" */;
+			buildConfigurationList = 1F5029F3146C2CC2006CFFFA /* Build configuration list for PBXNativeTarget "MockMyFace" */;
 			buildPhases = (
 				1F5029D1146C2CC2006CFFFA /* Sources */,
 				1F5029D2146C2CC2006CFFFA /* Frameworks */,
@@ -684,9 +676,9 @@
 			);
 			dependencies = (
 			);
-			name = MockMe;
+			name = MockMyFace;
 			productName = FaceMeNow;
-			productReference = 1F5029D5146C2CC2006CFFFA /* MockMe.app */;
+			productReference = 1F5029D5146C2CC2006CFFFA /* MockMyFace.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -698,7 +690,7 @@
 				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Bazinga Systems";
 			};
-			buildConfigurationList = 1F5029CF146C2CC2006CFFFA /* Build configuration list for PBXProject "MockMe" */;
+			buildConfigurationList = 1F5029CF146C2CC2006CFFFA /* Build configuration list for PBXProject "MockMyFace" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -710,7 +702,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1F5029D4146C2CC2006CFFFA /* MockMe */,
+				1F5029D4146C2CC2006CFFFA /* MockMyFace */,
 			);
 		};
 /* End PBXProject section */
@@ -776,8 +768,6 @@
 				0869750314718291009A6441 /* pelo_cola@2x.png in Resources */,
 				086975061471829B009A6441 /* thumb_pelo_cola.png in Resources */,
 				086975071471829B009A6441 /* thumb_pelo_cola@2x.png in Resources */,
-				0869750A14719CBF009A6441 /* marcUI.png in Resources */,
-				0869750B14719CBF009A6441 /* marcUI@2x.png in Resources */,
 				0869752E1472E752009A6441 /* Default.png in Resources */,
 				086975301472E756009A6441 /* Default@2x.png in Resources */,
 				086975371472ED61009A6441 /* shareSheet.png in Resources */,
@@ -856,10 +846,8 @@
 				08CBF7391483EF2400962DAD /* marc_tigre@2x.png in Resources */,
 				08CBF73C1483EF2A00962DAD /* marc_dorat.png in Resources */,
 				08CBF73D1483EF2A00962DAD /* marc_dorat@2x.png in Resources */,
-				08CBF7441483FCF700962DAD /* marc_raig.png in Resources */,
-				08CBF7451483FCF700962DAD /* marc_raig@2x.png in Resources */,
-				08CBF7491483FD0300962DAD /* thumb_marcRaig.png in Resources */,
-				08CBF74A1483FD0300962DAD /* thumb_marcRaig@2x.png in Resources */,
+				1F248DA01483F26400179D37 /* marcUI.png in Resources */,
+				1F248DA11483F26400179D37 /* marcUI@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,12 +940,12 @@
 		1F5029F4146C2CC2006CFFFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FaceMeNow/MockMe-Prefix.pch";
-				INFOPLIST_FILE = "FaceMeNow/MockMe-Info.plist";
-				PRODUCT_NAME = MockMe;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				GCC_PREFIX_HEADER = "FaceMeNow/MockMyFace-Prefix.pch";
+				INFOPLIST_FILE = "FaceMeNow/MockMyFace-Info.plist";
+				PRODUCT_NAME = MockMyFace;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "806DB5C3-784E-4614-96CA-5D36C7E19379";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -965,10 +953,12 @@
 		1F5029F5146C2CC2006CFFFA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FaceMeNow/MockMe-Prefix.pch";
-				INFOPLIST_FILE = "FaceMeNow/MockMe-Info.plist";
-				PRODUCT_NAME = MockMe;
+				GCC_PREFIX_HEADER = "FaceMeNow/MockMyFace-Prefix.pch";
+				INFOPLIST_FILE = "FaceMeNow/MockMyFace-Info.plist";
+				PRODUCT_NAME = MockMyFace;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E2577C9E-E003-47BA-A4A6-4DEA2F7044C3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -976,7 +966,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1F5029CF146C2CC2006CFFFA /* Build configuration list for PBXProject "MockMe" */ = {
+		1F5029CF146C2CC2006CFFFA /* Build configuration list for PBXProject "MockMyFace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F5029F1146C2CC2006CFFFA /* Debug */,
@@ -985,7 +975,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F5029F3146C2CC2006CFFFA /* Build configuration list for PBXNativeTarget "MockMe" */ = {
+		1F5029F3146C2CC2006CFFFA /* Build configuration list for PBXNativeTarget "MockMyFace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F5029F4146C2CC2006CFFFA /* Debug */,

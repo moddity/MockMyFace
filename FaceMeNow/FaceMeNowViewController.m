@@ -145,13 +145,13 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 @implementation FaceMeNowViewController
 
-@synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, beard, marc, flashView, stillImageOutput, videoDataOutput, previewView, previewLayer, faceIndicatorLayer;
+@synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, beard, marc, flashView, stillImageOutput, videoDataOutput, previewView, previewLayer, faceIndicatorLayer, session;
 
 - (void)setupAVCapture
 {
 	NSError *error = nil;
 	
-	AVCaptureSession *session = [AVCaptureSession new];
+	session = [AVCaptureSession new];
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 	    [session setSessionPreset:AVCaptureSessionPresetHigh];
 	else
@@ -175,8 +175,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     }
     
 	
-    isUsingFrontFacingCamera = NO;
-	if ( [session canAddInput:deviceInput] )
+    if ( [session canAddInput:deviceInput] )
 		[session addInput:deviceInput];
 	
     // Make a still image output
@@ -213,7 +212,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	[rootLayer setMasksToBounds:YES];
     NSLog(@"ROOT LAYER BOUNDS: %@", NSStringFromCGRect([rootLayer bounds]));
 	[previewLayer setFrame:[rootLayer bounds]];
-	[rootLayer addSublayer:previewLayer];
+	[rootLayer insertSublayer:previewLayer atIndex:0];
 	[session startRunning];
     
 
@@ -225,7 +224,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	if (videoDataOutputQueue)
 		dispatch_release(videoDataOutputQueue);
 	
-    //[stillImageOutput removeObserver:self forKeyPath:@"isCapturingStillImage"];
+    [stillImageOutput removeObserver:self forKeyPath:@"capturingStillImage"];
 	
 	[previewLayer removeFromSuperlayer];
 	
@@ -405,7 +404,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 
 -(void) takePhoto {
-
+    
 	// Find out the current orientation and tell the still image output.
 	AVCaptureConnection *stillImageConnection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
 	UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
@@ -419,18 +418,21 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [stillImageOutput setOutputSettings:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:kCMPixelFormat_32BGRA] 
                                                                     forKey:(id)kCVPixelBufferPixelFormatTypeKey]];
 	
-	
 	[stillImageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection
                                                   completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                       if (error) {
                                                           [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
+                                                          NSLog(@"ERROR: %@", error);
                                                       }
                                                       else {
                                                        
+                                                          /*
                                                               // Got an image.
                                                               CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(imageDataSampleBuffer);
                                                               CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, imageDataSampleBuffer, kCMAttachmentMode_ShouldPropagate);
-                                                              CIImage *ciImage = [[CIImage alloc] initWithCVPixelBuffer:pixelBuffer options:(__bridge NSDictionary *)attachments];
+                                                              
+                                                                CIImage *ciImage = [[CIImage alloc] initWithCVPixelBuffer:pixelBuffer options:(__bridge NSDictionary *)attachments];
+                                                          
                                                               if (attachments)
                                                                   CFRelease(attachments);
                                                               
@@ -439,15 +441,13 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                                               if (orientation) {
                                                                   imageOptions = [NSDictionary dictionaryWithObject:orientation forKey:CIDetectorImageOrientation];
                                                               }
-                                                              
+                                                              */
                                                               // when processing an existing frame we want any new frames to be automatically dropped
                                                               // queueing this block to execute on the videoDataOutputQueue serial queue ensures this
                                                               // see the header doc for setSampleBufferDelegate:queue: for more information
-                                                              dispatch_sync(videoDataOutputQueue, ^(void) {
                                                                   
-                                                                  // get the array of CIFeature instances in the given image with a orientation passed in
-                                                                  // the detection will be done based on the orientation but the coordinates in the returned features will
-                                                                  // still be based on those of the image.
+                                                          dispatch_sync(videoDataOutputQueue, ^(void) {
+                                                              
                                                                   CGImageRef srcImage = NULL;
                                                                   OSStatus err = CreateCGImageFromCVPixelBuffer(CMSampleBufferGetImageBuffer(imageDataSampleBuffer), &srcImage);
                                                                   check(!err);
@@ -455,6 +455,22 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                                                    
                                                                   if(isUsingFrontFacingCamera) {
                                                                       srcImage = [self imageFlipedHorizontal: srcImage];
+                                                                  }
+                                                                  
+                                                                  
+                                                                  CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, 
+                                                                                                                              imageDataSampleBuffer, 
+                                                                                                                              kCMAttachmentMode_ShouldPropagate);
+                                                                  //[self writeCGImageToCameraRoll:cgImageResult withMetadata:(__bridge id)attachments];
+                                                                  
+                                                                  NSDictionary *metadata = [[NSDictionary alloc] initWithDictionary:(__bridge NSDictionary*)attachments];
+
+                                                                  
+                                                                  
+                                                                  NSDictionary *imageOptions = nil;
+                                                                  NSNumber *orientation = (__bridge NSNumber*)CMGetAttachment(imageDataSampleBuffer,kCGImagePropertyOrientation, NULL);
+                                                                  if (orientation) {
+                                                                      imageOptions = [NSDictionary dictionaryWithObject:orientation forKey:CIDetectorImageOrientation];
                                                                   }
                                                                   
                                                                   CIImage *img = [[CIImage alloc] initWithCGImage:srcImage options:imageOptions];
@@ -468,36 +484,41 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                                                                                                       withOrientation:curDeviceOrientation 
                                                                                                                           frontFacing:isUsingFrontFacingCamera
                                                                                                                      withSampleBuffer:imageDataSampleBuffer];
-                                                                  /*if (srcImage)
-                                                                      CFRelease(srcImage);*/
-                                                                  
-                                                                  CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, 
-                                                                                                                              imageDataSampleBuffer, 
-                                                                                                                              kCMAttachmentMode_ShouldPropagate);
-                                                                  //[self writeCGImageToCameraRoll:cgImageResult withMetadata:(__bridge id)attachments];
-                                                                                         
-                                                                  NSDictionary *metadata = [[NSDictionary alloc] initWithDictionary:(__bridge NSDictionary*)attachments];
-                                                                  
+                                                                                                                                  
                                                                   [self displayPreviewImage:cgImageResult withMetadata:metadata];
+                                                                  
+                                                                  
+                                                                  /*if (srcImage)
+                                                                    CFRelease(srcImage);*/
+                                                                  
+                                                                  if(cgImageResult)
+                                                                      CFRelease(cgImageResult);
                                                                   
                                                                   if (attachments)
                                                                       CFRelease(attachments);
                                                                   if (cgImageResult)
                                                                       CFRelease(cgImageResult);
+                                                                      
                                                                   
+                                                                 
                                                               });
                                                               
-                                                            
+                                                              
                                                         
                                                       }
                                                   }
 	 ];
+    
+    
+    [stillImageOutput setOutputSettings:nil];
+    
+    
+	
 }
  
 
 -(void) displayPreviewImage:(CGImageRef)previewImage withMetadata: (NSDictionary*) metadata {
     self.previewController = [[ViewAndShareController alloc] initWithNibName:@"ViewAndShareController" bundle:nil];
-    //[self.view addSubview:previewController.view];
     self.previewController.view.frame = self.view.bounds;
     [self addChildViewController:self.previewController];
     [[self view] addSubview:previewController.view];
@@ -506,13 +527,21 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     
     [self.previewController.previewImage setImage:image];
     self.previewController.imageMetatadata = [NSDictionary dictionaryWithDictionary:metadata];
+    
+    //GUARRADA MÁXIMA PQ SINO DONA PROBLEMES DE MEMORIA
+    [NSThread detachNewThreadSelector:@selector(restartVideoCapture) toTarget:self withObject:nil];
 }
 
+-(void) restartVideoCapture {
+    [self teardownAVCapture];
+    [self setupAVCapture];
+    
+    [self setFrontCamera:isUsingFrontFacingCamera];
+}
 
 
 -(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage {
     
-              
     CGImageRef imgRef = frontCamImage;
         
     /*CGFloat width = CGImageGetWidth(imgRef);
@@ -520,11 +549,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     CGFloat width = 480.0;
     CGFloat height = 320.0;
         
-    
     CGAffineTransform transform = CGAffineTransformMake(1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
     CGRect bounds = CGRectMake(0, 0, width, height);
     
-           
     UIGraphicsBeginImageContext(bounds.size);
         
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -908,11 +935,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	[self teardownAVCapture];
 }
 
-// use front/back camera
-- (IBAction)switchCameras:(id)sender
-{
-	AVCaptureDevicePosition desiredPosition;
-	if (isUsingFrontFacingCamera)
+-(void) setFrontCamera:(BOOL)isFront {
+    AVCaptureDevicePosition desiredPosition;
+	if (!isFront)
 		desiredPosition = AVCaptureDevicePositionBack;
 	else
 		desiredPosition = AVCaptureDevicePositionFront;
@@ -929,7 +954,13 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 			break;
 		}
 	}
-	isUsingFrontFacingCamera = !isUsingFrontFacingCamera;
+	isUsingFrontFacingCamera = isFront;
+}
+
+// use front/back camera
+- (IBAction)switchCameras:(id)sender
+{
+    [self setFrontCamera:!isUsingFrontFacingCamera];
 }
 
 - (void)didReceiveMemoryWarning
@@ -944,12 +975,13 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    isUsingFrontFacingCamera = NO;
 	[self setupAVCapture];
     
 	NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
 	faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
-    
-    [self switchCameras:nil];
+
+    [self setFrontCamera:YES];
     
     //itemSelectorViewController = [[ItemSelector alloc] initWithNibName:@"ItemSelector" bundle:nil];
     [itemSelectorViewController.view setFrame:CGRectMake(0, 480-168, 320, 168)];
@@ -967,6 +999,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     [self.view addSubview: self.faceIndicatorLayer.view];
     [self.faceIndicatorLayer displayMessage:NO withText:nil];
     
+  
 }
 
 -(void) itemSelected:(int)kItemType imageName:(NSString *)imgName {
@@ -1034,6 +1067,8 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [self becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -1051,6 +1086,21 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     // Return YES for supported orientations
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+-(void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    
+    if (event.type == UIEventSubtypeMotionShake) 
+    {
+        //Put your code here what you want to do on a shake...
+        [itemSelectorViewController getRandomItems];
+    }   
+    
+}
+
 
 /*
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
