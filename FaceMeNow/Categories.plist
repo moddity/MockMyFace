@@ -168,6 +168,14 @@
 				<key>image</key>
 				<string>marc_lleopard.png</string>
 			</dict>
+            <dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcEstrelles</string>
+				<key>image</key>
+				<string>marc_estrelles.png</string>
+			</dict>
 		</array>
 	</dict>
 </dict>
