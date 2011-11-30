@@ -12,8 +12,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ShareController.h"
 #import <Twitter/Twitter.h>
+#import <MessageUI/MessageUI.h>
 
-@interface ViewAndShareController : UIViewController <ShareControllerDelegate>
+@interface ViewAndShareController : UIViewController <ShareControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *previewImage;
 @property (strong, nonatomic) NSDictionary *imageMetatadata;

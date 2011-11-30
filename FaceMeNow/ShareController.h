@@ -12,7 +12,7 @@
 
 -(void) backFromShare;
 -(void) tweetAction;
-
+-(void) emailAction;
 @end
 
 
@@ -27,5 +27,7 @@
 
 -(IBAction)backButtonAction:(id)sender;
 -(IBAction)tweetButtonAction:(id)sender;
+-(IBAction)emailButtonAction:(id)sender;
+-(IBAction)fbButtonAction:(id)sender;
 
 @end

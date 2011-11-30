@@ -64,4 +64,13 @@
 -(IBAction)tweetButtonAction:(id)sender {
     [delegate tweetAction];
 }
+
+-(IBAction)emailButtonAction:(id)sender {
+    [delegate emailAction];
+}
+
+-(IBAction)fbButtonAction:(id)sender {
+
+}
+
 @end

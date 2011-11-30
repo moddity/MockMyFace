@@ -120,6 +120,7 @@
 		08EB3D7F1483D90C00C5E272 /* marcBasic_blau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */; };
 		08EB3D831483D9B100C5E272 /* capirote.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D811483D9B100C5E272 /* capirote.png */; };
 		08EB3D841483D9B100C5E272 /* capirote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D821483D9B100C5E272 /* capirote@2x.png */; };
+		1F0D36B5148683A00065C353 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0D36B4148683A00065C353 /* MessageUI.framework */; };
 		1F248D751483960D00179D37 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F248D741483960C00179D37 /* Twitter.framework */; };
 		1F248D791483D22B00179D37 /* FaceIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F248D771483D22B00179D37 /* FaceIndicatorLayer.m */; };
 		1F248D7A1483D22B00179D37 /* FaceIndicatorLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F248D781483D22B00179D37 /* FaceIndicatorLayer.xib */; };
@@ -300,6 +301,7 @@
 		08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marcBasic_blau@2x.png"; path = "marcs/marcBasic_blau@2x.png"; sourceTree = "<group>"; };
 		08EB3D811483D9B100C5E272 /* capirote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capirote.png; path = iconos/capirote.png; sourceTree = "<group>"; };
 		08EB3D821483D9B100C5E272 /* capirote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "capirote@2x.png"; path = "iconos/capirote@2x.png"; sourceTree = "<group>"; };
+		1F0D36B4148683A00065C353 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1F248D741483960C00179D37 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		1F248D761483D22B00179D37 /* FaceIndicatorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceIndicatorLayer.h; sourceTree = "<group>"; };
 		1F248D771483D22B00179D37 /* FaceIndicatorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceIndicatorLayer.m; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F0D36B5148683A00065C353 /* MessageUI.framework in Frameworks */,
 				1F248D941483E8D700179D37 /* CoreMotion.framework in Frameworks */,
 				1F248D751483960D00179D37 /* Twitter.framework in Frameworks */,
 				1F502A03146C3256006CFFFA /* CoreMedia.framework in Frameworks */,
@@ -535,6 +538,7 @@
 		1F5029CA146C2CC2006CFFFA = {
 			isa = PBXGroup;
 			children = (
+				1F0D36B4148683A00065C353 /* MessageUI.framework */,
 				1F248D931483E8D700179D37 /* CoreMotion.framework */,
 				08CBF70C1483DFE200962DAD /* SusanWrittingMAYUSC-Regular.ttf */,
 				086975481473F56F009A6441 /* MockMe3-icon114.png */,
@@ -761,7 +765,7 @@
 		1F5029CC146C2CC2006CFFFA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Bazinga Systems";
 			};
 			buildConfigurationList = 1F5029CF146C2CC2006CFFFA /* Build configuration list for PBXProject "MockMyFace" */;
