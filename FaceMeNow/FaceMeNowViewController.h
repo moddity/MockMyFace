@@ -52,6 +52,8 @@
 -(void) removeLayer: (NSString*) layerToClean;
 
 -(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage;
+-(CGImageRef) imageSized: (CGImageRef) backCamImage;
+
 -(void) displayPreviewImage: (CGImageRef) previewImage withMetadata: (NSDictionary*) metadata;
 
 -(void) setFrontCamera: (BOOL) isFront;

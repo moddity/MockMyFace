@@ -92,8 +92,9 @@
         /*NSArray *toRecipients = [NSArray arrayWithObjects:@"fisrtMail@example.com", @"secondMail@example.com", nil];
         [mailer setToRecipients:toRecipients];*/
         
+    
        
-        NSData *imageData = UIImagePNGRepresentation(previewImage.image);
+        NSData *imageData = UIImageJPEGRepresentation(previewImage.image, 1.0);
         [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"mockmyface"]; 
         
         NSString *emailBody = @"Check my funny face!";

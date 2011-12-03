@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344205076.176833"
+         timestampString = "344368241.672347"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "522"
-         endingLineNumber = "522"
+         startingLineNumber = "525"
+         endingLineNumber = "525"
          landmarkName = "-displayPreviewImage:withMetadata:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -65,13 +65,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344205954.996327"
+         timestampString = "344368764.888397"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "935"
-         endingLineNumber = "935"
-         landmarkName = "-dealloc"
-         landmarkType = "5">
+         startingLineNumber = "966"
+         endingLineNumber = "966"
+         landmarkName = "@implementation FaceMeNowViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -85,6 +85,20 @@
          startingLineNumber = "136"
          endingLineNumber = "136"
          landmarkName = "-loadItems:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/FaceMeNowViewController.m"
+         timestampString = "344366329.294548"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "342"
+         endingLineNumber = "342"
+         landmarkName = "-newSquareOverlayedImageForFeatures:inCGImage:withOrientation:frontFacing:withSampleBuffer:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

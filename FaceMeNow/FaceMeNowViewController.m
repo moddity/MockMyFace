@@ -353,7 +353,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                         eyeCenterX-(glassesWidth/2),
                                         glassesWidth, 
                                         glassesWidth);
-        
+            
+            NSLog(@"CGRect GLASSES: %@", NSStringFromCGRect(glassesRect));
+            
             UIImage *sunglassesImage = [sunglasses imageRotatedByDegrees:rotationDegrees];
             CGContextDrawImage(bitmapContext, glassesRect, [sunglassesImage CGImage]);
         }
@@ -455,6 +457,8 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                                                    
                                                                   if(isUsingFrontFacingCamera) {
                                                                       srcImage = [self imageFlipedHorizontal: srcImage];
+                                                                  } else {
+                                                                      srcImage = [self imageSized:srcImage];
                                                                   }
                                                                   
                                                                   
@@ -491,8 +495,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                                                   /*if (srcImage)
                                                                     CFRelease(srcImage);*/
                                                                   
-                                                                  if(cgImageResult)
-                                                                      CFRelease(cgImageResult);
+                                                        
                                                                   
                                                                   if (attachments)
                                                                       CFRelease(attachments);
@@ -563,6 +566,27 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
         
+    return [imageCopy CGImage];
+}
+
+-(CGImageRef) imageSized: (CGImageRef) backCamImage {
+    
+    CGImageRef imgRef = backCamImage;
+    
+    /*CGFloat width = CGImageGetWidth(imgRef);
+     CGFloat height = CGImageGetHeight(imgRef);*/
+    CGFloat width = 480.0;
+    CGFloat height = 320.0;
+    
+    CGRect bounds = CGRectMake(0, 0, width, height);
+    
+    UIGraphicsBeginImageContext(bounds.size);
+    
+    CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef);
+   
+ UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     return [imageCopy CGImage];
 }
 
@@ -665,6 +689,9 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 		[CATransaction commit];
 
         [self.faceIndicatorLayer displayMessage:YES withText:kNoFacesMessage];
+        for(CALayer *layer in sublayers) {
+            [layer removeFromSuperlayer];
+        }
 
 		return; // early bail.
 	} else {
