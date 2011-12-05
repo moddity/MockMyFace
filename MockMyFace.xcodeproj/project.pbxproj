@@ -134,6 +134,10 @@
 		08DB5596148D503000ED41A9 /* antenesEstrella@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5594148D503000ED41A9 /* antenesEstrella@2x.png */; };
 		08DB559A148D504000ED41A9 /* thumb_antenesEstrella.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5598148D504000ED41A9 /* thumb_antenesEstrella.png */; };
 		08DB559B148D504000ED41A9 /* thumb_antenesEstrella@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5599148D504000ED41A9 /* thumb_antenesEstrella@2x.png */; };
+		08DB55A2148D57DE00ED41A9 /* thumb_boca4.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB55A0148D57DE00ED41A9 /* thumb_boca4.png */; };
+		08DB55A3148D57DE00ED41A9 /* thumb_boca4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB55A1148D57DE00ED41A9 /* thumb_boca4@2x.png */; };
+		08DB55A7148D57E900ED41A9 /* boca4.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB55A5148D57E900ED41A9 /* boca4.png */; };
+		08DB55A8148D57E900ED41A9 /* boca4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB55A6148D57E900ED41A9 /* boca4@2x.png */; };
 		08EB3D7E1483D90C00C5E272 /* marcBasic_blau.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */; };
 		08EB3D7F1483D90C00C5E272 /* marcBasic_blau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */; };
 		08EB3D831483D9B100C5E272 /* capirote.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D811483D9B100C5E272 /* capirote.png */; };
@@ -378,6 +382,10 @@
 		08DB5594148D503000ED41A9 /* antenesEstrella@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antenesEstrella@2x.png"; sourceTree = "<group>"; };
 		08DB5598148D504000ED41A9 /* thumb_antenesEstrella.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_antenesEstrella.png; sourceTree = "<group>"; };
 		08DB5599148D504000ED41A9 /* thumb_antenesEstrella@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_antenesEstrella@2x.png"; sourceTree = "<group>"; };
+		08DB55A0148D57DE00ED41A9 /* thumb_boca4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thumb_boca4.png; path = thumb_boques/thumb_boca4.png; sourceTree = "<group>"; };
+		08DB55A1148D57DE00ED41A9 /* thumb_boca4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "thumb_boca4@2x.png"; path = "thumb_boques/thumb_boca4@2x.png"; sourceTree = "<group>"; };
+		08DB55A5148D57E900ED41A9 /* boca4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boca4.png; path = boques/boca4.png; sourceTree = "<group>"; };
+		08DB55A6148D57E900ED41A9 /* boca4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "boca4@2x.png"; path = "boques/boca4@2x.png"; sourceTree = "<group>"; };
 		08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marcBasic_blau.png; path = marcs/marcBasic_blau.png; sourceTree = "<group>"; };
 		08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marcBasic_blau@2x.png"; path = "marcs/marcBasic_blau@2x.png"; sourceTree = "<group>"; };
 		08EB3D811483D9B100C5E272 /* capirote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capirote.png; path = iconos/capirote.png; sourceTree = "<group>"; };
@@ -877,6 +885,8 @@
 		1F58236B1471633D00604489 /* boques */ = {
 			isa = PBXGroup;
 			children = (
+				08DB55A5148D57E900ED41A9 /* boca4.png */,
+				08DB55A6148D57E900ED41A9 /* boca4@2x.png */,
 				1F5823681471624300604489 /* boca1.png */,
 				086974F21471820C009A6441 /* boca2.png */,
 				086974F31471820C009A6441 /* boca2@2x.png */,
@@ -889,6 +899,8 @@
 		1F58236C1471634D00604489 /* thumb_boques */ = {
 			isa = PBXGroup;
 			children = (
+				08DB55A0148D57DE00ED41A9 /* thumb_boca4.png */,
+				08DB55A1148D57DE00ED41A9 /* thumb_boca4@2x.png */,
 				086974EE14718202009A6441 /* thumb_boca3.png */,
 				086974EF14718202009A6441 /* thumb_boca3@2x.png */,
 				1F58236D1471636000604489 /* thumb_boca1.png */,
@@ -1314,6 +1326,10 @@
 				08DB5596148D503000ED41A9 /* antenesEstrella@2x.png in Resources */,
 				08DB559A148D504000ED41A9 /* thumb_antenesEstrella.png in Resources */,
 				08DB559B148D504000ED41A9 /* thumb_antenesEstrella@2x.png in Resources */,
+				08DB55A2148D57DE00ED41A9 /* thumb_boca4.png in Resources */,
+				08DB55A3148D57DE00ED41A9 /* thumb_boca4@2x.png in Resources */,
+				08DB55A7148D57E900ED41A9 /* boca4.png in Resources */,
+				08DB55A8148D57E900ED41A9 /* boca4@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

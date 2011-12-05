@@ -152,6 +152,14 @@
 				<key>image</key>
 				<string>boca3.png</string>
 			</dict>
+            <dict>
+				<key>type</key>
+				<integer>3</integer>
+				<key>name</key>
+				<string>Boca4</string>
+				<key>image</key>
+				<string>boca4.png</string>
+			</dict>
 		</array>
 	</dict>
 	<key>Frames</key>
