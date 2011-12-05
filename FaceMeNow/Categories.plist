@@ -72,6 +72,22 @@
 				<key>image</key>
 				<string>marinero.png</string>
 			</dict>
+            <dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>PapaNoel</string>
+				<key>image</key>
+				<string>papanoel.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>Sailor</string>
+				<key>image</key>
+				<string>graduado.png</string>
+			</dict>
 		</array>
 	</dict>
 	<key>Mouths</key>

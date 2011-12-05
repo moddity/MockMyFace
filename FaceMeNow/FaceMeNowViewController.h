@@ -11,7 +11,7 @@
 #import "ItemSelector.h"
 #import "ViewAndShareController.h"
 #import "FaceIndicatorLayer.h"
-
+#import "AdWhirlDelegateProtocol.h"
 
 #define kSunglassesLayer @"SunglassesLayer"
 #define kHatLayer @"HatLayer"
@@ -19,11 +19,14 @@
 #define kBeardLayer @"BeardLayer"
 
 @class CIDetector;
+@class AdWhirlView;
 
 extern const CGBitmapInfo kDefaultCGBitmapInfo;
 extern const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha;
 
-@interface FaceMeNowViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, ItemSelectorDelegate> {
+//adwihrl key 7e4323992fd8465cbf0138153f04ea52
+
+@interface FaceMeNowViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, ItemSelectorDelegate, AdWhirlDelegate> {
 	
 	dispatch_queue_t videoDataOutputQueue;
 	
@@ -31,6 +34,8 @@ extern const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha;
 	CIDetector *faceDetector;
 	CGFloat beginGestureScale;
 	CGFloat effectiveScale;
+    
+    AdWhirlView *adView;
 }
 
 @property (nonatomic, strong) IBOutlet ItemSelector *itemSelectorViewController;

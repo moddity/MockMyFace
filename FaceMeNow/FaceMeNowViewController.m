@@ -12,7 +12,8 @@
 #import <AssertMacros.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ViewAndShareController.h"
-
+#import "AdWhirlView.h"
+#import "AdWhirlView+.h"
 
 #pragma mark-
 
@@ -169,9 +170,9 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	
 	session = [AVCaptureSession new];
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-	    [session setSessionPreset:AVCaptureSessionPresetHigh];
+	    [session setSessionPreset:AVCaptureSessionPreset640x480];
 	else
-	    [session setSessionPreset:AVCaptureSessionPresetPhoto];
+	    [session setSessionPreset:AVCaptureSessionPreset640x480];
 	
     // Select a video device, make an input
 	AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -244,6 +245,11 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	
 	[previewLayer removeFromSuperlayer];
 	
+    previewLayer = nil;
+    session = nil;
+    previewLayer = nil;
+    videoDataOutput = nil;
+    stillImageOutput = nil;
 }
 
 // perform a flash bulb animation using KVO to monitor the value of the capturingStillImage property of the AVCaptureStillImageOutput class
@@ -475,10 +481,6 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                                                                   CGImageRef srcImage = NULL;
                                                                   OSStatus err = CreateCGImageFromCVPixelBuffer(CMSampleBufferGetImageBuffer(imageDataSampleBuffer), &srcImage);
                                                                   check(!err);
-                                                                  
-                                                                   
-                                                                  
-                                                                  
                                                                   
                                                                   CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, 
                                                                                                                               imageDataSampleBuffer, 
@@ -1151,7 +1153,9 @@ imageOrientation: (UIImageOrientation) orientation
     [self.view addSubview: self.faceIndicatorLayer.view];
     [self.faceIndicatorLayer displayMessage:NO withText:nil];
     
-  
+
+    adView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
+    [self.view addSubview:adView];
 }
 
 -(void) itemSelected:(int)kItemType imageName:(NSString *)imgName {
@@ -1214,6 +1218,7 @@ imageOrientation: (UIImageOrientation) orientation
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+   
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -1253,6 +1258,15 @@ imageOrientation: (UIImageOrientation) orientation
     
 }
 
+///////////// AD WHIRL DELEGATE
+
+-(NSString*) adWhirlApplicationKey {
+    return @"7e4323992fd8465cbf0138153f04ea52";
+}
+
+- (UIViewController *)viewControllerForPresentingModalView {
+    return self;
+}
 
 /*
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
