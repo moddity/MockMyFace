@@ -40,13 +40,13 @@
 				<key>image</key>
 				<string>gafes_rayban.png</string>
 			</dict>
-            <dict>
+			<dict>
 				<key>type</key>
 				<integer>2</integer>
 				<key>name</key>
 				<string>gafesEstrella</string>
 				<key>image</key>
-				<string>gafesEstrella.png</string>
+				<string>gafes_estrella.png</string>
 			</dict>
 		</array>
 	</dict>
@@ -80,7 +80,7 @@
 				<key>image</key>
 				<string>marinero.png</string>
 			</dict>
-            <dict>
+			<dict>
 				<key>type</key>
 				<integer>1</integer>
 				<key>name</key>
@@ -88,7 +88,7 @@
 				<key>image</key>
 				<string>papanoel.png</string>
 			</dict>
-            <dict>
+			<dict>
 				<key>type</key>
 				<integer>1</integer>
 				<key>name</key>
@@ -96,7 +96,7 @@
 				<key>image</key>
 				<string>graduado.png</string>
 			</dict>
-            <dict>
+			<dict>
 				<key>type</key>
 				<integer>1</integer>
 				<key>name</key>
@@ -104,7 +104,7 @@
 				<key>image</key>
 				<string>antenesEstrella.png</string>
 			</dict>
-            <dict>
+			<dict>
 				<key>type</key>
 				<integer>1</integer>
 				<key>name</key>
@@ -112,7 +112,7 @@
 				<key>image</key>
 				<string>renoRojo.png</string>
 			</dict>
-            <dict>
+			<dict>
 				<key>type</key>
 				<integer>1</integer>
 				<key>name</key>
@@ -120,7 +120,6 @@
 				<key>image</key>
 				<string>renoMarron.png</string>
 			</dict>
-
 		</array>
 	</dict>
 	<key>Mouths</key>
@@ -217,7 +216,7 @@
 				<key>image</key>
 				<string>marc_lleopard.png</string>
 			</dict>
-            <dict>
+			<dict>
 				<key>type</key>
 				<integer>4</integer>
 				<key>name</key>
