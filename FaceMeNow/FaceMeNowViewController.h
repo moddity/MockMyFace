@@ -20,6 +20,9 @@
 
 @class CIDetector;
 
+extern const CGBitmapInfo kDefaultCGBitmapInfo;
+extern const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha;
+
 @interface FaceMeNowViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, ItemSelectorDelegate> {
 	
 	dispatch_queue_t videoDataOutputQueue;
@@ -53,6 +56,10 @@
 
 -(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage;
 -(CGImageRef) imageSized: (CGImageRef) backCamImage;
++ (CGImageRef)imageWithImage:(CGImageRef)image 
+              scaledToSize:(CGSize)newSize
+            imageOrientation: (UIImageOrientation) orientation;
+CGContextRef	CreateCGBitmapContextForWidthAndHeight( unsigned int width, unsigned int height, CGColorSpaceRef optionalColorSpace, CGBitmapInfo optionalInfo );
 
 -(void) displayPreviewImage: (CGImageRef) previewImage withMetadata: (NSDictionary*) metadata;
 

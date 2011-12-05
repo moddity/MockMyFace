@@ -538,8 +538,6 @@
 		1F5029CA146C2CC2006CFFFA = {
 			isa = PBXGroup;
 			children = (
-				1F0D36B4148683A00065C353 /* MessageUI.framework */,
-				1F248D931483E8D700179D37 /* CoreMotion.framework */,
 				08CBF70C1483DFE200962DAD /* SusanWrittingMAYUSC-Regular.ttf */,
 				086975481473F56F009A6441 /* MockMe3-icon114.png */,
 				086975461473F56C009A6441 /* MockMe3-icon57.png */,
@@ -562,6 +560,8 @@
 		1F5029D8146C2CC2006CFFFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F0D36B4148683A00065C353 /* MessageUI.framework */,
+				1F248D931483E8D700179D37 /* CoreMotion.framework */,
 				1F248D741483960C00179D37 /* Twitter.framework */,
 				1F502A02146C3256006CFFFA /* CoreMedia.framework */,
 				1F502A00146C2D41006CFFFA /* CoreVideo.framework */,

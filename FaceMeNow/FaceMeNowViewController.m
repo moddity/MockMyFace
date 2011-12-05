@@ -16,6 +16,14 @@
 
 #pragma mark-
 
+
+CGColorSpaceRef	GetDeviceRGBColorSpace() {
+	static CGColorSpaceRef	deviceRGBSpace	= NULL;
+	if( deviceRGBSpace == NULL )
+		deviceRGBSpace	= CGColorSpaceCreateDeviceRGB();
+	return deviceRGBSpace;
+}
+
 // used for KVO observation of the @"capturingStillImage" property to perform flash bulb animation
 static const NSString *AVCaptureStillImageIsCapturingStillImageContext = @"AVCaptureStillImageIsCapturingStillImageContext";
 
@@ -143,7 +151,15 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 - (void)drawFaceBoxesForFeatures:(NSArray *)features forVideoBox:(CGRect)clap orientation:(UIDeviceOrientation)orientation;
 @end
 
+
+
+
 @implementation FaceMeNowViewController
+
+const CGBitmapInfo kDefaultCGBitmapInfo	= (kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host);
+const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Host);
+
+
 
 @synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, beard, marc, flashView, stillImageOutput, videoDataOutput, previewView, previewLayer, faceIndicatorLayer, session;
 
@@ -335,11 +351,17 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 			break; // leave the layer in its last known orientation
 	}
     
+    
+    if([features count] == 0) {
+        NSLog(@"NO FACE FEATURES!");
+    }
 	
 
     // features found by the face detector
 	for (CIFaceFeature *ff in features ) {
 		CGRect faceRect = [ff bounds];
+        
+        NSLog(@"FACE RECT: %@", NSStringFromCGRect(faceRect));
         
         /// SUNGLASSES
         if(self.sunglasses != nil) {
@@ -455,11 +477,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                                                   check(!err);
                                                                   
                                                                    
-                                                                  if(isUsingFrontFacingCamera) {
-                                                                      srcImage = [self imageFlipedHorizontal: srcImage];
-                                                                  } else {
-                                                                      srcImage = [self imageSized:srcImage];
-                                                                  }
+                                                                  
                                                                   
                                                                   
                                                                   CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, 
@@ -477,8 +495,17 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
                                                                       imageOptions = [NSDictionary dictionaryWithObject:orientation forKey:CIDetectorImageOrientation];
                                                                   }
                                                                   
+                                                              
+                                                                    if(isUsingFrontFacingCamera) {
+                                                                        srcImage = [self imageFlipedHorizontal: srcImage];
+                                                              } else {
+                                                                  srcImage = [self imageSized:srcImage];
+                                                              }
+                                                              
+                                                              
+                                                              
                                                                   CIImage *img = [[CIImage alloc] initWithCGImage:srcImage options:imageOptions];
-                                                                  
+                                                            
                                                                   NSArray *features = [faceDetector featuresInImage:img options:imageOptions];
                                                                   
                                                                   
@@ -518,6 +545,8 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     
 	
 }
+
+
  
 
 -(void) displayPreviewImage:(CGImageRef)previewImage withMetadata: (NSDictionary*) metadata {
@@ -569,6 +598,94 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     return [imageCopy CGImage];
 }
 
+
+
+CGContextRef CreateCGBitmapContextForWidthAndHeight( unsigned int width, unsigned int height, 
+													CGColorSpaceRef optionalColorSpace, CGBitmapInfo optionalInfo )
+{
+	CGColorSpaceRef	colorSpace	= (optionalColorSpace == NULL) ? GetDeviceRGBColorSpace() : optionalColorSpace;
+	CGBitmapInfo	alphaInfo	= ( (int32_t)optionalInfo < 0 ) ? kDefaultCGBitmapInfo : optionalInfo;
+	return CGBitmapContextCreate( NULL, width, height, 8, 0, colorSpace, alphaInfo );
+}
+
++ (CGImageRef)imageWithImage:(CGImageRef)image 
+              scaledToSize:(CGSize)newSize
+imageOrientation: (UIImageOrientation) orientation
+{
+
+    CGImageRef newImage = NULL;
+    CGContextRef bmContext = NULL;
+    BOOL  mustTransform = YES;
+    CGAffineTransform  transform = CGAffineTransformIdentity;
+    
+    
+    CGImageRef srcCGImage = CGImageRetain( image );
+    
+    size_t width = newSize.width;
+    size_t height = newSize.height;
+    
+    // These Orientations are rotated 0 or 180 degrees, so they retain the width/height of the image
+ /*   if ( (orientation == UIImageOrientationUp) || (orientation == UIImageOrientationDown) || (orientation == UIImageOrientationUpMirrored) || (orientation == UIImageOrientationDownMirrored)  )
+    {	
+        bmContext = CreateCGBitmapContextForWidthAndHeight( width, height, NULL, kDefaultCGBitmapInfo );
+    }
+    else	// The other Orientations are rotated ±90 degrees, so they swap width & height.
+    {	
+        bmContext = CreateCGBitmapContextForWidthAndHeight( height, width, NULL, kDefaultCGBitmapInfo );
+    }*/
+    
+    bmContext = CreateCGBitmapContextForWidthAndHeight( width, height, NULL, kDefaultCGBitmapInfo );
+    
+    CGContextSetBlendMode( bmContext, kCGBlendModeCopy );	// we just want to copy the data
+    
+    switch(orientation)
+    {
+        case UIImageOrientationDown:		// 0th row is at the bottom, and 0th column is on the right - Rotate 180 degrees
+            transform = CGAffineTransformMake(-1.0, 0.0, 0.0, -1.0, width, height);
+            break;
+            
+        case UIImageOrientationLeft:		// 0th row is on the left, and 0th column is the bottom - Rotate -90 degrees
+            transform = CGAffineTransformMake(0.0, 1.0, -1.0, 0.0, height, 0.0);
+            break;
+            
+        case UIImageOrientationRight:		// 0th row is on the right, and 0th column is the top - Rotate 90 degrees
+            transform = CGAffineTransformMake(0.0, -1.0, 1.0, 0.0, 0.0, width);
+            break;
+            
+        case UIImageOrientationUpMirrored:	// 0th row is at the top, and 0th column is on the right - Flip Horizontal
+            transform = CGAffineTransformMake(-1.0, 0.0, 0.0, 1.0, width, 0.0);
+            break;
+            
+        case UIImageOrientationDownMirrored:	// 0th row is at the bottom, and 0th column is on the left - Flip Vertical
+            transform = CGAffineTransformMake(1.0, 0.0, 0, -1.0, 0.0, height);
+            break;
+            
+        case UIImageOrientationLeftMirrored:	// 0th row is on the left, and 0th column is the top - Rotate -90 degrees and Flip Vertical
+            transform = CGAffineTransformMake(0.0, -1.0, -1.0, 0.0, height, width);
+            break;
+            
+        case UIImageOrientationRightMirrored:	// 0th row is on the right, and 0th column is the bottom - Rotate 90 degrees and Flip Vertical
+            transform = CGAffineTransformMake(0.0, 1.0, 1.0, 0.0, 0.0, 0.0);
+            break;
+            
+        default:
+            mustTransform = NO;
+            break;
+    }
+    
+    if ( mustTransform )	
+        CGContextConcatCTM( bmContext, transform );
+    
+    CGContextDrawImage( bmContext, CGRectMake(0.0, 0.0, width, height), srcCGImage );
+    CGImageRelease( srcCGImage );
+    newImage = CGBitmapContextCreateImage( bmContext );
+    CFRelease( bmContext );
+    
+    return newImage;
+    
+    
+}
+
 -(CGImageRef) imageSized: (CGImageRef) backCamImage {
     
     CGImageRef imgRef = backCamImage;
@@ -578,17 +695,21 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     CGFloat width = 480.0;
     CGFloat height = 320.0;
     
+    CGAffineTransform transform = CGAffineTransformMake(1.0, 0.0, 0, -1.0, 0.0, height);
     CGRect bounds = CGRectMake(0, 0, width, height);
     
     UIGraphicsBeginImageContext(bounds.size);
     
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextConcatCTM(context, transform);
+    
     CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef);
-   
- UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    return [imageCopy CGImage];
-}
+    return [imageCopy CGImage];}
 
 
 // turn on/off face detection
@@ -690,7 +811,11 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
         [self.faceIndicatorLayer displayMessage:YES withText:kNoFacesMessage];
         for(CALayer *layer in sublayers) {
-            [layer removeFromSuperlayer];
+            if([[layer name] isEqualToString:kHatLayer] ||
+               [[layer name] isEqualToString:kSunglassesLayer] ||
+               [[layer name] isEqualToString:kMouthLayer]                
+               )
+                [layer removeFromSuperlayer];
         }
 
 		return; // early bail.
