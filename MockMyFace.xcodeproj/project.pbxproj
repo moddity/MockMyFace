@@ -130,6 +130,10 @@
 		08DB5586148D463100ED41A9 /* thumb_gafes_estrella@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5584148D463100ED41A9 /* thumb_gafes_estrella@2x.png */; };
 		08DB5589148D464200ED41A9 /* gafes_estrella.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5587148D464200ED41A9 /* gafes_estrella.png */; };
 		08DB558A148D464200ED41A9 /* gafes_estrella@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5588148D464200ED41A9 /* gafes_estrella@2x.png */; };
+		08DB5595148D503000ED41A9 /* antenesEstrella.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5593148D503000ED41A9 /* antenesEstrella.png */; };
+		08DB5596148D503000ED41A9 /* antenesEstrella@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5594148D503000ED41A9 /* antenesEstrella@2x.png */; };
+		08DB559A148D504000ED41A9 /* thumb_antenesEstrella.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5598148D504000ED41A9 /* thumb_antenesEstrella.png */; };
+		08DB559B148D504000ED41A9 /* thumb_antenesEstrella@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB5599148D504000ED41A9 /* thumb_antenesEstrella@2x.png */; };
 		08EB3D7E1483D90C00C5E272 /* marcBasic_blau.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */; };
 		08EB3D7F1483D90C00C5E272 /* marcBasic_blau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */; };
 		08EB3D831483D9B100C5E272 /* capirote.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D811483D9B100C5E272 /* capirote.png */; };
@@ -370,6 +374,10 @@
 		08DB5584148D463100ED41A9 /* thumb_gafes_estrella@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "thumb_gafes_estrella@2x.png"; path = "thumb_gafes/thumb_gafes_estrella@2x.png"; sourceTree = "<group>"; };
 		08DB5587148D464200ED41A9 /* gafes_estrella.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gafes_estrella.png; path = gafes/gafes_estrella.png; sourceTree = "<group>"; };
 		08DB5588148D464200ED41A9 /* gafes_estrella@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gafes_estrella@2x.png"; path = "gafes/gafes_estrella@2x.png"; sourceTree = "<group>"; };
+		08DB5593148D503000ED41A9 /* antenesEstrella.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = antenesEstrella.png; sourceTree = "<group>"; };
+		08DB5594148D503000ED41A9 /* antenesEstrella@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antenesEstrella@2x.png"; sourceTree = "<group>"; };
+		08DB5598148D504000ED41A9 /* thumb_antenesEstrella.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_antenesEstrella.png; sourceTree = "<group>"; };
+		08DB5599148D504000ED41A9 /* thumb_antenesEstrella@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_antenesEstrella@2x.png"; sourceTree = "<group>"; };
 		08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marcBasic_blau.png; path = marcs/marcBasic_blau.png; sourceTree = "<group>"; };
 		08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marcBasic_blau@2x.png"; path = "marcs/marcBasic_blau@2x.png"; sourceTree = "<group>"; };
 		08EB3D811483D9B100C5E272 /* capirote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capirote.png; path = iconos/capirote.png; sourceTree = "<group>"; };
@@ -893,6 +901,8 @@
 		1F8650D8146DA8160010A2FE /* sombreros */ = {
 			isa = PBXGroup;
 			children = (
+				08DB5593148D503000ED41A9 /* antenesEstrella.png */,
+				08DB5594148D503000ED41A9 /* antenesEstrella@2x.png */,
 				08DB557B148D462100ED41A9 /* renoMarron.png */,
 				08DB557C148D462100ED41A9 /* renoMarron@2x.png */,
 				08DB557D148D462100ED41A9 /* renoRojo.png */,
@@ -916,6 +926,8 @@
 		1F8650E6146DA85E0010A2FE /* thumb_sombreros */ = {
 			isa = PBXGroup;
 			children = (
+				08DB5598148D504000ED41A9 /* thumb_antenesEstrella.png */,
+				08DB5599148D504000ED41A9 /* thumb_antenesEstrella@2x.png */,
 				08DB556E148D460C00ED41A9 /* thumb_papanoel.png */,
 				08DB556F148D460C00ED41A9 /* thumb_papanoel@2x.png */,
 				08DB5570148D460C00ED41A9 /* thumb_renoMarron.png */,
@@ -1298,6 +1310,10 @@
 				08DB5586148D463100ED41A9 /* thumb_gafes_estrella@2x.png in Resources */,
 				08DB5589148D464200ED41A9 /* gafes_estrella.png in Resources */,
 				08DB558A148D464200ED41A9 /* gafes_estrella@2x.png in Resources */,
+				08DB5595148D503000ED41A9 /* antenesEstrella.png in Resources */,
+				08DB5596148D503000ED41A9 /* antenesEstrella@2x.png in Resources */,
+				08DB559A148D504000ED41A9 /* thumb_antenesEstrella.png in Resources */,
+				08DB559B148D504000ED41A9 /* thumb_antenesEstrella@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,8 +1436,8 @@
 		1F5029F4146C2CC2006CFFFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FaceMeNow/MockMyFace-Prefix.pch";
 				INFOPLIST_FILE = "FaceMeNow/MockMyFace-Info.plist";
@@ -1430,8 +1446,8 @@
 					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
 				);
 				PRODUCT_NAME = MockMyFace;
-				PROVISIONING_PROFILE = "806DB5C3-784E-4614-96CA-5D36C7E19379";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "806DB5C3-784E-4614-96CA-5D36C7E19379";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

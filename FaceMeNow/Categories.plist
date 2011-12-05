@@ -40,6 +40,14 @@
 				<key>image</key>
 				<string>gafes_rayban.png</string>
 			</dict>
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafesEstrella</string>
+				<key>image</key>
+				<string>gafesEstrella.png</string>
+			</dict>
 		</array>
 	</dict>
 	<key>Hats</key>
@@ -84,10 +92,35 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>name</key>
-				<string>Sailor</string>
+				<string>Graduado</string>
 				<key>image</key>
 				<string>graduado.png</string>
 			</dict>
+            <dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>Stars</string>
+				<key>image</key>
+				<string>antenesEstrella.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>RenoRojo</string>
+				<key>image</key>
+				<string>renoRojo.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>RenoMarron</string>
+				<key>image</key>
+				<string>renoMarron.png</string>
+			</dict>
+
 		</array>
 	</dict>
 	<key>Mouths</key>
