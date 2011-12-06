@@ -10,10 +10,14 @@
 
 #import "FaceMeNowViewController.h"
 
+
+
 @implementation FaceMeNowAppDelegate
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
+
+@synthesize facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -65,5 +69,51 @@
      See also applicationDidEnterBackground:.
      */
 }
+
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.facebook handleOpenURL:url];
+}
+
+// Add for Facebook SSO support (4.2+)
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.facebook handleOpenURL:url];
+}
+
+-(void) postImageToFacebook:(UIImage *)image {
+    self.facebook = [[Facebook alloc] initWithAppId:@"123366887777694" andDelegate:self];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([defaults objectForKey:@"FBAccessTokenKey"]
+       && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    
+    if(![facebook isSessionValid]) {
+        // Permissions
+        NSArray *permissions =  [NSArray arrayWithObjects:@"publish_stream",@"read_stream",@"offline_access",nil];     
+
+        [self.facebook authorize:permissions];
+    }
+    
+    /*
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   [UIImage imageWithCGImage:[image CGImage] scale:1.0 orientation:UIImageOrientationRightMirrored], @"picture",
+                                   nil];*/
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"Image by MockMyFace iOS App", @"message", imageData, @"source", nil];
+    
+    [self.facebook requestWithGraphPath:@"me/photos"
+                                    andParams:params
+                                andHttpMethod:@"POST"
+                                  andDelegate:self];
+}
+
+
+
+
 
 @end

@@ -9,12 +9,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/ItemSelector.m"
-         timestampString = "344359299.599094"
+         timestampString = "344891533.564414"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "117"
-         endingLineNumber = "117"
-         landmarkName = "-loadItems:"
+         startingLineNumber = "118"
+         endingLineNumber = "118"
+         landmarkName = "-toogleItemsUP:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -37,12 +37,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344205076.176833"
+         timestampString = "344890505.048189"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "290"
-         endingLineNumber = "290"
-         landmarkName = "-newSquareOverlayedImageForFeatures:inCGImage:withOrientation:frontFacing:withSampleBuffer:"
+         startingLineNumber = "287"
+         endingLineNumber = "287"
+         landmarkName = "-observeValueForKeyPath:ofObject:change:context:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -51,27 +51,27 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344368241.672347"
+         timestampString = "344890505.048189"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "525"
          endingLineNumber = "525"
-         landmarkName = "-displayPreviewImage:withMetadata:"
+         landmarkName = "-takePhoto"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344368764.888397"
+         timestampString = "344890505.048189"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "966"
-         endingLineNumber = "966"
-         landmarkName = "@implementation FaceMeNowViewController"
-         landmarkType = "3">
+         startingLineNumber = "891"
+         endingLineNumber = "891"
+         landmarkName = "-drawFaceBoxesForFeatures:forVideoBox:orientation:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -79,12 +79,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/ItemSelector.m"
-         timestampString = "344359299.599094"
+         timestampString = "344892364.592799"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
-         landmarkName = "-loadItems:"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
+         landmarkName = "-toogleItemsUP:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -93,12 +93,96 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "FaceMeNow/FaceMeNowViewController.m"
-         timestampString = "344366329.294548"
+         timestampString = "344890505.048189"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "342"
-         endingLineNumber = "342"
+         startingLineNumber = "339"
+         endingLineNumber = "339"
          landmarkName = "-newSquareOverlayedImageForFeatures:inCGImage:withOrientation:frontFacing:withSampleBuffer:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/FaceMeNowAppDelegate.m"
+         timestampString = "344881303.252957"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "-postImageToFacebook:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/FaceMeNowAppDelegate.m"
+         timestampString = "344881303.252957"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
+         landmarkName = "-application:openURL:sourceApplication:annotation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/FaceMeNowAppDelegate.m"
+         timestampString = "344881289.27235"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "-application:handleOpenURL:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/ViewAndShareController.m"
+         timestampString = "344889634.524558"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "289"
+         endingLineNumber = "289"
+         landmarkName = "-sendImageToFacebook"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/ViewAndShareController.m"
+         timestampString = "344889634.524558"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "277"
+         endingLineNumber = "277"
+         landmarkName = "-request:didReceiveResponse:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "FaceMeNow/ItemSelector.m"
+         timestampString = "344891664.188923"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
+         landmarkName = "-selectItem:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

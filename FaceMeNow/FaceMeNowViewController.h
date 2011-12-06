@@ -12,6 +12,7 @@
 #import "ViewAndShareController.h"
 #import "FaceIndicatorLayer.h"
 #import "AdWhirlDelegateProtocol.h"
+#import "MBProgressHUD.h"
 
 #define kSunglassesLayer @"SunglassesLayer"
 #define kHatLayer @"HatLayer"
@@ -61,10 +62,6 @@ extern const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha;
 
 -(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage;
 -(CGImageRef) imageSized: (CGImageRef) backCamImage;
-+ (CGImageRef)imageWithImage:(CGImageRef)image 
-              scaledToSize:(CGSize)newSize
-            imageOrientation: (UIImageOrientation) orientation;
-CGContextRef	CreateCGBitmapContextForWidthAndHeight( unsigned int width, unsigned int height, CGColorSpaceRef optionalColorSpace, CGBitmapInfo optionalInfo );
 
 -(void) displayPreviewImage: (CGImageRef) previewImage withMetadata: (NSDictionary*) metadata;
 
@@ -74,5 +71,7 @@ CGContextRef	CreateCGBitmapContextForWidthAndHeight( unsigned int width, unsigne
 
 // find where the video box is positioned within the preview layer based on the video size and gravity
 + (CGRect)videoPreviewBoxForGravity:(NSString *)gravity frameSize:(CGSize)frameSize apertureSize:(CGSize)apertureSize;
+
+-(void) requestNewAD;
 
 @end

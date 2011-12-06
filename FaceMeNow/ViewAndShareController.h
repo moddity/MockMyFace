@@ -13,12 +13,16 @@
 #import "ShareController.h"
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
+#import "FBConnect.h"
+#import "FBRequest.h"
 
-@interface ViewAndShareController : UIViewController <ShareControllerDelegate, MFMailComposeViewControllerDelegate>
+
+@interface ViewAndShareController : UIViewController <ShareControllerDelegate, MFMailComposeViewControllerDelegate,FBSessionDelegate, FBRequestDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *previewImage;
 @property (strong, nonatomic) NSDictionary *imageMetatadata;
 @property (strong, nonatomic) ShareController *shareController;
+
 
 
 -(IBAction) close: (id) sender;
@@ -26,5 +30,7 @@
 -(IBAction) saveToCameraRoll:(id)sender;
 
 - (BOOL)writeCGImageToCameraRoll:(CGImageRef)cgImage withMetadata:(NSDictionary *)metadata;
+
+-(void) sendImageToFacebook;
 
 @end

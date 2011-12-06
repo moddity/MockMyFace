@@ -13,6 +13,7 @@
 -(void) backFromShare;
 -(void) tweetAction;
 -(void) emailAction;
+-(void) fbAction;
 @end
 
 
@@ -23,6 +24,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *tweetButton;
 @property (strong, nonatomic) IBOutlet UIButton *facebookButton;
 @property (weak, nonatomic) id<ShareControllerDelegate> delegate;
+@property (strong, nonatomic) IBOutlet UIView *backgroundView;
+@property (strong, nonatomic) IBOutlet UIImageView *sheetBackground;
 
 
 -(IBAction)backButtonAction:(id)sender;

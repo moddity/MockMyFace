@@ -14,12 +14,14 @@
 @synthesize tweetButton;
 @synthesize facebookButton;
 @synthesize delegate;
+@synthesize backgroundView;
+@synthesize sheetBackground;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+       
     }
     return self;
 }
@@ -38,6 +40,26 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    backgroundView.alpha = 0.0;
+   
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    backgroundView.alpha = 0.0;
+    
+    sheetBackground.frame = CGRectMake(0, -218, 320, 218);
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        backgroundView.alpha = 0.5;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+           sheetBackground.frame = CGRectMake(0, 0, 320, 218);
+        }];
+    }];
+    
+    
 }
 
 - (void)viewDidUnload
@@ -46,6 +68,8 @@
     [self setMailButton:nil];
     [self setTweetButton:nil];
     [self setFacebookButton:nil];
+    [self setBackgroundView:nil];
+    [self setSheetBackground:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -58,7 +82,14 @@
 }
 
 -(IBAction)backButtonAction:(id)sender {
-    [delegate backFromShare];
+    [UIView animateWithDuration:0.5 animations:^{
+        sheetBackground.frame = CGRectMake(0, -218, 320, 218);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 animations:^{
+             backgroundView.alpha = 0.0;
+             [delegate backFromShare];
+        }];
+    }];
 }
 
 -(IBAction)tweetButtonAction:(id)sender {
@@ -70,7 +101,7 @@
 }
 
 -(IBAction)fbButtonAction:(id)sender {
-
+    [delegate fbAction];
 }
 
 @end

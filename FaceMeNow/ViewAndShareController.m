@@ -7,7 +7,8 @@
 //
 
 #import "ViewAndShareController.h"
-
+#import "FaceMeNowAppDelegate.h"
+#import "MBProgressHUD.h"
 
 @implementation ViewAndShareController
 @synthesize previewImage, imageMetatadata, shareController;
@@ -51,7 +52,15 @@
 }
 
 -(IBAction)close:(id)sender {
-    [[self view] removeFromSuperview];
+    
+    [UIView transitionWithView:[self.view superview] duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromBottom
+                    animations:^ {  [[self view] removeFromSuperview]; }
+                    completion:^(BOOL finished) {
+                        
+                    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RequestNewAD" object:nil];
+    //[[self view] removeFromSuperview];
 }
 
 -(IBAction)openShareView:(id)sender {
@@ -66,6 +75,8 @@
 }
 
 -(void) tweetAction {
+    
+    
     TWTweetComposeViewController *tweetSheet = [[TWTweetComposeViewController alloc] init];
     
     [tweetSheet setInitialText:@"Look at my funny face! #mockmyface"];
@@ -75,8 +86,13 @@
     tweetSheet.completionHandler = ^(TWTweetComposeViewControllerResult result) {
         [self dismissModalViewControllerAnimated:YES];
     };
+    
+    //[MBProgressHUD hideHUDForView:self.view animated:YES];
+    
     [self presentModalViewController:tweetSheet animated:YES];
 }
+
+
 
 -(void) emailAction {
     
@@ -141,7 +157,18 @@
 
 
 -(IBAction)saveToCameraRoll:(id)sender {
-    [self writeCGImageToCameraRoll:[previewImage.image CGImage] withMetadata:imageMetatadata];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Save image";
+    NSString *alertTxt = @"";
+    if([self writeCGImageToCameraRoll:[previewImage.image CGImage] withMetadata:imageMetatadata])
+        alertTxt = @"Image saved to camera roll";
+    else
+        alertTxt = @"Error saving image";
+
+    [hud hide:YES];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save image" message:alertTxt delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    [alert show];
 }
 // utility routine used after taking a still image to write the resulting image to the camera roll
 - (BOOL)writeCGImageToCameraRoll:(CGImageRef)cgImage withMetadata:(NSDictionary *)metadata
@@ -201,5 +228,78 @@
     return success;
 }
 
+-(void) fbAction {
+    
+    
+    
+    FaceMeNowAppDelegate *appDelegate = (FaceMeNowAppDelegate*)[[UIApplication sharedApplication] delegate];
+  
+    appDelegate.facebook = [[Facebook alloc] initWithAppId:@"123366887777694" andDelegate:self];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([defaults objectForKey:@"FBAccessTokenKey"]
+       && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    
+    if(![appDelegate.facebook isSessionValid]) {
+        // Permissions
+        NSArray *permissions =  [NSArray arrayWithObjects:@"publish_stream",@"read_stream",@"offline_access",nil];
+        [appDelegate.facebook authorize:permissions];
+    } else {
+        [self sendImageToFacebook];
+    }
+    
+   
+    
+    
+}
+
+-(void) fbDidLogin {
+    FaceMeNowAppDelegate *appDelegate = (FaceMeNowAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[appDelegate.facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[appDelegate.facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+    
+    NSLog(@"FACEBOOK LOGIN OK");
+    
+    [self sendImageToFacebook];
+}
+
+-(void) fbDidNotLogin:(BOOL)cancelled {
+    NSLog(@"LOGIN CANCELLED");
+}
+
+-(void) request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self.shareController backButtonAction:nil];
+}
+
+-(void) request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"ERROR ON REQUEST: %@", [error localizedDescription]);
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error uploading photo to Facebook" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alertView show];
+}
+
+-(void) sendImageToFacebook {
+    FaceMeNowAppDelegate *appDelegate = (FaceMeNowAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Uploading image to Facebook"];
+    
+    NSData *imageData = UIImageJPEGRepresentation(previewImage.image, 1.0);
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"Image by MockMyFace iOS App", @"message", imageData, @"source", nil];
+    
+    [appDelegate.facebook requestWithGraphPath:@"me/photos"
+                                     andParams:params
+                                 andHttpMethod:@"POST"
+                                   andDelegate:self];
+}
 
 @end

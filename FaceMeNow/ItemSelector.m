@@ -109,21 +109,23 @@
     [delegate itemSelected: itemType imageName: [itemDict objectForKey:@"image"]];
     selectedCategoryIndex = -1;
     [self toogleItemsUP:sender];
+    [self animateButton:nil];
 }
 
 -(IBAction) toogleItemsUP:(id) sender {
     
     UIButton *origin = (UIButton*) sender;
-    if (selectedCategoryIndex != -1) {
+    if (selectedCategoryIndex != -1 || buttonSelected == nil) {
         [self animateButton:origin];
-    }
+    } 
+    
    if(!itemsUP) {
        //Load buttons
        
        selectedCategoryIndex = origin.tag;
        
        [self loadItems:[itemsArray objectAtIndex:selectedCategoryIndex]];
-       
+       origin.enabled = NO;
        [UIView animateWithDuration:0.3
                         animations:^{ 
                             itemScroll.center = CGPointMake(itemScroll.center.x, itemScroll.center.y-ITEMS_OFFSET);
@@ -131,6 +133,7 @@
                          } 
                          completion:^(BOOL finished){
                             itemsUP = YES;
+                             origin.enabled = YES;
                          }];
        
     } else {
@@ -143,6 +146,7 @@
             return;
         }
         
+        origin.enabled = NO;
         [UIView animateWithDuration:0.3
                          animations:^{ 
                              itemScroll.center = CGPointMake(itemScroll.center.x, itemScroll.center.y+ITEMS_OFFSET);
@@ -151,23 +155,22 @@
                          } 
                          completion:^(BOOL finished){
                              itemsUP = NO;
+                             origin.enabled = YES;
                          }];
-        buttonSelected = nil;
+        //buttonSelected = nil;
         
     }
 }
 
 -(void) animateButton:(UIButton *)newButton {
     
-    if(buttonSelected != nil) {
+    if(buttonSelected != nil && newButton != buttonSelected) {
         [UIView animateWithDuration:0.2 animations:^{
             buttonSelected.frame = CGRectInset(buttonSelected.frame, ITEM_WIDTH-CATEGORY_WIDTH, ITEM_WIDTH-CATEGORY_WIDTH);
-        } completion:^(BOOL finished) {
-        
         }];
     }
     
-    if(newButton != buttonSelected) {
+    if(newButton != buttonSelected && newButton != nil) {
         [UIView animateWithDuration:0.2 animations:^{
             newButton.frame = CGRectInset(newButton.frame, CATEGORY_WIDTH-ITEM_WIDTH, CATEGORY_WIDTH-ITEM_WIDTH);
         }];

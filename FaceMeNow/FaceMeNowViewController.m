@@ -18,12 +18,7 @@
 #pragma mark-
 
 
-CGColorSpaceRef	GetDeviceRGBColorSpace() {
-	static CGColorSpaceRef	deviceRGBSpace	= NULL;
-	if( deviceRGBSpace == NULL )
-		deviceRGBSpace	= CGColorSpaceCreateDeviceRGB();
-	return deviceRGBSpace;
-}
+
 
 // used for KVO observation of the @"capturingStillImage" property to perform flash bulb animation
 static const NSString *AVCaptureStillImageIsCapturingStillImageContext = @"AVCaptureStillImageIsCapturingStillImageContext";
@@ -271,20 +266,22 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 							 animations:^{
 								 [flashView setAlpha:1.f];
 							 }
+             completion:^(BOOL finished) {
+                 [UIView animateWithDuration:.4f
+                                  animations:^{
+                                      [flashView setAlpha:0.f];
+                                  }
+                                  completion:^(BOOL finished){
+                                      [flashView removeFromSuperview];
+                                      
+                                      flashView = nil;
+                                  }
+                  ];
+
+             }
 			 ];
 		}
-		else {
-			[UIView animateWithDuration:.4f
-							 animations:^{
-								 [flashView setAlpha:0.f];
-							 }
-							 completion:^(BOOL finished){
-								 [flashView removeFromSuperview];
-								
-								 flashView = nil;
-							 }
-			 ];
-		}
+		
 	}
      
 }
@@ -435,6 +432,8 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 
 -(void) takePhoto {
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
 	// Find out the current orientation and tell the still image output.
 	AVCaptureConnection *stillImageConnection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
 	UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
@@ -485,7 +484,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                                                                   CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, 
                                                                                                                               imageDataSampleBuffer, 
                                                                                                                               kCMAttachmentMode_ShouldPropagate);
-                                                                  //[self writeCGImageToCameraRoll:cgImageResult withMetadata:(__bridge id)attachments];
+                                                               
                                                                   
                                                                   NSDictionary *metadata = [[NSDictionary alloc] initWithDictionary:(__bridge NSDictionary*)attachments];
 
@@ -493,6 +492,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                                                                   
                                                                   NSDictionary *imageOptions = nil;
                                                                   NSNumber *orientation = (__bridge NSNumber*)CMGetAttachment(imageDataSampleBuffer,kCGImagePropertyOrientation, NULL);
+                                                                  
                                                                   if (orientation) {
                                                                       imageOptions = [NSDictionary dictionaryWithObject:orientation forKey:CIDetectorImageOrientation];
                                                                   }
@@ -512,7 +512,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                                                                   
                                                                   
                                                                   
-                                                                  CGImageRef cgImageResult = [self newSquareOverlayedImageForFeatures:features 
+                                                                CGImageRef cgImageResult = [self newSquareOverlayedImageForFeatures:features 
                                                                                                                             inCGImage:srcImage 
                                                                                                                       withOrientation:curDeviceOrientation 
                                                                                                                           frontFacing:isUsingFrontFacingCamera
@@ -552,16 +552,28 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
  
 
 -(void) displayPreviewImage:(CGImageRef)previewImage withMetadata: (NSDictionary*) metadata {
+    
+    
     self.previewController = [[ViewAndShareController alloc] initWithNibName:@"ViewAndShareController" bundle:nil];
     self.previewController.view.frame = self.view.bounds;
     [self addChildViewController:self.previewController];
-    [[self view] addSubview:previewController.view];
+    //[[self view] addSubview:previewController.view];
+    
+    [UIView transitionWithView:self.view duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromBottom
+                    animations:^ {  [[self view] addSubview:previewController.view]; }
+                    completion:^(BOOL finished) {
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    }];
+    
     
     UIImage *image = [[UIImage alloc] initWithCGImage:previewImage scale:1.0 orientation:UIImageOrientationRight];
     
     [self.previewController.previewImage setImage:image];
     self.previewController.imageMetatadata = [NSDictionary dictionaryWithDictionary:metadata];
     
+    
+    [adView removeFromSuperview];
     //GUARRADA MÁXIMA PQ SINO DONA PROBLEMES DE MEMORIA
     [NSThread detachNewThreadSelector:@selector(restartVideoCapture) toTarget:self withObject:nil];
 }
@@ -601,93 +613,6 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 }
 
 
-
-CGContextRef CreateCGBitmapContextForWidthAndHeight( unsigned int width, unsigned int height, 
-													CGColorSpaceRef optionalColorSpace, CGBitmapInfo optionalInfo )
-{
-	CGColorSpaceRef	colorSpace	= (optionalColorSpace == NULL) ? GetDeviceRGBColorSpace() : optionalColorSpace;
-	CGBitmapInfo	alphaInfo	= ( (int32_t)optionalInfo < 0 ) ? kDefaultCGBitmapInfo : optionalInfo;
-	return CGBitmapContextCreate( NULL, width, height, 8, 0, colorSpace, alphaInfo );
-}
-
-+ (CGImageRef)imageWithImage:(CGImageRef)image 
-              scaledToSize:(CGSize)newSize
-imageOrientation: (UIImageOrientation) orientation
-{
-
-    CGImageRef newImage = NULL;
-    CGContextRef bmContext = NULL;
-    BOOL  mustTransform = YES;
-    CGAffineTransform  transform = CGAffineTransformIdentity;
-    
-    
-    CGImageRef srcCGImage = CGImageRetain( image );
-    
-    size_t width = newSize.width;
-    size_t height = newSize.height;
-    
-    // These Orientations are rotated 0 or 180 degrees, so they retain the width/height of the image
- /*   if ( (orientation == UIImageOrientationUp) || (orientation == UIImageOrientationDown) || (orientation == UIImageOrientationUpMirrored) || (orientation == UIImageOrientationDownMirrored)  )
-    {	
-        bmContext = CreateCGBitmapContextForWidthAndHeight( width, height, NULL, kDefaultCGBitmapInfo );
-    }
-    else	// The other Orientations are rotated ±90 degrees, so they swap width & height.
-    {	
-        bmContext = CreateCGBitmapContextForWidthAndHeight( height, width, NULL, kDefaultCGBitmapInfo );
-    }*/
-    
-    bmContext = CreateCGBitmapContextForWidthAndHeight( width, height, NULL, kDefaultCGBitmapInfo );
-    
-    CGContextSetBlendMode( bmContext, kCGBlendModeCopy );	// we just want to copy the data
-    
-    switch(orientation)
-    {
-        case UIImageOrientationDown:		// 0th row is at the bottom, and 0th column is on the right - Rotate 180 degrees
-            transform = CGAffineTransformMake(-1.0, 0.0, 0.0, -1.0, width, height);
-            break;
-            
-        case UIImageOrientationLeft:		// 0th row is on the left, and 0th column is the bottom - Rotate -90 degrees
-            transform = CGAffineTransformMake(0.0, 1.0, -1.0, 0.0, height, 0.0);
-            break;
-            
-        case UIImageOrientationRight:		// 0th row is on the right, and 0th column is the top - Rotate 90 degrees
-            transform = CGAffineTransformMake(0.0, -1.0, 1.0, 0.0, 0.0, width);
-            break;
-            
-        case UIImageOrientationUpMirrored:	// 0th row is at the top, and 0th column is on the right - Flip Horizontal
-            transform = CGAffineTransformMake(-1.0, 0.0, 0.0, 1.0, width, 0.0);
-            break;
-            
-        case UIImageOrientationDownMirrored:	// 0th row is at the bottom, and 0th column is on the left - Flip Vertical
-            transform = CGAffineTransformMake(1.0, 0.0, 0, -1.0, 0.0, height);
-            break;
-            
-        case UIImageOrientationLeftMirrored:	// 0th row is on the left, and 0th column is the top - Rotate -90 degrees and Flip Vertical
-            transform = CGAffineTransformMake(0.0, -1.0, -1.0, 0.0, height, width);
-            break;
-            
-        case UIImageOrientationRightMirrored:	// 0th row is on the right, and 0th column is the bottom - Rotate 90 degrees and Flip Vertical
-            transform = CGAffineTransformMake(0.0, 1.0, 1.0, 0.0, 0.0, 0.0);
-            break;
-            
-        default:
-            mustTransform = NO;
-            break;
-    }
-    
-    if ( mustTransform )	
-        CGContextConcatCTM( bmContext, transform );
-    
-    CGContextDrawImage( bmContext, CGRectMake(0.0, 0.0, width, height), srcCGImage );
-    CGImageRelease( srcCGImage );
-    newImage = CGBitmapContextCreateImage( bmContext );
-    CFRelease( bmContext );
-    
-    return newImage;
-    
-    
-}
-
 -(CGImageRef) imageSized: (CGImageRef) backCamImage {
     
     CGImageRef imgRef = backCamImage;
@@ -699,6 +624,8 @@ imageOrientation: (UIImageOrientation) orientation
     
     CGAffineTransform transform = CGAffineTransformMake(1.0, 0.0, 0, -1.0, 0.0, height);
     CGRect bounds = CGRectMake(0, 0, width, height);
+    
+
     
     UIGraphicsBeginImageContext(bounds.size);
     
@@ -1111,6 +1038,15 @@ imageOrientation: (UIImageOrientation) orientation
 	isUsingFrontFacingCamera = isFront;
 }
 
+-(void) requestNewAD {
+    if(adView != nil) {
+        [adView removeFromSuperview];
+        adView = nil;
+    }
+    adView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
+    [self.view addSubview:adView];
+}
+
 // use front/back camera
 - (IBAction)switchCameras:(id)sender
 {
@@ -1154,8 +1090,26 @@ imageOrientation: (UIImageOrientation) orientation
     [self.faceIndicatorLayer displayMessage:NO withText:nil];
     
 
-    adView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
-    [self.view addSubview:adView];
+    [self requestNewAD];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestNewAD) name:@"RequestNewAD" object:nil];
+}
+
+- (void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView {
+    [UIView beginAnimations:@"AdWhirlDelegate.adWhirlDidReceiveAd:"
+                    context:nil];
+    
+    [UIView setAnimationDuration:0.7];
+    
+    CGSize adSize = [adView actualAdSize];
+    CGRect newFrame = adView.frame;
+    
+    newFrame.size = adSize;
+    newFrame.origin.x = (self.view.bounds.size.width - adSize.width)/ 2;
+    
+    adView.frame = newFrame;
+    
+    [UIView commitAnimations];
 }
 
 -(void) itemSelected:(int)kItemType imageName:(NSString *)imgName {
@@ -1218,7 +1172,7 @@ imageOrientation: (UIImageOrientation) orientation
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-   
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
