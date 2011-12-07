@@ -200,6 +200,38 @@
 				<key>image</key>
 				<string>boca5.png</string>
 			</dict>
+            <dict>
+				<key>type</key>
+				<integer>3</integer>
+				<key>name</key>
+				<string>bigoteChivo</string>
+				<key>image</key>
+				<string>bigoteChivo.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>3</integer>
+				<key>name</key>
+				<string>bigoteMariachi</string>
+				<key>image</key>
+				<string>bigoteMariachi.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>3</integer>
+				<key>name</key>
+				<string>bigoteEnroscat</string>
+				<key>image</key>
+				<string>bigoteEnroscat.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>3</integer>
+				<key>name</key>
+				<string>bigotillo</string>
+				<key>image</key>
+				<string>bigotillo.png</string>
+			</dict>
 		</array>
 	</dict>
 	<key>Frames</key>
