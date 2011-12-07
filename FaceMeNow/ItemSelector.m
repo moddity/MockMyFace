@@ -58,14 +58,33 @@
         [itemsButtons removeAllObjects];
     }
     
+    for(UIView *v in [itemScroll subviews]) {
+        if(v.tag == kBackViewTAG)
+            [v removeFromSuperview];
+    }
     
     float itemX = 10;
     
     for(NSDictionary *itemDict in items) {
         
+        CGRect itemFrame = CGRectMake(itemX, 10, ITEM_WIDTH, ITEM_WIDTH);
+        
+        UIView *backView = [[UIView alloc] initWithFrame:itemFrame];
+        backView.tag = kBackViewTAG;
+        backView.backgroundColor = [UIColor whiteColor];
+        backView.layer.masksToBounds = NO;
+        backView.layer.cornerRadius = 8; // if you like rounded corners
+        backView.layer.shadowOffset = CGSizeMake(5, -5);
+        backView.layer.shadowRadius = 5;
+        backView.layer.shadowOpacity = 0.5;
+        [itemScroll addSubview:backView];
+        
         UIButton *itemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [itemButton setFrame:CGRectMake(itemX, 10, ITEM_WIDTH, ITEM_WIDTH)];
-        [itemButton setImage:[UIImage imageNamed:[itemDict objectForKey:@"image"]] forState:UIControlStateNormal];
+        [itemButton setFrame:itemFrame];
+        
+        NSString *thumbName = [NSString stringWithFormat:@"thumb_%@", [itemDict objectForKey:@"image"]];
+        
+        [itemButton setImage:[UIImage imageNamed:thumbName] forState:UIControlStateNormal];
         [itemButton setTag:[items indexOfObject:itemDict]];
         
         

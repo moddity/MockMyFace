@@ -27,7 +27,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.bazingasystems.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.bazingasystems.mockmyface</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -50,6 +50,7 @@
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
+		<string>front-facing-camera</string>
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarHidden</key>

@@ -43,7 +43,7 @@ extern const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha;
 @property (nonatomic, strong) ViewAndShareController *previewController;
 @property (nonatomic, strong) FaceIndicatorLayer *faceIndicatorLayer;
 
-@property (nonatomic, strong) UIView *flashView;
+//@property (nonatomic, strong) UIView *flashView;
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
 @property (nonatomic, strong) AVCaptureVideoDataOutput *videoDataOutput;

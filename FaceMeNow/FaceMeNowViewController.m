@@ -157,17 +157,18 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 
 
 
-@synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, beard, marc, flashView, stillImageOutput, videoDataOutput, previewView, previewLayer, faceIndicatorLayer, session;
+@synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, beard, marc, stillImageOutput, videoDataOutput, previewView, previewLayer, faceIndicatorLayer, session;
 
 - (void)setupAVCapture
 {
 	NSError *error = nil;
 	
 	session = [AVCaptureSession new];
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    [session setSessionPreset:AVCaptureSessionPreset640x480];
+	/*if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 	    [session setSessionPreset:AVCaptureSessionPreset640x480];
 	else
-	    [session setSessionPreset:AVCaptureSessionPreset640x480];
+	    [session setSessionPreset:AVCaptureSessionPreset640x480];*/
 	
     // Select a video device, make an input
 	AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -193,7 +194,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     // Make a still image output
 	stillImageOutput = [AVCaptureStillImageOutput new];
     
-	[stillImageOutput addObserver:self forKeyPath:@"capturingStillImage" options:NSKeyValueObservingOptionNew context:(__bridge void *)AVCaptureStillImageIsCapturingStillImageContext];
+	//[stillImageOutput addObserver:self forKeyPath:@"capturingStillImage" options:NSKeyValueObservingOptionNew context:(__bridge void *)AVCaptureStillImageIsCapturingStillImageContext];
 	if ( [session canAddOutput:stillImageOutput] )
 		[session addOutput:stillImageOutput];
 	
@@ -227,7 +228,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	[rootLayer insertSublayer:previewLayer atIndex:0];
 	[session startRunning];
     
-
+    
 }
 
 // clean up capture setup
@@ -236,54 +237,16 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	if (videoDataOutputQueue)
 		dispatch_release(videoDataOutputQueue);
 	
-    [stillImageOutput removeObserver:self forKeyPath:@"capturingStillImage"];
+    //[stillImageOutput removeObserver:self forKeyPath:@"capturingStillImage"];
 	
 	[previewLayer removeFromSuperlayer];
 	
     previewLayer = nil;
     session = nil;
+    videoDataOutputQueue = nil;
     previewLayer = nil;
     videoDataOutput = nil;
     stillImageOutput = nil;
-}
-
-// perform a flash bulb animation using KVO to monitor the value of the capturingStillImage property of the AVCaptureStillImageOutput class
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-
-	
-    if ( context == (__bridge void *)AVCaptureStillImageIsCapturingStillImageContext ) {
-		BOOL isCapturingStillImage = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-		
-		if ( isCapturingStillImage ) {
-			// do flash bulb like animation
-			flashView = [[UIView alloc] initWithFrame:[previewView frame]];
-			[flashView setBackgroundColor:[UIColor whiteColor]];
-			[flashView setAlpha:0.f];
-			[[[self view] window] addSubview:flashView];
-			
-			[UIView animateWithDuration:.4f
-							 animations:^{
-								 [flashView setAlpha:1.f];
-							 }
-             completion:^(BOOL finished) {
-                 [UIView animateWithDuration:.4f
-                                  animations:^{
-                                      [flashView setAlpha:0.f];
-                                  }
-                                  completion:^(BOOL finished){
-                                      [flashView removeFromSuperview];
-                                      
-                                      flashView = nil;
-                                  }
-                  ];
-
-             }
-			 ];
-		}
-		
-	}
-     
 }
 
 // utility routing used during image capture to set up capture orientation
@@ -357,6 +320,8 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     
     if([features count] == 0) {
         NSLog(@"NO FACE FEATURES!");
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No faces detected!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alertView show];
     }
 	
 
@@ -432,7 +397,9 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 
 -(void) takePhoto {
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelFont:[UIFont fontWithName:@"SusanWrittingMAYUSC-Regular" size:15.0]];
+    [hud setLabelText:@"Processing image"];
     
 	// Find out the current orientation and tell the still image output.
 	AVCaptureConnection *stillImageConnection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
@@ -1096,6 +1063,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 }
 
 - (void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView {
+    NSLog(@"AD RECEIVED");
     [UIView beginAnimations:@"AdWhirlDelegate.adWhirlDidReceiveAd:"
                     context:nil];
     
@@ -1110,6 +1078,10 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     adView.frame = newFrame;
     
     [UIView commitAnimations];
+}
+
+-(void) adWhirlDidFailToReceiveAd:(AdWhirlView *)adWhirlView usingBackup:(BOOL)yesOrNo {
+    NSLog(@"FAILED TO RECEIVE AN AD");
 }
 
 -(void) itemSelected:(int)kItemType imageName:(NSString *)imgName {

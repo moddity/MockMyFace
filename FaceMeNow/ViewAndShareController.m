@@ -289,6 +289,7 @@
     FaceMeNowAppDelegate *appDelegate = (FaceMeNowAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelFont:[UIFont fontWithName:@"SusanWrittingMAYUSC-Regular" size:15.0]];
     [hud setLabelText:@"Uploading image to Facebook"];
     
     NSData *imageData = UIImageJPEGRepresentation(previewImage.image, 1.0);
