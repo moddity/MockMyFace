@@ -152,6 +152,14 @@
 				<key>image</key>
 				<string>renoMarron.png</string>
 			</dict>
+			<dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>Embut</string>
+				<key>image</key>
+				<string>embut.png</string>
+			</dict>
 		</array>
 	</dict>
 	<key>Mouths</key>
