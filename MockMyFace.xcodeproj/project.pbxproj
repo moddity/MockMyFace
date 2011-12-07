@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0832BFF4148F819A007CA062 /* thumb_graduado.png in Resources */ = {isa = PBXBuildFile; fileRef = 0832BFF2148F819A007CA062 /* thumb_graduado.png */; };
+		0832BFF5148F819A007CA062 /* thumb_graduado@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0832BFF3148F819A007CA062 /* thumb_graduado@2x.png */; };
 		086974C81471815C009A6441 /* gafes_3D.png in Resources */ = {isa = PBXBuildFile; fileRef = 086974C01471815B009A6441 /* gafes_3D.png */; };
 		086974C91471815C009A6441 /* gafes_3D@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 086974C11471815B009A6441 /* gafes_3D@2x.png */; };
 		086974CA1471815C009A6441 /* gafes_corazon.png in Resources */ = {isa = PBXBuildFile; fileRef = 086974C21471815B009A6441 /* gafes_corazon.png */; };
@@ -138,6 +140,8 @@
 		08DB55A3148D57DE00ED41A9 /* thumb_boca4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB55A1148D57DE00ED41A9 /* thumb_boca4@2x.png */; };
 		08DB55A7148D57E900ED41A9 /* boca4.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB55A5148D57E900ED41A9 /* boca4.png */; };
 		08DB55A8148D57E900ED41A9 /* boca4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB55A6148D57E900ED41A9 /* boca4@2x.png */; };
+		08DB55B4148F7EF400ED41A9 /* thumb_vikingo.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB55B2148F7EF400ED41A9 /* thumb_vikingo.png */; };
+		08DB55B5148F7EF400ED41A9 /* thumb_vikingo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08DB55B3148F7EF400ED41A9 /* thumb_vikingo@2x.png */; };
 		08EB3D7E1483D90C00C5E272 /* marcBasic_blau.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */; };
 		08EB3D7F1483D90C00C5E272 /* marcBasic_blau@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */; };
 		08EB3D831483D9B100C5E272 /* capirote.png in Resources */ = {isa = PBXBuildFile; fileRef = 08EB3D811483D9B100C5E272 /* capirote.png */; };
@@ -201,8 +205,6 @@
 		1F8650EE146DA85E0010A2FE /* thumb_capitan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F8650E8146DA85E0010A2FE /* thumb_capitan@2x.png */; };
 		1F8650EF146DA85E0010A2FE /* thumb_marinero.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F8650E9146DA85E0010A2FE /* thumb_marinero.png */; };
 		1F8650F0146DA85E0010A2FE /* thumb_marinero@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F8650EA146DA85E0010A2FE /* thumb_marinero@2x.png */; };
-		1F8650F1146DA85E0010A2FE /* thumb_vickingo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F8650EB146DA85E0010A2FE /* thumb_vickingo.png */; };
-		1F8650F2146DA85E0010A2FE /* thumb_vickingo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F8650EC146DA85E0010A2FE /* thumb_vickingo@2x.png */; };
 		1FC8A2C2148E3477001E115F /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC8A2A7148E3476001E115F /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1FC8A2C3148E3477001E115F /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1FC8A2AA148E3476001E115F /* FBDialog.bundle */; };
 		1FC8A2C4148E3477001E115F /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC8A2AC148E3476001E115F /* FBDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -268,6 +270,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0832BFF2148F819A007CA062 /* thumb_graduado.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_graduado.png; sourceTree = "<group>"; };
+		0832BFF3148F819A007CA062 /* thumb_graduado@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_graduado@2x.png"; sourceTree = "<group>"; };
 		086974C01471815B009A6441 /* gafes_3D.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gafes_3D.png; path = gafes/gafes_3D.png; sourceTree = "<group>"; };
 		086974C11471815B009A6441 /* gafes_3D@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gafes_3D@2x.png"; path = "gafes/gafes_3D@2x.png"; sourceTree = "<group>"; };
 		086974C21471815B009A6441 /* gafes_corazon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gafes_corazon.png; path = gafes/gafes_corazon.png; sourceTree = "<group>"; };
@@ -399,6 +403,8 @@
 		08DB55A1148D57DE00ED41A9 /* thumb_boca4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "thumb_boca4@2x.png"; path = "thumb_boques/thumb_boca4@2x.png"; sourceTree = "<group>"; };
 		08DB55A5148D57E900ED41A9 /* boca4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boca4.png; path = boques/boca4.png; sourceTree = "<group>"; };
 		08DB55A6148D57E900ED41A9 /* boca4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "boca4@2x.png"; path = "boques/boca4@2x.png"; sourceTree = "<group>"; };
+		08DB55B2148F7EF400ED41A9 /* thumb_vikingo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_vikingo.png; sourceTree = "<group>"; };
+		08DB55B3148F7EF400ED41A9 /* thumb_vikingo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_vikingo@2x.png"; sourceTree = "<group>"; };
 		08EB3D7C1483D90C00C5E272 /* marcBasic_blau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marcBasic_blau.png; path = marcs/marcBasic_blau.png; sourceTree = "<group>"; };
 		08EB3D7D1483D90C00C5E272 /* marcBasic_blau@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marcBasic_blau@2x.png"; path = "marcs/marcBasic_blau@2x.png"; sourceTree = "<group>"; };
 		08EB3D811483D9B100C5E272 /* capirote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capirote.png; path = iconos/capirote.png; sourceTree = "<group>"; };
@@ -469,8 +475,6 @@
 		1F8650E8146DA85E0010A2FE /* thumb_capitan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_capitan@2x.png"; sourceTree = "<group>"; };
 		1F8650E9146DA85E0010A2FE /* thumb_marinero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_marinero.png; sourceTree = "<group>"; };
 		1F8650EA146DA85E0010A2FE /* thumb_marinero@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_marinero@2x.png"; sourceTree = "<group>"; };
-		1F8650EB146DA85E0010A2FE /* thumb_vickingo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_vickingo.png; sourceTree = "<group>"; };
-		1F8650EC146DA85E0010A2FE /* thumb_vickingo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_vickingo@2x.png"; sourceTree = "<group>"; };
 		1FC8A2A6148E3476001E115F /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		1FC8A2A7148E3476001E115F /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
 		1FC8A2A8148E3476001E115F /* facebook_ios_sdk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = facebook_ios_sdk_Prefix.pch; sourceTree = "<group>"; };
@@ -977,6 +981,10 @@
 		1F8650E6146DA85E0010A2FE /* thumb_sombreros */ = {
 			isa = PBXGroup;
 			children = (
+				0832BFF2148F819A007CA062 /* thumb_graduado.png */,
+				0832BFF3148F819A007CA062 /* thumb_graduado@2x.png */,
+				08DB55B2148F7EF400ED41A9 /* thumb_vikingo.png */,
+				08DB55B3148F7EF400ED41A9 /* thumb_vikingo@2x.png */,
 				08DB5598148D504000ED41A9 /* thumb_antenesEstrella.png */,
 				08DB5599148D504000ED41A9 /* thumb_antenesEstrella@2x.png */,
 				08DB556E148D460C00ED41A9 /* thumb_papanoel.png */,
@@ -991,8 +999,6 @@
 				1F8650E8146DA85E0010A2FE /* thumb_capitan@2x.png */,
 				1F8650E9146DA85E0010A2FE /* thumb_marinero.png */,
 				1F8650EA146DA85E0010A2FE /* thumb_marinero@2x.png */,
-				1F8650EB146DA85E0010A2FE /* thumb_vickingo.png */,
-				1F8650EC146DA85E0010A2FE /* thumb_vickingo@2x.png */,
 			);
 			path = thumb_sombreros;
 			sourceTree = "<group>";
@@ -1261,8 +1267,6 @@
 				1F8650EE146DA85E0010A2FE /* thumb_capitan@2x.png in Resources */,
 				1F8650EF146DA85E0010A2FE /* thumb_marinero.png in Resources */,
 				1F8650F0146DA85E0010A2FE /* thumb_marinero@2x.png in Resources */,
-				1F8650F1146DA85E0010A2FE /* thumb_vickingo.png in Resources */,
-				1F8650F2146DA85E0010A2FE /* thumb_vickingo@2x.png in Resources */,
 				1F5823691471624300604489 /* boca1.png in Resources */,
 				1F58236E1471636000604489 /* thumb_boca1.png in Resources */,
 				1F5823701471636800604489 /* boques.png in Resources */,
@@ -1432,6 +1436,10 @@
 				08DB55A8148D57E900ED41A9 /* boca4@2x.png in Resources */,
 				1FC8A2C3148E3477001E115F /* FBDialog.bundle in Resources */,
 				1FC8A304148E8739001E115F /* README.mdown in Resources */,
+				08DB55B4148F7EF400ED41A9 /* thumb_vikingo.png in Resources */,
+				08DB55B5148F7EF400ED41A9 /* thumb_vikingo@2x.png in Resources */,
+				0832BFF4148F819A007CA062 /* thumb_graduado.png in Resources */,
+				0832BFF5148F819A007CA062 /* thumb_graduado@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1565,8 +1573,8 @@
 		1F5029F4146C2CC2006CFFFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FaceMeNow/MockMyFace-Prefix.pch";
 				INFOPLIST_FILE = "FaceMeNow/MockMyFace-Info.plist";
@@ -1575,8 +1583,8 @@
 					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
 				);
 				PRODUCT_NAME = MockMyFace;
-				PROVISIONING_PROFILE = "806DB5C3-784E-4614-96CA-5D36C7E19379";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "806DB5C3-784E-4614-96CA-5D36C7E19379";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1584,7 +1592,7 @@
 		1F5029F5146C2CC2006CFFFA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FaceMeNow/MockMyFace-Prefix.pch";
@@ -1594,7 +1602,7 @@
 					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
 				);
 				PRODUCT_NAME = MockMyFace;
-				PROVISIONING_PROFILE = "806DB5C3-784E-4614-96CA-5D36C7E19379";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "806DB5C3-784E-4614-96CA-5D36C7E19379";
 				WRAPPER_EXTENSION = app;
 			};
