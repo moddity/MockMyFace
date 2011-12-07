@@ -48,6 +48,38 @@
 				<key>image</key>
 				<string>gafes_estrella.png</string>
 			</dict>
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafesMargarites</string>
+				<key>image</key>
+				<string>gafes_margarites.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafesAntifaz</string>
+				<key>image</key>
+				<string>gafes_antifaz.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafesPeace</string>
+				<key>image</key>
+				<string>gafes_peace.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafesMonoculo</string>
+				<key>image</key>
+				<string>gafes_monoculo.png</string>
+			</dict>
 		</array>
 	</dict>
 	<key>Hats</key>
@@ -158,7 +190,15 @@
 				<key>name</key>
 				<string>Boca4</string>
 				<key>image</key>
-				<string>boca4a.png</string>
+				<string>boca4.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>3</integer>
+				<key>name</key>
+				<string>Boca5</string>
+				<key>image</key>
+				<string>boca5.png</string>
 			</dict>
 		</array>
 	</dict>
@@ -231,6 +271,14 @@
 				<string>MarcEstrelles</string>
 				<key>image</key>
 				<string>marc_estrelles.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcCorporatiu</string>
+				<key>image</key>
+				<string>marc_corporatiu.png</string>
 			</dict>
 		</array>
 	</dict>

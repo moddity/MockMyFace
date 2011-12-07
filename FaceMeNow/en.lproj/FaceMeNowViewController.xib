@@ -79,7 +79,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">marcBasic_blau.png</string>
+							<string key="NSResourceName">marc_corporatiu.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="798578305">
@@ -300,15 +300,10 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="catScroll">UIScrollView</string>
 						<string key="itemScroll">UIScrollView</string>
 						<string key="slideBackground">UIImageView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="catScroll">
-							<string key="name">catScroll</string>
-							<string key="candidateClassName">UIScrollView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="itemScroll">
 							<string key="name">itemScroll</string>
 							<string key="candidateClassName">UIScrollView</string>
@@ -330,7 +325,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="marcBasic_blau.png">{320, 480}</string>
+			<string key="marc_corporatiu.png">{320, 480}</string>
 			<string key="volteoCam.png">{71, 30}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
