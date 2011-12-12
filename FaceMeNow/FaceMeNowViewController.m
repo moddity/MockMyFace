@@ -362,7 +362,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
         
         if(self.mouth != nil) {
             float mouthSize = faceRect.size.width / 2;
-            CGRect mouthRect = CGRectMake(ff.mouthPosition.x-(mouthSize/2), ff.mouthPosition.y-(mouthSize/2), mouthSize, mouthSize);
+            CGRect mouthRect = CGRectMake((ff.mouthPosition.x-(mouthSize/2))+10, ff.mouthPosition.y-(mouthSize/2), mouthSize, mouthSize);
             
             UIImage *mouthImage = [mouth imageRotatedByDegrees:rotationDegrees];
             CGContextDrawImage(bitmapContext, mouthRect, [mouthImage CGImage]);
@@ -730,8 +730,11 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
                                                                  frameSize:parentFrameSize 
                                                               apertureSize:clap.size];
-	
-	for ( CIFaceFeature *ff in features ) {
+	//Disabled suport for multifaces
+	//for ( CIFaceFeature *ff in features ) {
+        
+    CIFaceFeature *ff = [features objectAtIndex:0];
+    
 		// find the correct position for the square layer within the previewLayer
 		// the feature box originates in the bottom left of the video frame.
 		// (Bottom right if mirroring is turned on)
@@ -752,7 +755,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
         
         float mouthSize = faceRect.size.width / 2;
         
-        CGRect mouthRect = CGRectMake(ff.mouthPosition.y-(mouthSize/2), ff.mouthPosition.x-(mouthSize/2), mouthSize, mouthSize);
+        CGRect mouthRect = CGRectMake((ff.mouthPosition.y-(mouthSize/2)), (ff.mouthPosition.x-(mouthSize/2))+10, mouthSize, mouthSize);
         CGRect leftEyeRect = CGRectMake(ff.leftEyePosition.y-50, ff.leftEyePosition.x-50, 100, 100);
         CGRect rightEyeRect = CGRectMake(ff.rightEyePosition.y-50, ff.rightEyePosition.x-50, 100, 100);
         
@@ -888,16 +891,24 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
         /*
 		switch (orientation) {
 			case UIDeviceOrientationPortrait:
-				[featureLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(0.))];
+				[hatLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(0.))];
+                [sunglassesLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(0.))];
+                [mouthLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(0.))];
 				break;
 			case UIDeviceOrientationPortraitUpsideDown:
-				[featureLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(180.))];
+				[hatLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(180.))];
+                [sunglassesLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(180.))];
+                [mouthLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(180.))];
 				break;
 			case UIDeviceOrientationLandscapeLeft:
-				[featureLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(90.))];
+				[hatLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(90.))];
+                [sunglassesLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(90.))];
+                [mouthLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(90.))];
 				break;
 			case UIDeviceOrientationLandscapeRight:
-				[featureLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(-90.))];
+				[hatLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(-90.))];
+                [sunglassesLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(-90.))];
+                [mouthLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(-90.))];
 				break;
 			case UIDeviceOrientationFaceUp:
 			case UIDeviceOrientationFaceDown:
@@ -905,8 +916,10 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 				break; // leave the layer in its last known orientation
 		}
          */
+         
 		currentFeature++;
-	}
+	
+    //} //end of for face features
 	
 	[CATransaction commit];
 }
@@ -1132,6 +1145,8 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     self.sunglasses = nil;
     self.hat = nil;
     self.mouth = nil;
+    
+    [marc setImage:[UIImage imageNamed:@"marc_corporatiu.png"]];
 }
 
 - (void)viewDidUnload

@@ -248,6 +248,14 @@
 		<string>block_marcs</string>
 		<key>items</key>
 		<array>
+            <dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcCorporatiu</string>
+				<key>image</key>
+				<string>marc_corporatiu.png</string>
+			</dict>
 			<dict>
 				<key>type</key>
 				<integer>4</integer>
@@ -304,22 +312,14 @@
 				<key>image</key>
 				<string>marc_lleopard.png</string>
 			</dict>
-			<dict>
+			<!--<dict>
 				<key>type</key>
 				<integer>4</integer>
 				<key>name</key>
 				<string>MarcEstrelles</string>
 				<key>image</key>
 				<string>marc_estrelles.png</string>
-			</dict>
-            <dict>
-				<key>type</key>
-				<integer>4</integer>
-				<key>name</key>
-				<string>MarcCorporatiu</string>
-				<key>image</key>
-				<string>marc_corporatiu.png</string>
-			</dict>
+			</dict>-->
 		</array>
 	</dict>
 </dict>

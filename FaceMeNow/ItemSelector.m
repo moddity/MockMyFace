@@ -77,6 +77,7 @@
         backView.layer.shadowOffset = CGSizeMake(5, -5);
         backView.layer.shadowRadius = 5;
         backView.layer.shadowOpacity = 0.5;
+        
         [itemScroll addSubview:backView];
         
         UIButton *itemButton = [UIButton buttonWithType:UIButtonTypeCustom];
