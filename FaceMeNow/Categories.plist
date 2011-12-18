@@ -79,6 +79,62 @@
 				<string>gafesMonoculo</string>
 				<key>image</key>
 				<string>gafes_monoculo.png</string>
+			</dict> 
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>Indio</string>
+				<key>image</key>
+				<string>indio.png</string>
+			</dict> 
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>Ulleres</string>
+				<key>image</key>
+				<string>gafes_ulleres.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafes2012</string>
+				<key>image</key>
+				<string>2012.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>gafesBartolo</string>
+				<key>image</key>
+				<string>gafes_bartolo.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>nasTosino</string>
+				<key>image</key>
+				<string>nas_tosino.png</string>
+			</dict> 
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>nasGat</string>
+				<key>image</key>
+				<string>nas_gat.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>2</integer>
+				<key>name</key>
+				<string>nasPallaso</string>
+				<key>image</key>
+				<string>nas_pallaso.png</string>
 			</dict>
 		</array>
 	</dict>
@@ -159,6 +215,30 @@
 				<string>Embut</string>
 				<key>image</key>
 				<string>embut.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>NewYear</string>
+				<key>image</key>
+				<string>newyear.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>Sant</string>
+				<key>image</key>
+				<string>sant.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
+				<string>Peineta</string>
+				<key>image</key>
+				<string>peineta.png</string>
 			</dict>
 		</array>
 	</dict>
@@ -311,6 +391,22 @@
 				<string>MarcLleopard</string>
 				<key>image</key>
 				<string>marc_lleopard.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcNadal</string>
+				<key>image</key>
+				<string>marc_nadal.png</string>
+			</dict>
+			<dict>
+				<key>type</key>
+				<integer>4</integer>
+				<key>name</key>
+				<string>MarcAnyNou</string>
+				<key>image</key>
+				<string>marc_anynou.png</string>
 			</dict>
 			<!--<dict>
 				<key>type</key>
