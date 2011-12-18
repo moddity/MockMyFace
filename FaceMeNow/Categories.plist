@@ -236,6 +236,14 @@
 				<key>type</key>
 				<integer>1</integer>
 				<key>name</key>
+				<string>Corona</string>
+				<key>image</key>
+				<string>corona.png</string>
+			</dict>
+            <dict>
+				<key>type</key>
+				<integer>1</integer>
+				<key>name</key>
 				<string>Peineta</string>
 				<key>image</key>
 				<string>peineta.png</string>

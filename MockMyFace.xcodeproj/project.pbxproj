@@ -55,6 +55,10 @@
 		0800EFAF149E35210055F513 /* thumb_peineta@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0800EFA9149E35210055F513 /* thumb_peineta@2x.png */; };
 		0800EFB0149E35210055F513 /* thumb_sant.png in Resources */ = {isa = PBXBuildFile; fileRef = 0800EFAA149E35210055F513 /* thumb_sant.png */; };
 		0800EFB1149E35210055F513 /* thumb_sant@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0800EFAB149E35210055F513 /* thumb_sant@2x.png */; };
+		0800EFB4149E3F130055F513 /* corona.png in Resources */ = {isa = PBXBuildFile; fileRef = 0800EFB2149E3F130055F513 /* corona.png */; };
+		0800EFB5149E3F130055F513 /* corona2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0800EFB3149E3F130055F513 /* corona2x.png */; };
+		0800EFB8149E3F290055F513 /* thumb_corona.png in Resources */ = {isa = PBXBuildFile; fileRef = 0800EFB6149E3F290055F513 /* thumb_corona.png */; };
+		0800EFB9149E3F290055F513 /* thumb_corona@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0800EFB7149E3F290055F513 /* thumb_corona@2x.png */; };
 		0832BFF4148F819A007CA062 /* thumb_graduado.png in Resources */ = {isa = PBXBuildFile; fileRef = 0832BFF2148F819A007CA062 /* thumb_graduado.png */; };
 		0832BFF5148F819A007CA062 /* thumb_graduado@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0832BFF3148F819A007CA062 /* thumb_graduado@2x.png */; };
 		0832C008148F870A007CA062 /* thumb_marc_corporatiu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0832BFF6148F870A007CA062 /* thumb_marc_corporatiu.png */; };
@@ -422,6 +426,10 @@
 		0800EFA9149E35210055F513 /* thumb_peineta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_peineta@2x.png"; sourceTree = "<group>"; };
 		0800EFAA149E35210055F513 /* thumb_sant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_sant.png; sourceTree = "<group>"; };
 		0800EFAB149E35210055F513 /* thumb_sant@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_sant@2x.png"; sourceTree = "<group>"; };
+		0800EFB2149E3F130055F513 /* corona.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corona.png; path = FaceMeNow/sombreros/corona.png; sourceTree = SOURCE_ROOT; };
+		0800EFB3149E3F130055F513 /* corona2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corona2x.png; path = FaceMeNow/sombreros/corona2x.png; sourceTree = SOURCE_ROOT; };
+		0800EFB6149E3F290055F513 /* thumb_corona.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_corona.png; sourceTree = "<group>"; };
+		0800EFB7149E3F290055F513 /* thumb_corona@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_corona@2x.png"; sourceTree = "<group>"; };
 		0832BFF2148F819A007CA062 /* thumb_graduado.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_graduado.png; sourceTree = "<group>"; };
 		0832BFF3148F819A007CA062 /* thumb_graduado@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_graduado@2x.png"; sourceTree = "<group>"; };
 		0832BFF6148F870A007CA062 /* thumb_marc_corporatiu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thumb_marc_corporatiu.png; path = thumb_marcs/thumb_marc_corporatiu.png; sourceTree = "<group>"; };
@@ -1252,6 +1260,8 @@
 		1F8650D8146DA8160010A2FE /* sombreros */ = {
 			isa = PBXGroup;
 			children = (
+				0800EFB2149E3F130055F513 /* corona.png */,
+				0800EFB3149E3F130055F513 /* corona2x.png */,
 				0800EF76149E34EE0055F513 /* newyear.png */,
 				0800EF77149E34EE0055F513 /* newyear@2x.png */,
 				0800EF78149E34EE0055F513 /* peineta.png */,
@@ -1285,6 +1295,8 @@
 		1F8650E6146DA85E0010A2FE /* thumb_sombreros */ = {
 			isa = PBXGroup;
 			children = (
+				0800EFB6149E3F290055F513 /* thumb_corona.png */,
+				0800EFB7149E3F290055F513 /* thumb_corona@2x.png */,
 				0800EFA6149E35210055F513 /* thumb_newyear.png */,
 				0800EFA7149E35210055F513 /* thumb_newyear@2x.png */,
 				0800EFA8149E35210055F513 /* thumb_peineta.png */,
@@ -1856,6 +1868,10 @@
 				0800EFAF149E35210055F513 /* thumb_peineta@2x.png in Resources */,
 				0800EFB0149E35210055F513 /* thumb_sant.png in Resources */,
 				0800EFB1149E35210055F513 /* thumb_sant@2x.png in Resources */,
+				0800EFB4149E3F130055F513 /* corona.png in Resources */,
+				0800EFB5149E3F130055F513 /* corona2x.png in Resources */,
+				0800EFB8149E3F290055F513 /* thumb_corona.png in Resources */,
+				0800EFB9149E3F290055F513 /* thumb_corona@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
