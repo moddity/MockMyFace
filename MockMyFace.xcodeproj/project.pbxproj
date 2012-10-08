@@ -1763,7 +1763,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MockMyFace/MockMyFace-Prefix.pch";
 				INFOPLIST_FILE = "MockMyFace/MockMyFace-Info.plist";
@@ -1773,7 +1773,7 @@
 				);
 				PRODUCT_NAME = MockMyFace;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "806DB5C3-784E-4614-96CA-5D36C7E19379";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
