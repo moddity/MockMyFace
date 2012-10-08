@@ -12,8 +12,6 @@
 #import <AssertMacros.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ViewAndShareController.h"
-#import "AdWhirlView.h"
-#import "AdWhirlView+.h"
 
 #pragma mark-
 
@@ -98,8 +96,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
     return context;
 }
 
-#pragma mark-
-
+//Private UIImage Category
 @interface UIImage (RotationMethods)
 - (UIImage *)imageRotatedByDegrees:(CGFloat)degrees;
 @end
@@ -131,13 +128,12 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	return newImage;
-	
 }
 
 @end
 
-#pragma mark-
 
+//Private methods
 @interface MockCameraViewController (InternalMethods)
 - (void)setupAVCapture;
 - (void)teardownAVCapture;
@@ -146,32 +142,28 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 
 
-
+//Main class
 @implementation MockCameraViewController
 
 const CGBitmapInfo kDefaultCGBitmapInfo	= (kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host);
 const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Host);
 
+@synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, marc, stillImageOutput, videoDataOutput, previewView, previewLayer, faceIndicatorLayer, session;
 
-
-@synthesize itemSelectorViewController, previewController, sunglasses, hat, mouth, beard, marc, stillImageOutput, videoDataOutput, previewView, previewLayer, faceIndicatorLayer, session;
-
+/* Turn on the camera */
 - (void)setupAVCapture
 {
 	NSError *error = nil;
 	
 	session = [AVCaptureSession new];
+    
     [session setSessionPreset:AVCaptureSessionPreset640x480];
-	/*if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-	    [session setSessionPreset:AVCaptureSessionPreset640x480];
-	else
-	    [session setSessionPreset:AVCaptureSessionPreset640x480];*/
 	
     // Select a video device, make an input
 	AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
 	
-    //Si hi ha error
+    //Error starting the camera
     if(error != nil) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Failed with error %d", (int)[error code]]
 															message:[error localizedDescription]
@@ -188,11 +180,10 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     if ( [session canAddInput:deviceInput] )
 		[session addInput:deviceInput];
 	
-    // Make a still image output
+    // Make a still image output to process the photos we will take
 	stillImageOutput = [AVCaptureStillImageOutput new];
-    
-	//[stillImageOutput addObserver:self forKeyPath:@"capturingStillImage" options:NSKeyValueObservingOptionNew context:(__bridge void *)AVCaptureStillImageIsCapturingStillImageContext];
-	if ( [session canAddOutput:stillImageOutput] )
+   
+	if([session canAddOutput:stillImageOutput])
 		[session addOutput:stillImageOutput];
 	
     // Make a video data output
@@ -210,22 +201,21 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	videoDataOutputQueue = dispatch_queue_create("VideoDataOutputQueue", DISPATCH_QUEUE_SERIAL);
 	[videoDataOutput setSampleBufferDelegate:self queue:videoDataOutputQueue];
 	
-    if ( [session canAddOutput:videoDataOutput] )
+    if([session canAddOutput:videoDataOutput])
 		[session addOutput:videoDataOutput];
 	[[videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setEnabled:NO];
 	
 	effectiveScale = 1.0;
+    
+    //Attach the video to a view on the screen, so we can see it.
 	previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
 	[previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
 	[previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
 	CALayer *rootLayer = [previewView layer];
 	[rootLayer setMasksToBounds:YES];
-    NSLog(@"ROOT LAYER BOUNDS: %@", NSStringFromCGRect([rootLayer bounds]));
 	[previewLayer setFrame:[rootLayer bounds]];
 	[rootLayer insertSublayer:previewLayer atIndex:0];
 	[session startRunning];
-    
-    
 }
 
 // clean up capture setup
@@ -234,9 +224,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	if (videoDataOutputQueue)
 		dispatch_release(videoDataOutputQueue);
 	
-    //[stillImageOutput removeObserver:self forKeyPath:@"capturingStillImage"];
-	
-	[previewLayer removeFromSuperlayer];
+    [previewLayer removeFromSuperlayer];
 	
     previewLayer = nil;
     session = nil;
@@ -286,7 +274,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                                                                  frameSize:parentFrameSize 
                                                               apertureSize:clap.size];
     
-    //Pintem la imatge de la cámera
+    //We draw the image on the camera
     CGContextDrawImage(bitmapContext, 
                        CGRectMake(previewBox.origin.y, previewBox.origin.x, previewBox.size.height, previewBox.size.width)
                        , backgroundImage);
@@ -314,24 +302,18 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 			break; // leave the layer in its last known orientation
 	}
     
-    
+    //Check if we have faces on the screen
     if([features count] == 0) {
-        NSLog(@"NO FACE FEATURES!");
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No faces detected!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alertView show];
     }
 	
-
-    // features found by the face detector
+    //Iterate over faces to mock it
 	for (CIFaceFeature *ff in features ) {
 		CGRect faceRect = [ff bounds];
         
-        NSLog(@"FACE RECT: %@", NSStringFromCGRect(faceRect));
-        
-        /// SUNGLASSES
+        /// SUNGLASSES POSITION
         if(self.sunglasses != nil) {
-            
-            
             float eyeCenterX = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
         
             float glassesWidth = (ff.rightEyePosition.y-ff.leftEyePosition.y)*2;
@@ -341,13 +323,11 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                                         glassesWidth, 
                                         glassesWidth);
             
-            NSLog(@"CGRect GLASSES: %@", NSStringFromCGRect(glassesRect));
-            
             UIImage *sunglassesImage = [sunglasses imageRotatedByDegrees:rotationDegrees];
             CGContextDrawImage(bitmapContext, glassesRect, [sunglassesImage CGImage]);
         }
         
-        // HAT
+        // HAT POSITION
         if(self.hat != nil) {
             CGRect hatRect = CGRectMake(faceRect.origin.x - (faceRect.size.width * 0.85), 
                                         faceRect.origin.y,
@@ -514,9 +494,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     [self.previewController.previewImage setImage:image];
     self.previewController.imageMetatadata = [NSDictionary dictionaryWithDictionary:metadata];
     
-    
-    [adView removeFromSuperview];
-    //GUARRADA MÁXIMA PQ SINO DONA PROBLEMES DE MEMORIA
+    //Init all the system to clean the memory
     [NSThread detachNewThreadSelector:@selector(restartVideoCapture) toTarget:self withObject:nil];
 }
 
@@ -580,23 +558,9 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    return [imageCopy CGImage];}
-
-
-// turn on/off face detection
-/*
-- (IBAction)toggleFaceDetection:(id)sender
-{
-	detectFaces = [(UISwitch *)sender isOn];
-	[[videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setEnabled:detectFaces];
-	if (!detectFaces) {
-		dispatch_async(dispatch_get_main_queue(), ^(void) {
-			// clear out any squares currently displaying.
-			[self drawFaceBoxesForFeatures:[NSArray array] forVideoBox:CGRectZero orientation:UIDeviceOrientationPortrait];
-		});
-	}
+    return [imageCopy CGImage];
 }
- */
+
 
 // find where the video box is positioned within the preview layer based on the video size and gravity
 + (CGRect)videoPreviewBoxForGravity:(NSString *)gravity frameSize:(CGSize)frameSize apertureSize:(CGSize)apertureSize
@@ -647,7 +611,6 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     if(self.sunglasses != nil) [enabledLayers addObject:kSunglassesLayer];
     if(self.hat != nil) [enabledLayers addObject:kHatLayer];
     if(self.mouth != nil) [enabledLayers addObject:kMouthLayer];
-    if(self.beard != nil) [enabledLayers addObject:kBeardLayer];
     return enabledLayers;
 }
 
@@ -808,7 +771,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
         }
 		
 		
-        CALayer *sunglassesLayer = nil, *mouthLayer = nil, *hatLayer = nil, *beardLayer = nil;
+    CALayer *sunglassesLayer = nil, *mouthLayer = nil, *hatLayer = nil;
 		
 		// re-use an existing layer if possible
 		while ( (!sunglassesLayer || !mouthLayer || !hatLayer) 
@@ -823,8 +786,6 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                     hatLayer = currentLayer;
                 } else if([[currentLayer name] isEqualToString: kMouthLayer]) {
                     mouthLayer = currentLayer;
-                } else {
-                    beardLayer = currentLayer;
                 }
             }
 		}
@@ -993,15 +954,6 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	isUsingFrontFacingCamera = isFront;
 }
 
--(void) requestNewAD {
-    if(adView != nil) {
-        [adView removeFromSuperview];
-        adView = nil;
-    }
-    adView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
-    [self.view addSubview:adView];
-}
-
 // use front/back camera
 - (IBAction)switchCameras:(id)sender
 {
@@ -1044,33 +996,10 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     [self.view addSubview: self.faceIndicatorLayer.view];
     [self.faceIndicatorLayer displayMessage:NO withText:nil];
     
-
-    [self requestNewAD];
-    
+  
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestNewAD) name:@"RequestNewAD" object:nil];
 }
 
-- (void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView {
-    NSLog(@"AD RECEIVED");
-    [UIView beginAnimations:@"AdWhirlDelegate.adWhirlDidReceiveAd:"
-                    context:nil];
-    
-    [UIView setAnimationDuration:0.7];
-    
-    CGSize adSize = [adView actualAdSize];
-    CGRect newFrame = adView.frame;
-    
-    newFrame.size = adSize;
-    newFrame.origin.x = (self.view.bounds.size.width - adSize.width)/ 2;
-    
-    adView.frame = newFrame;
-    
-    [UIView commitAnimations];
-}
-
--(void) adWhirlDidFailToReceiveAd:(AdWhirlView *)adWhirlView usingBackup:(BOOL)yesOrNo {
-    NSLog(@"FAILED TO RECEIVE AN AD");
-}
 
 -(void) itemSelected:(int)kItemType imageName:(NSString *)imgName {
     

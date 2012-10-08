@@ -10,8 +10,6 @@
 
 #import "MockCameraViewConroller.h"
 
-
-
 @implementation MockMyFaceAppDelegate
 
 
@@ -96,11 +94,6 @@
 
         [self.facebook authorize:permissions];
     }
-    
-    /*
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [UIImage imageWithCGImage:[image CGImage] scale:1.0 orientation:UIImageOrientationRightMirrored], @"picture",
-                                   nil];*/
     
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     

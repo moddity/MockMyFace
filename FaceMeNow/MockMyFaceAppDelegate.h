@@ -18,6 +18,7 @@
 @property (strong, nonatomic) MockCameraViewController *viewController;
 @property (strong, nonatomic) Facebook *facebook;
 
+/* Sends the image generated from the app to facebook */
 -(void) postImageToFacebook: (UIImage*) image;
 
 @end
