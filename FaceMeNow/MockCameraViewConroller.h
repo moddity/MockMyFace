@@ -1,6 +1,6 @@
 //
-//  FaceMeNowViewController.h
-//  FaceMeNow
+//  MockCameraViewController.h
+//  MockMyFace
 //
 //  Created by Jaume Cornadó on 10/11/11.
 //  Copyright (c) 2011 Bazinga Systems. All rights reserved.
@@ -27,7 +27,7 @@ extern const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha;
 
 //adwihrl key 7e4323992fd8465cbf0138153f04ea52
 
-@interface FaceMeNowViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, ItemSelectorDelegate, AdWhirlDelegate> {
+@interface MockCameraViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, ItemSelectorDelegate, AdWhirlDelegate> {
 	
 	dispatch_queue_t videoDataOutputQueue;
 	

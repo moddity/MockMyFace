@@ -8,7 +8,7 @@
 
 #import "MockMyFaceAppDelegate.h"
 
-#import "FaceMeNowViewController.h"
+#import "MockCameraViewConroller.h"
 
 
 
@@ -24,7 +24,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[FaceMeNowViewController alloc] initWithNibName:@"FaceMeNowViewController" bundle:nil];
+    self.viewController = [[MockCameraViewController alloc] initWithNibName:@"MockCameraViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

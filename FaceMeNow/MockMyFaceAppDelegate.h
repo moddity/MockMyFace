@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 
-@class FaceMeNowViewController;
+@class MockCameraViewController;
 
 @interface MockMyFaceAppDelegate : UIResponder <UIApplicationDelegate, FBSessionDelegate, FBRequestDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) FaceMeNowViewController *viewController;
+@property (strong, nonatomic) MockCameraViewController *viewController;
 @property (strong, nonatomic) Facebook *facebook;
 
 -(void) postImageToFacebook: (UIImage*) image;

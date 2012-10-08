@@ -1,12 +1,12 @@
 //
-//  FaceMeNowViewController.m
-//  FaceMeNow
+//  MockCameraViewController.m
+//  MockMyFace
 //
 //  Created by Jaume Cornadó on 10/11/11.
 //  Copyright (c) 2011 Bazinga Systems. All rights reserved.
 //
 
-#import "FaceMeNowViewController.h"
+#import "MockCameraViewConroller.h"
 #import <CoreImage/CoreImage.h>
 #import <ImageIO/ImageIO.h>
 #import <AssertMacros.h>
@@ -16,9 +16,6 @@
 #import "AdWhirlView+.h"
 
 #pragma mark-
-
-
-
 
 // used for KVO observation of the @"capturingStillImage" property to perform flash bulb animation
 static const NSString *AVCaptureStillImageIsCapturingStillImageContext = @"AVCaptureStillImageIsCapturingStillImageContext";
@@ -141,7 +138,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 #pragma mark-
 
-@interface FaceMeNowViewController (InternalMethods)
+@interface MockCameraViewController (InternalMethods)
 - (void)setupAVCapture;
 - (void)teardownAVCapture;
 - (void)drawFaceBoxesForFeatures:(NSArray *)features forVideoBox:(CGRect)clap orientation:(UIDeviceOrientation)orientation;
@@ -150,7 +147,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 
 
 
-@implementation FaceMeNowViewController
+@implementation MockCameraViewController
 
 const CGBitmapInfo kDefaultCGBitmapInfo	= (kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host);
 const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Host);
@@ -285,7 +282,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     CGSize parentFrameSize = [previewView frame].size;
 	NSString *gravity = [previewLayer videoGravity];
 
-    CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
+    CGRect previewBox = [MockCameraViewController videoPreviewBoxForGravity:gravity
                                                                  frameSize:parentFrameSize 
                                                               apertureSize:clap.size];
     
@@ -705,7 +702,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	CGSize parentFrameSize = [previewView frame].size;
 	NSString *gravity = [previewLayer videoGravity];
 	BOOL isMirrored = [previewLayer isMirrored];
-	CGRect previewBox = [FaceMeNowViewController videoPreviewBoxForGravity:gravity 
+	CGRect previewBox = [MockCameraViewController videoPreviewBoxForGravity:gravity
                                                                  frameSize:parentFrameSize 
                                                               apertureSize:clap.size];
 	//Disabled suport for multifaces

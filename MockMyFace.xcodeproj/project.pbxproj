@@ -285,7 +285,7 @@
 		1F5029E4146C2CC2006CFFFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F5029E2146C2CC2006CFFFA /* InfoPlist.strings */; };
 		1F5029E6146C2CC2006CFFFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029E5146C2CC2006CFFFA /* main.m */; };
 		1F5029EA146C2CC2006CFFFA /* MockMyFaceAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029E9146C2CC2006CFFFA /* MockMyFaceAppDelegate.m */; };
-		1F5029ED146C2CC2006CFFFA /* FaceMeNowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029EC146C2CC2006CFFFA /* FaceMeNowViewController.m */; };
+		1F5029ED146C2CC2006CFFFA /* MockCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029EC146C2CC2006CFFFA /* MockCameraViewController.m */; };
 		1F5029F0146C2CC2006CFFFA /* FaceMeNowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5029EE146C2CC2006CFFFA /* FaceMeNowViewController.xib */; };
 		1F5029F7146C2D12006CFFFA /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029F6146C2D12006CFFFA /* CoreImage.framework */; };
 		1F5029F9146C2D1B006CFFFA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029F8146C2D1B006CFFFA /* AVFoundation.framework */; };
@@ -661,8 +661,8 @@
 		1F5029E7146C2CC2006CFFFA /* MockMyFace-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MockMyFace-Prefix.pch"; sourceTree = "<group>"; };
 		1F5029E8146C2CC2006CFFFA /* MockMyFaceAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockMyFaceAppDelegate.h; sourceTree = "<group>"; };
 		1F5029E9146C2CC2006CFFFA /* MockMyFaceAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockMyFaceAppDelegate.m; sourceTree = "<group>"; };
-		1F5029EB146C2CC2006CFFFA /* FaceMeNowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceMeNowViewController.h; sourceTree = "<group>"; };
-		1F5029EC146C2CC2006CFFFA /* FaceMeNowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceMeNowViewController.m; sourceTree = "<group>"; };
+		1F5029EB146C2CC2006CFFFA /* MockCameraViewConroller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockCameraViewConroller.h; sourceTree = "<group>"; };
+		1F5029EC146C2CC2006CFFFA /* MockCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockCameraViewController.m; sourceTree = "<group>"; };
 		1F5029EF146C2CC2006CFFFA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FaceMeNowViewController.xib; sourceTree = "<group>"; };
 		1F5029F6146C2D12006CFFFA /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		1F5029F8146C2D1B006CFFFA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1079,8 +1079,8 @@
 				1F8993C1161DCE9700B0B8D0 /* XIBS */,
 				1F5029E8146C2CC2006CFFFA /* MockMyFaceAppDelegate.h */,
 				1F5029E9146C2CC2006CFFFA /* MockMyFaceAppDelegate.m */,
-				1F5029EB146C2CC2006CFFFA /* FaceMeNowViewController.h */,
-				1F5029EC146C2CC2006CFFFA /* FaceMeNowViewController.m */,
+				1F5029EB146C2CC2006CFFFA /* MockCameraViewConroller.h */,
+				1F5029EC146C2CC2006CFFFA /* MockCameraViewController.m */,
 				1F502A08146C3EC5006CFFFA /* ItemSelector.h */,
 				1F502A09146C3EC5006CFFFA /* ItemSelector.m */,
 				1FF3BB70147B7E1D008C9D94 /* ViewAndShareController.h */,
@@ -1895,7 +1895,7 @@
 				1F502A0B146C3EC5006CFFFA /* ItemSelector.m in Sources */,
 				1F5029E6146C2CC2006CFFFA /* main.m in Sources */,
 				1F5029EA146C2CC2006CFFFA /* MockMyFaceAppDelegate.m in Sources */,
-				1F5029ED146C2CC2006CFFFA /* FaceMeNowViewController.m in Sources */,
+				1F5029ED146C2CC2006CFFFA /* MockCameraViewController.m in Sources */,
 				1FF3BB73147B7E1D008C9D94 /* ViewAndShareController.m in Sources */,
 				9998F0CC14801B8800F27A63 /* ShareController.m in Sources */,
 				1F248D791483D22B00179D37 /* FaceIndicatorLayer.m in Sources */,
