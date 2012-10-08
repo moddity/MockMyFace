@@ -105,11 +105,6 @@
         
         [mailer setSubject:@"Message from MockMyFace App"];
         
-        /*NSArray *toRecipients = [NSArray arrayWithObjects:@"fisrtMail@example.com", @"secondMail@example.com", nil];
-        [mailer setToRecipients:toRecipients];*/
-        
-    
-       
         NSData *imageData = UIImageJPEGRepresentation(previewImage.image, 1.0);
         [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"mockmyface"]; 
         
@@ -247,10 +242,6 @@
     } else {
         [self sendImageToFacebook];
     }
-    
-   
-    
-    
 }
 
 -(void) fbDidLogin {

@@ -1,6 +1,6 @@
 //
 //  main.m
-//  FaceMeNow
+//  MockMyFace
 //
 //  Created by Jaume Cornadó on 10/11/11.
 //  Copyright (c) 2011 Bazinga Systems. All rights reserved.

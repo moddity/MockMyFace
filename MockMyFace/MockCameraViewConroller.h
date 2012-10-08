@@ -57,18 +57,23 @@ extern const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha;
 -(void) removeLayer: (NSString*) layerToClean;
 /* Flips images by frontcam */
 -(CGImageRef) imageFlipedHorizontal: (CGImageRef) frontCamImage;
-
+/* Returns an image of 480x320 */
 -(CGImageRef) imageSized: (CGImageRef) backCamImage;
-
+/* Loads the preview controller, to save, share or discard the image */
 -(void) displayPreviewImage: (CGImageRef) previewImage withMetadata: (NSDictionary*) metadata;
-
+/* Changes the device camera */
 -(void) setFrontCamera: (BOOL) isFront;
-
+/* Reset the video device */
 -(void) restartVideoCapture;
+/* Utility method to flip coordinates of a rect */
+-(CGRect) flipRect: (CGRect) rectToFlip;
 
 // find where the video box is positioned within the preview layer based on the video size and gravity
 + (CGRect)videoPreviewBoxForGravity:(NSString *)gravity frameSize:(CGSize)frameSize apertureSize:(CGSize)apertureSize;
 
--(void) requestNewAD;
+//Functions to calculate item positions
+-(CGRect) getHatRectFromFace: (CIFaceFeature*) face isStill: (BOOL) still;
+-(CGRect) getMouthRectFromFace: (CIFaceFeature*) face isStill: (BOOL) still;
+-(CGRect) getSunglassesRectFromFace: (CIFaceFeature*) face isStill: (BOOL) still;
 
 @end

@@ -247,7 +247,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 
 // utility routine to create a new image with the red square overlay with appropriate orientation
 // and return the new composited image which can be saved to the camera roll
-- (CGImageRef)newSquareOverlayedImageForFeatures:(NSArray *)features 
+- (CGImageRef)newSquareOverlayedImageForFeatures:(NSArray *)features
                                        inCGImage:(CGImageRef)backgroundImage 
                                  withOrientation:(UIDeviceOrientation)orientation 
                                      frontFacing:(BOOL)isFrontFacing
@@ -274,7 +274,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                                                                  frameSize:parentFrameSize 
                                                               apertureSize:clap.size];
     
-    //We draw the image on the camera
+    //draw the image on the camera
     CGContextDrawImage(bitmapContext, 
                        CGRectMake(previewBox.origin.y, previewBox.origin.x, previewBox.size.height, previewBox.size.width)
                        , backgroundImage);
@@ -310,43 +310,30 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	
     //Iterate over faces to mock it
 	for (CIFaceFeature *ff in features ) {
-		CGRect faceRect = [ff bounds];
         
         /// SUNGLASSES POSITION
         if(self.sunglasses != nil) {
-            float eyeCenterX = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
-        
-            float glassesWidth = (ff.rightEyePosition.y-ff.leftEyePosition.y)*2;
-        
-            CGRect glassesRect = CGRectMake(ff.leftEyePosition.x-(glassesWidth/2),
-                                        eyeCenterX-(glassesWidth/2),
-                                        glassesWidth, 
-                                        glassesWidth);
-            
+            CGRect glassesRect = [self getSunglassesRectFromFace:ff isStill:YES];
             UIImage *sunglassesImage = [sunglasses imageRotatedByDegrees:rotationDegrees];
             CGContextDrawImage(bitmapContext, glassesRect, [sunglassesImage CGImage]);
         }
         
         // HAT POSITION
         if(self.hat != nil) {
-            CGRect hatRect = CGRectMake(faceRect.origin.x - (faceRect.size.width * 0.85), 
-                                        faceRect.origin.y,
-                                        faceRect.size.width, 
-                                        faceRect.size.width);
+            CGRect hatRect = [self getHatRectFromFace:ff isStill:YES];
             UIImage *hatImage = [hat imageRotatedByDegrees:rotationDegrees];
             CGContextDrawImage(bitmapContext, hatRect, [hatImage CGImage]);
         }
         
+        // MOUTH POSITION
         if(self.mouth != nil) {
-            float mouthSize = faceRect.size.width / 2;
-            CGRect mouthRect = CGRectMake((ff.mouthPosition.x-(mouthSize/2))+10, ff.mouthPosition.y-(mouthSize/2), mouthSize, mouthSize);
-            
+            CGRect mouthRect = [self getMouthRectFromFace:ff isStill:YES];
             UIImage *mouthImage = [mouth imageRotatedByDegrees:rotationDegrees];
             CGContextDrawImage(bitmapContext, mouthRect, [mouthImage CGImage]);
         }
 	}
     
-    //PINTEM EL MARC
+    //Draw the border
     CGContextDrawImage(bitmapContext, backgroundImageRect, [[marc.image imageRotatedByDegrees:rotationDegrees] CGImage]);
     
 	returnImage = CGBitmapContextCreateImage(bitmapContext);
@@ -370,8 +357,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	});
 }
 
-
-
+//ItemSelectorDelegate implementation of takePhoto
 -(void) takePhoto {
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -443,9 +429,6 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                                                                   [self displayPreviewImage:cgImageResult withMetadata:metadata];
                                                                   
                                                                   
-                                                                  /*if (srcImage)
-                                                                    CFRelease(srcImage);*/
-                                                                  
                                                         
                                                                   
                                                                   if (attachments)
@@ -470,11 +453,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	
 }
 
-
- 
-
 -(void) displayPreviewImage:(CGImageRef)previewImage withMetadata: (NSDictionary*) metadata {
-    
     
     self.previewController = [[ViewAndShareController alloc] initWithNibName:@"ViewAndShareController" bundle:nil];
     self.previewController.view.frame = self.view.bounds;
@@ -638,9 +617,8 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
             [layer setHidden:YES];
 	}	
 	
+    //No faces detected, we show a message
 	if ( featuresCount == 0) {
-        
-
 		[CATransaction commit];
 
         [self.faceIndicatorLayer displayMessage:YES withText:kNoFacesMessage];
@@ -654,7 +632,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 
 		return; // early bail.
 	} else {
-        
+        //If we got no items enabled, tell the user to enable something
         if([enabledLayers count] == 0) {
             [self.faceIndicatorLayer displayMessage:YES withText:kNoMocksEnabled];
         } else {
@@ -668,58 +646,24 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	CGRect previewBox = [MockCameraViewController videoPreviewBoxForGravity:gravity
                                                                  frameSize:parentFrameSize 
                                                               apertureSize:clap.size];
-	//Disabled suport for multifaces
-	//for ( CIFaceFeature *ff in features ) {
-        
+	     
     CIFaceFeature *ff = [features objectAtIndex:0];
     
-		// find the correct position for the square layer within the previewLayer
-		// the feature box originates in the bottom left of the video frame.
-		// (Bottom right if mirroring is turned on)
-		CGRect faceRect = [ff bounds];
+    // find the correct position for the square layer within the previewLayer
+    // the feature box originates in the bottom left of the video frame.
+    // (Bottom right if mirroring is turned on)
+    CGRect faceRect = [ff bounds];
+
+    CGRect hatRect = [self getHatRectFromFace:ff isStill:NO];
         
-		// flip preview width and height
-		CGFloat temp = faceRect.size.width;
-		faceRect.size.width = faceRect.size.height;
-		faceRect.size.height = temp;
-		temp = faceRect.origin.x;
-		faceRect.origin.x = faceRect.origin.y;
-		faceRect.origin.y = temp;
+    /*float mouthSize = faceRect.size.width / 2;
         
-        CGRect hatRect = CGRectMake(faceRect.origin.x, 
-                                    faceRect.origin.y - (faceRect.size.width * 0.85),
-                                    faceRect.size.width, 
-                                    faceRect.size.width);
-        
-        float mouthSize = faceRect.size.width / 2;
-        
-        CGRect mouthRect = CGRectMake((ff.mouthPosition.y-(mouthSize/2)), (ff.mouthPosition.x-(mouthSize/2))+10, mouthSize, mouthSize);
-        CGRect leftEyeRect = CGRectMake(ff.leftEyePosition.y-50, ff.leftEyePosition.x-50, 100, 100);
-        CGRect rightEyeRect = CGRectMake(ff.rightEyePosition.y-50, ff.rightEyePosition.x-50, 100, 100);
-        
-        /*CGRect glassesRect = CGRectMake(ff.rightEyePosition.y-120,
-                                        ff.rightEyePosition.x-120, 
-                                        (ff.rightEyePosition.y-ff.leftEyePosition.y)+100,
-                                        100);*/
-        
-        
-        float eyeCenterY = ((ff.rightEyePosition.y - ff.leftEyePosition.y) / 2) + ff.leftEyePosition.y;
+    CGRect mouthRect = CGRectMake((ff.mouthPosition.y-(mouthSize/2)), (ff.mouthPosition.x-(mouthSize/2))+10, mouthSize, mouthSize);*/
+    CGRect mouthRect = [self getMouthRectFromFace:ff isStill:NO];
     
-        CGPoint eyeCenter = CGPointMake(ff.rightEyePosition.x, eyeCenterY);
+       
+    CGRect glassesRect = [self getSunglassesRectFromFace:ff isStill:NO];
     
-        float glassesWidth = (ff.rightEyePosition.y-ff.leftEyePosition.y)*2;
-        
-        /*
-        CGRect glassesRect = CGRectMake(ff.leftEyePosition.y - (glassesWidth / 3), 
-                                        ff.leftEyePosition.x - (glassesWidth / 2), 
-                                        glassesWidth, 
-                                        glassesWidth);*/
-        
-        CGRect glassesRect = CGRectMake(eyeCenter.y - (glassesWidth / 2), 
-                                        eyeCenter.x - (glassesWidth / 2), 
-                                        glassesWidth, 
-                                        glassesWidth);
-        
 		// scale coordinates so they fit in the preview box, which may be scaled
 		CGFloat widthScaleBy = previewBox.size.width / clap.size.height;
 		CGFloat heightScaleBy = previewBox.size.height / clap.size.width;
@@ -738,16 +682,6 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
         mouthRect.origin.x *= widthScaleBy;
         mouthRect.origin.y *= heightScaleBy;
         
-        leftEyeRect.size.width *= widthScaleBy;
-        leftEyeRect.size.height *= heightScaleBy;
-        leftEyeRect.origin.x *= widthScaleBy;
-        leftEyeRect.origin.y *= heightScaleBy;
-        
-        rightEyeRect.size.width *= widthScaleBy;
-        rightEyeRect.size.height *= heightScaleBy;
-        rightEyeRect.origin.x *= widthScaleBy;
-        rightEyeRect.origin.y *= heightScaleBy;
-        
         glassesRect.size.width *= widthScaleBy;
         glassesRect.size.height *= heightScaleBy;
         glassesRect.origin.x *= widthScaleBy;
@@ -758,15 +692,15 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 			faceRect = CGRectOffset(faceRect, previewBox.origin.x + previewBox.size.width - faceRect.size.width - (faceRect.origin.x * 2), previewBox.origin.y);
             hatRect = CGRectOffset(hatRect, previewBox.origin.x + previewBox.size.width - hatRect.size.width - (hatRect.origin.x * 2), previewBox.origin.y);
             mouthRect = CGRectOffset(mouthRect, previewBox.origin.x + previewBox.size.width - mouthRect.size.width - (mouthRect.origin.x * 2), previewBox.origin.y);
-            leftEyeRect = CGRectOffset(leftEyeRect, previewBox.origin.x + previewBox.size.width - leftEyeRect.size.width - (leftEyeRect.origin.x * 2), previewBox.origin.y);
-            rightEyeRect = CGRectOffset(rightEyeRect, previewBox.origin.x + previewBox.size.width - rightEyeRect.size.width - (rightEyeRect.origin.x * 2), previewBox.origin.y);
+           /* leftEyeRect = CGRectOffset(leftEyeRect, previewBox.origin.x + previewBox.size.width - leftEyeRect.size.width - (leftEyeRect.origin.x * 2), previewBox.origin.y);
+            rightEyeRect = CGRectOffset(rightEyeRect, previewBox.origin.x + previewBox.size.width - rightEyeRect.size.width - (rightEyeRect.origin.x * 2), previewBox.origin.y);*/
             glassesRect = CGRectOffset(glassesRect, previewBox.origin.x + previewBox.size.width - glassesRect.size.width - (glassesRect.origin.x * 2), previewBox.origin.y);
         } else {
 			faceRect = CGRectOffset(faceRect, previewBox.origin.x, previewBox.origin.y);
             hatRect = CGRectOffset(hatRect, previewBox.origin.x, previewBox.origin.y);
             mouthRect = CGRectOffset(mouthRect, previewBox.origin.x, previewBox.origin.y);
-            leftEyeRect = CGRectOffset(leftEyeRect, previewBox.origin.x, previewBox.origin.y);
-            rightEyeRect = CGRectOffset(rightEyeRect, previewBox.origin.x, previewBox.origin.y);
+            /*leftEyeRect = CGRectOffset(leftEyeRect, previewBox.origin.x, previewBox.origin.y);
+            rightEyeRect = CGRectOffset(rightEyeRect, previewBox.origin.x, previewBox.origin.y);*/
             glassesRect = CGRectOffset(glassesRect, previewBox.origin.x, previewBox.origin.y);
         }
 		
@@ -824,35 +758,6 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
         //mouthLayer.backgroundColor = [[UIColor purpleColor] CGColor];
         [mouthLayer setFrame:mouthRect];
                 
-        /*
-		switch (orientation) {
-			case UIDeviceOrientationPortrait:
-				[hatLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(0.))];
-                [sunglassesLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(0.))];
-                [mouthLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(0.))];
-				break;
-			case UIDeviceOrientationPortraitUpsideDown:
-				[hatLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(180.))];
-                [sunglassesLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(180.))];
-                [mouthLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(180.))];
-				break;
-			case UIDeviceOrientationLandscapeLeft:
-				[hatLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(90.))];
-                [sunglassesLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(90.))];
-                [mouthLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(90.))];
-				break;
-			case UIDeviceOrientationLandscapeRight:
-				[hatLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(-90.))];
-                [sunglassesLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(-90.))];
-                [mouthLayer setAffineTransform:CGAffineTransformMakeRotation(DegreesToRadians(-90.))];
-				break;
-			case UIDeviceOrientationFaceUp:
-			case UIDeviceOrientationFaceDown:
-			default:
-				break; // leave the layer in its last known orientation
-		}
-         */
-         
 		currentFeature++;
 	
     //} //end of for face features
@@ -927,11 +832,13 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	});
 }
 
+//Close the video on dealloc
 - (void)dealloc
 {
 	[self teardownAVCapture];
 }
 
+//Change the capture camera from front to back and vice...
 -(void) setFrontCamera:(BOOL)isFront {
     AVCaptureDevicePosition desiredPosition;
 	if (!isFront)
@@ -978,15 +885,15 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 	NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];
 	faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
 
+    //We start using the front camera
     [self setFrontCamera:YES];
     
-    //itemSelectorViewController = [[ItemSelector alloc] initWithNibName:@"ItemSelector" bundle:nil];
+    //Create the item selector view
     [itemSelectorViewController.view setFrame:CGRectMake(0, 480-168, 320, 168)];
-    //itemSelectorViewController.view.frame = self.view.bounds;
-    //[self addChildViewController:itemSelectorViewController];
     [self.view addSubview:itemSelectorViewController.view];
     itemSelectorViewController.delegate = self;
    
+    //Init message layer and set in the center of screen
     self.faceIndicatorLayer = [[FaceIndicatorLayer alloc] initWithNibName:@"FaceIndicatorLayer" bundle:nil];
     
     self.faceIndicatorLayer.view.frame = CGRectMake(self.view.frame.size.width/2 - (self.faceIndicatorLayer.view.frame.size.width/2),
@@ -995,18 +902,10 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
  
     [self.view addSubview: self.faceIndicatorLayer.view];
     [self.faceIndicatorLayer displayMessage:NO withText:nil];
-    
-  
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestNewAD) name:@"RequestNewAD" object:nil];
 }
 
 
 -(void) itemSelected:(int)kItemType imageName:(NSString *)imgName {
-    
-    
-    
-    NSLog(@"SELECTED: %@", imgName);
-    
     switch (kItemType) {
         case kItemTypeHat:
             [self removeLayer:kHatLayer];
@@ -1097,59 +996,77 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
     
     if (event.type == UIEventSubtypeMotionShake) 
     {
-        //Put your code here what you want to do on a shake...
+        //If the user shakes, we put random items on the screen, for lazy boys
         [itemSelectorViewController getRandomItems];
     }   
     
 }
 
-///////////// AD WHIRL DELEGATE
-
--(NSString*) adWhirlApplicationKey {
-    return @"7e4323992fd8465cbf0138153f04ea52";
+/* Gets the size and position of the hat frame 
+ depending on the face detected */
+-(CGRect) getHatRectFromFace:(CIFaceFeature *)face isStill:(BOOL)still {
+    CGRect faceRect = [face bounds];
+    
+    if(still) {
+        return CGRectMake(faceRect.origin.x - (faceRect.size.width * 0.85),
+                   faceRect.origin.y,
+                   faceRect.size.width,
+                   faceRect.size.width);
+    } else {
+        //We have to flip the face rect in preview mode...
+        faceRect = [self flipRect:faceRect];
+        return CGRectMake(faceRect.origin.x,
+                                faceRect.origin.y - (faceRect.size.width * 0.85),
+                                faceRect.size.width,
+                                faceRect.size.width);
+    }
 }
 
-- (UIViewController *)viewControllerForPresentingModalView {
-    return self;
+-(CGRect) getSunglassesRectFromFace:(CIFaceFeature *)face isStill:(BOOL)still {
+    
+    float eyeCenterY = ((face.rightEyePosition.y - face.leftEyePosition.y) / 2) + face.leftEyePosition.y;
+    
+    CGPoint eyeCenter = CGPointMake(face.rightEyePosition.x, eyeCenterY);
+    
+    float glassesWidth = (face.rightEyePosition.y-face.leftEyePosition.y)*2;
+    
+    
+    if(still) {
+        return CGRectMake(face.leftEyePosition.x-(glassesWidth/2),
+                          eyeCenterY-(glassesWidth/2),
+                          glassesWidth,
+                          glassesWidth);
+    } else {
+        return CGRectMake(eyeCenter.y - (glassesWidth / 2),
+                          eyeCenter.x - (glassesWidth / 2),
+                          glassesWidth,
+                          glassesWidth);
+    }
 }
 
-/*
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-	if ( [gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] ) {
-		beginGestureScale = effectiveScale;
-	}
-	return YES;
+-(CGRect) getMouthRectFromFace:(CIFaceFeature *)face isStill:(BOOL)still {
+    
+    CGRect faceRect = [face bounds];
+    
+    float mouthSize = faceRect.size.width / 2;
+    
+    if(still) {
+        return CGRectMake((face.mouthPosition.x-(mouthSize/2))+10, face.mouthPosition.y-(mouthSize/2), mouthSize, mouthSize);
+    }
+    CGRect mouthRect = CGRectMake((face.mouthPosition.y-(mouthSize/2)), (face.mouthPosition.x-(mouthSize/2))+10, mouthSize, mouthSize);
+    
+    return mouthRect;
 }
 
-// scale image depending on users pinch gesture
-- (IBAction)handlePinchGesture:(UIPinchGestureRecognizer *)recognizer
-{
-	BOOL allTouchesAreOnThePreviewLayer = YES;
-	NSUInteger numTouches = [recognizer numberOfTouches], i;
-	for ( i = 0; i < numTouches; ++i ) {
-		CGPoint location = [recognizer locationOfTouch:i inView:previewView];
-		CGPoint convertedLocation = [previewLayer convertPoint:location fromLayer:previewLayer.superlayer];
-		if ( ! [previewLayer containsPoint:convertedLocation] ) {
-			allTouchesAreOnThePreviewLayer = NO;
-			break;
-		}
-	}
-	
-	if ( allTouchesAreOnThePreviewLayer ) {
-		effectiveScale = beginGestureScale * recognizer.scale;
-		if (effectiveScale < 1.0)
-			effectiveScale = 1.0;
-		CGFloat maxScaleAndCropFactor = [[stillImageOutput connectionWithMediaType:AVMediaTypeVideo] videoMaxScaleAndCropFactor];
-		if (effectiveScale > maxScaleAndCropFactor)
-			effectiveScale = maxScaleAndCropFactor;
-		[CATransaction begin];
-		[CATransaction setAnimationDuration:.025];
-		[previewLayer setAffineTransform:CGAffineTransformMakeScale(effectiveScale, effectiveScale)];
-		[CATransaction commit];
-	}
+-(CGRect) flipRect:(CGRect)rectToFlip {
+    // flip preview width and height
+    CGFloat temp = rectToFlip.size.width;
+    rectToFlip.size.width = rectToFlip.size.height;
+    rectToFlip.size.height = temp;
+    temp = rectToFlip.origin.x;
+    rectToFlip.origin.x = rectToFlip.origin.y;
+    rectToFlip.origin.y = temp;
+    return rectToFlip;
 }
- 
- */
 
 @end

@@ -1,6 +1,6 @@
 //
 //  ItemSelector.h
-//  FaceMeNow
+//  MockMyFace
 //
 //  Created by Jaume Cornadó on 10/11/11.
 //  Copyright (c) 2011 Bazinga Systems. All rights reserved.
@@ -21,9 +21,11 @@
 #define kBackViewTAG 2020
 
 @protocol ItemSelectorDelegate <NSObject>
-
+//Comunicates to the main object that item is selected
 -(void) itemSelected: (int) kItemType imageName: (NSString*) imgName;
+//When the photo button is pressed
 -(void) takePhoto;
+//When the clear button is pressed
 -(void) clearMocks;
 
 @end
@@ -40,8 +42,6 @@
     NSArray *activeItems;
     
     int selectedCategoryIndex;
-    
-
 }
 
 @property (nonatomic, strong) NSMutableArray *itemsArray;
@@ -49,17 +49,19 @@
 @property (nonatomic, strong) NSDictionary *catDict;
 @property (nonatomic, assign) UIButton *buttonSelected;
 
-
+//Read plist of items
 -(void) parseItems;
+//Called when a user shakes the phone
 -(void) getRandomItems;
+//Category selected
 -(IBAction) toogleItemsUP:(id) sender;
-
-
+//Create item views
 -(void) loadItems: (NSArray*) items;
+//Fired when user touches an item
 -(void) selectItem: (id) sender;
-
+//Sends the buttons up
 -(void) animateButton: (UIButton*) newButton;
-
+//The button hooks
 -(IBAction) takePhotoAction: (id) sender;
 -(IBAction) cleanAction: (id) sender;
 

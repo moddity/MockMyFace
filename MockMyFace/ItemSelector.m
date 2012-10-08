@@ -1,6 +1,6 @@
 //
 //  ItemSelector.m
-//  FaceMeNow
+//  MockMyFace
 //
 //  Created by Jaume Cornadó on 10/11/11.
 //  Copyright (c) 2011 Bazinga Systems. All rights reserved.
@@ -50,7 +50,7 @@
 
 -(void) loadItems: (NSArray*) items {
     
-    //Treiem els botons anteriors si n'hi ha
+    //If there is any button remove it
     if([itemsButtons count] > 0) {
         for(UIButton *b in itemsButtons) {
             [b removeFromSuperview];
@@ -158,7 +158,7 @@
        
     } else {
         
-        //Canvi de 
+        //Category change
         
         if(selectedCategoryIndex >= 0 && origin.tag != selectedCategoryIndex) {
             selectedCategoryIndex = origin.tag;
@@ -177,8 +177,6 @@
                              itemsUP = NO;
                              origin.enabled = YES;
                          }];
-        //buttonSelected = nil;
-        
     }
 }
 

@@ -286,7 +286,7 @@
 		1F5029E6146C2CC2006CFFFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029E5146C2CC2006CFFFA /* main.m */; };
 		1F5029EA146C2CC2006CFFFA /* MockMyFaceAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029E9146C2CC2006CFFFA /* MockMyFaceAppDelegate.m */; };
 		1F5029ED146C2CC2006CFFFA /* MockCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5029EC146C2CC2006CFFFA /* MockCameraViewController.m */; };
-		1F5029F0146C2CC2006CFFFA /* FaceMeNowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5029EE146C2CC2006CFFFA /* FaceMeNowViewController.xib */; };
+		1F5029F0146C2CC2006CFFFA /* MockCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5029EE146C2CC2006CFFFA /* MockCameraViewController.xib */; };
 		1F5029F7146C2D12006CFFFA /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029F6146C2D12006CFFFA /* CoreImage.framework */; };
 		1F5029F9146C2D1B006CFFFA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029F8146C2D1B006CFFFA /* AVFoundation.framework */; };
 		1F5029FB146C2D27006CFFFA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5029FA146C2D27006CFFFA /* ImageIO.framework */; };
@@ -393,8 +393,8 @@
 		0800EFA9149E35210055F513 /* thumb_peineta@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_peineta@2x.png"; sourceTree = "<group>"; };
 		0800EFAA149E35210055F513 /* thumb_sant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_sant.png; sourceTree = "<group>"; };
 		0800EFAB149E35210055F513 /* thumb_sant@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_sant@2x.png"; sourceTree = "<group>"; };
-		0800EFB2149E3F130055F513 /* corona.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corona.png; path = FaceMeNow/sombreros/corona.png; sourceTree = SOURCE_ROOT; };
-		0800EFB3149E3F130055F513 /* corona2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corona2x.png; path = FaceMeNow/sombreros/corona2x.png; sourceTree = SOURCE_ROOT; };
+		0800EFB2149E3F130055F513 /* corona.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corona.png; path = MockMyFace/sombreros/corona.png; sourceTree = SOURCE_ROOT; };
+		0800EFB3149E3F130055F513 /* corona2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corona2x.png; path = MockMyFace/sombreros/corona2x.png; sourceTree = SOURCE_ROOT; };
 		0800EFB6149E3F290055F513 /* thumb_corona.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_corona.png; sourceTree = "<group>"; };
 		0800EFB7149E3F290055F513 /* thumb_corona@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_corona@2x.png"; sourceTree = "<group>"; };
 		0832BFF2148F819A007CA062 /* thumb_graduado.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_graduado.png; sourceTree = "<group>"; };
@@ -549,7 +549,7 @@
 		086975A01474309E009A6441 /* slideBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "slideBackground@2x.png"; path = "UI-main/slideBackground@2x.png"; sourceTree = "<group>"; };
 		086975A11474309E009A6441 /* volteoCam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volteoCam.png; path = "UI-main/volteoCam.png"; sourceTree = "<group>"; };
 		086975A21474309E009A6441 /* volteoCam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "volteoCam@2x.png"; path = "UI-main/volteoCam@2x.png"; sourceTree = "<group>"; };
-		08CBF70C1483DFE200962DAD /* SusanWrittingMAYUSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SusanWrittingMAYUSC-Regular.ttf"; path = "FaceMeNow/SusanWrittingMAYUSC-Regular.ttf"; sourceTree = "<group>"; };
+		08CBF70C1483DFE200962DAD /* SusanWrittingMAYUSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SusanWrittingMAYUSC-Regular.ttf"; path = "MockMyFace/SusanWrittingMAYUSC-Regular.ttf"; sourceTree = "<group>"; };
 		08CBF7261483EF2400962DAD /* marc_lleopard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marc_lleopard.png; path = marcs/marc_lleopard.png; sourceTree = "<group>"; };
 		08CBF7271483EF2400962DAD /* marc_lleopard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marc_lleopard@2x.png"; path = "marcs/marc_lleopard@2x.png"; sourceTree = "<group>"; };
 		08CBF7281483EF2400962DAD /* marc_llum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marc_llum.png; path = marcs/marc_llum.png; sourceTree = "<group>"; };
@@ -630,7 +630,7 @@
 		1F5029E9146C2CC2006CFFFA /* MockMyFaceAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockMyFaceAppDelegate.m; sourceTree = "<group>"; };
 		1F5029EB146C2CC2006CFFFA /* MockCameraViewConroller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockCameraViewConroller.h; sourceTree = "<group>"; };
 		1F5029EC146C2CC2006CFFFA /* MockCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockCameraViewController.m; sourceTree = "<group>"; };
-		1F5029EF146C2CC2006CFFFA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FaceMeNowViewController.xib; sourceTree = "<group>"; };
+		1F5029EF146C2CC2006CFFFA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MockCameraViewController.xib; sourceTree = "<group>"; };
 		1F5029F6146C2D12006CFFFA /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		1F5029F8146C2D1B006CFFFA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1F5029FA146C2D27006CFFFA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -984,7 +984,7 @@
 				1F248D771483D22B00179D37 /* FaceIndicatorLayer.m */,
 			);
 			name = "MockMyFace Classes";
-			path = FaceMeNow;
+			path = MockMyFace;
 			sourceTree = "<group>";
 		};
 		1F5029E0146C2CC2006CFFFA /* Supporting Files */ = {
@@ -997,7 +997,7 @@
 				1F502A10146C4599006CFFFA /* Categories.plist */,
 			);
 			name = "Supporting Files";
-			path = FaceMeNow;
+			path = MockMyFace;
 			sourceTree = "<group>";
 		};
 		1F502A04146C32A2006CFFFA /* Images */ = {
@@ -1019,7 +1019,7 @@
 				1F502A05146C32AB006CFFFA /* SunGlasses */,
 			);
 			name = Images;
-			path = FaceMeNow;
+			path = MockMyFace;
 			sourceTree = "<group>";
 		};
 		1F502A05146C32AB006CFFFA /* SunGlasses */ = {
@@ -1221,7 +1221,7 @@
 		1F8993C1161DCE9700B0B8D0 /* XIBS */ = {
 			isa = PBXGroup;
 			children = (
-				1F5029EE146C2CC2006CFFFA /* FaceMeNowViewController.xib */,
+				1F5029EE146C2CC2006CFFFA /* MockCameraViewController.xib */,
 				1F502A0A146C3EC5006CFFFA /* ItemSelector.xib */,
 				1FF3BB72147B7E1D008C9D94 /* ViewAndShareController.xib */,
 				9998F0CB14801B8800F27A63 /* ShareController.xib */,
@@ -1305,7 +1305,7 @@
 			dependencies = (
 			);
 			name = MockMyFace;
-			productName = FaceMeNow;
+			productName = MockMyFace;
 			productReference = 1F5029D5146C2CC2006CFFFA /* MockMyFace.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1341,7 +1341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F5029E4146C2CC2006CFFFA /* InfoPlist.strings in Resources */,
-				1F5029F0146C2CC2006CFFFA /* FaceMeNowViewController.xib in Resources */,
+				1F5029F0146C2CC2006CFFFA /* MockCameraViewController.xib in Resources */,
 				1F502A07146C32CD006CFFFA /* sunglasses1.png in Resources */,
 				1F502A0C146C3EC5006CFFFA /* ItemSelector.xib in Resources */,
 				1F502A0E146C41AA006CFFFA /* glasses_sunglasses.png in Resources */,
@@ -1678,12 +1678,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		1F5029EE146C2CC2006CFFFA /* FaceMeNowViewController.xib */ = {
+		1F5029EE146C2CC2006CFFFA /* MockCameraViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				1F5029EF146C2CC2006CFFFA /* en */,
 			);
-			name = FaceMeNowViewController.xib;
+			name = MockCameraViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1746,8 +1746,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FaceMeNow/MockMyFace-Prefix.pch";
-				INFOPLIST_FILE = "FaceMeNow/MockMyFace-Info.plist";
+				GCC_PREFIX_HEADER = "MockMyFace/MockMyFace-Prefix.pch";
+				INFOPLIST_FILE = "MockMyFace/MockMyFace-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
@@ -1765,8 +1765,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaume Cornado Panades (96LYL46QP4)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FaceMeNow/MockMyFace-Prefix.pch";
-				INFOPLIST_FILE = "FaceMeNow/MockMyFace-Info.plist";
+				GCC_PREFIX_HEADER = "MockMyFace/MockMyFace-Prefix.pch";
+				INFOPLIST_FILE = "MockMyFace/MockMyFace-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
