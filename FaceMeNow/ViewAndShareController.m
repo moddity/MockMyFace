@@ -7,7 +7,7 @@
 //
 
 #import "ViewAndShareController.h"
-#import "FaceMeNowAppDelegate.h"
+#import "MockMyFaceAppDelegate.h"
 #import "MBProgressHUD.h"
 
 @implementation ViewAndShareController
@@ -229,10 +229,7 @@
 }
 
 -(void) fbAction {
-    
-    
-    
-    FaceMeNowAppDelegate *appDelegate = (FaceMeNowAppDelegate*)[[UIApplication sharedApplication] delegate];
+    MockMyFaceAppDelegate *appDelegate = (MockMyFaceAppDelegate*)[[UIApplication sharedApplication] delegate];
   
     appDelegate.facebook = [[Facebook alloc] initWithAppId:@"123366887777694" andDelegate:self];
     
@@ -257,7 +254,7 @@
 }
 
 -(void) fbDidLogin {
-    FaceMeNowAppDelegate *appDelegate = (FaceMeNowAppDelegate*)[[UIApplication sharedApplication] delegate];
+    MockMyFaceAppDelegate *appDelegate = (MockMyFaceAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[appDelegate.facebook accessToken] forKey:@"FBAccessTokenKey"];
@@ -286,7 +283,7 @@
 }
 
 -(void) sendImageToFacebook {
-    FaceMeNowAppDelegate *appDelegate = (FaceMeNowAppDelegate*)[[UIApplication sharedApplication] delegate];
+    MockMyFaceAppDelegate *appDelegate = (MockMyFaceAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelFont:[UIFont fontWithName:@"SusanWrittingMAYUSC-Regular" size:15.0]];

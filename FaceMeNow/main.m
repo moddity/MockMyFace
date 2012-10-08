@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FaceMeNowAppDelegate.h"
+#import "MockMyFaceAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([FaceMeNowAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MockMyFaceAppDelegate class]));
     }
 }

@@ -379,7 +379,7 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
 }
 
 
-// utility routine to display error aleart if takePicture fails
+// utility routine to display error alert if takePicture fails
 - (void)displayErrorOnMainQueue:(NSError *)error withMessage:(NSString *)message
 {
 	dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -418,30 +418,8 @@ const CGBitmapInfo kDefaultCGBitmapInfoNoAlpha	= (kCGImageAlphaNoneSkipFirst | k
                                                   completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                       if (error) {
                                                           [self displayErrorOnMainQueue:error withMessage:@"Take picture failed"];
-                                                          NSLog(@"ERROR: %@", error);
                                                       }
                                                       else {
-                                                       
-                                                          /*
-                                                              // Got an image.
-                                                              CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(imageDataSampleBuffer);
-                                                              CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, imageDataSampleBuffer, kCMAttachmentMode_ShouldPropagate);
-                                                              
-                                                                CIImage *ciImage = [[CIImage alloc] initWithCVPixelBuffer:pixelBuffer options:(__bridge NSDictionary *)attachments];
-                                                          
-                                                              if (attachments)
-                                                                  CFRelease(attachments);
-                                                              
-                                                              NSDictionary *imageOptions = nil;
-                                                              NSNumber *orientation = (__bridge NSNumber*)CMGetAttachment(imageDataSampleBuffer,kCGImagePropertyOrientation, NULL);
-                                                              if (orientation) {
-                                                                  imageOptions = [NSDictionary dictionaryWithObject:orientation forKey:CIDetectorImageOrientation];
-                                                              }
-                                                              */
-                                                              // when processing an existing frame we want any new frames to be automatically dropped
-                                                              // queueing this block to execute on the videoDataOutputQueue serial queue ensures this
-                                                              // see the header doc for setSampleBufferDelegate:queue: for more information
-                                                                  
                                                           dispatch_sync(videoDataOutputQueue, ^(void) {
                                                               
                                                                   CGImageRef srcImage = NULL;

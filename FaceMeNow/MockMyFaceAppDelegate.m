@@ -1,18 +1,19 @@
 //
-//  FaceMeNowAppDelegate.m
-//  FaceMeNow
+//  MockMyFaceAppDelegate.m
+//  MockMyFace
 //
 //  Created by Jaume Cornadó on 10/11/11.
 //  Copyright (c) 2011 Bazinga Systems. All rights reserved.
 //
 
-#import "FaceMeNowAppDelegate.h"
+#import "MockMyFaceAppDelegate.h"
 
 #import "FaceMeNowViewController.h"
 
 
 
-@implementation FaceMeNowAppDelegate
+@implementation MockMyFaceAppDelegate
+
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
